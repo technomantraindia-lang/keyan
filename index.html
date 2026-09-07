@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KEYAN CORPORATION | B2B Industrial Procurement Marketplace</title>
+  <meta name="description" content="Keyan Corporation is a trusted B2B industrial marketplace for Marine & Ship Supply, Fire & Safety Equipment, Industrial Machinery, and Rig & Marine Instruments.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 1. TOP UTILITY BAR -->
+  <div class="top-utility-bar">
+    <div class="container utility-wrapper">
+      <div class="utility-left">
+        <span>Marine • Industrial • Fire Safety • Instrumentation</span>
+      </div>
+      <div class="utility-right">
+        <a href="tel:+919825207743"><i class="fas fa-phone-alt"></i> +91 9825207743</a>
+        <a href="mailto:sales@keyancorporation.com"><i class="fas fa-envelope"></i> sales@keyancorporation.com</a>
+        <span class="utility-gstin">| GSTIN: 24BWNPV1980J1ZV</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOBILE NAVIGATION DRAWER & OVERLAY BACKDROP -->
+  <div class="mobile-nav-backdrop" id="mobileNavBackdrop" onclick="closeMobileNav()"></div>
+  <aside class="mobile-nav-drawer" id="mobileNavDrawer">
+    <div class="mobile-nav-header">
+      <div class="mobile-brand">
+        <img src="iamges/image.png" alt="KEYAN CORPORATION Logo" class="mobile-logo">
+        <div>
+          <div class="brand-name">KEYAN CORP</div>
+          <div class="brand-sub">B2B Marketplace</div>
+        </div>
+      </div>
+      <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Close Menu">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="mobile-nav-body">
+      <ul class="mobile-nav-menu">
+        <li><a href="#home" class="mobile-nav-link active" onclick="closeMobileNav()"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#about" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fas fa-building"></i> About Us</a></li>
+        <li><a href="#categories" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fas fa-th-large"></i> Categories</a></li>
+        <li><a href="#featured" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fas fa-boxes"></i> Featured Products</a></li>
+        <li><a href="#industries" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fas fa-industry"></i> Industry Sectors</a></li>
+        <li><a href="#rfq" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fas fa-file-invoice"></i> Request Quote</a></li>
+        <li><a href="#contact" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fas fa-envelope"></i> Contact Us</a></li>
+      </ul>
+      <div class="mobile-nav-actions">
+        <a href="login.html" class="btn btn-navy btn-full"><i class="far fa-user"></i> Account Login</a>
+        <a href="#rfq" class="btn btn-orange btn-full" onclick="closeMobileNav()"><i class="fas fa-paper-plane"></i> Submit RFQ</a>
+      </div>
+      <div class="mobile-nav-contact">
+        <a href="tel:+919825207743"><i class="fas fa-phone-alt"></i> +91 9825207743</a>
+        <a href="mailto:sales@keyancorporation.com"><i class="fas fa-envelope"></i> sales@keyancorporation.com</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 2. MAIN E-COMMERCE HEADER -->
+  <header class="main-header">
+    <div class="container header-grid">
+      
+      <!-- Brand Logo -->
+      <a href="#home" class="header-brand">
+        <img src="iamges/image.png" alt="KEYAN CORPORATION Logo" class="header-logo">
+        <div class="brand-text-wrap">
+          <div class="brand-name">KEYAN CORPORATION</div>
+          <div class="brand-sub">From Port to Plant</div>
+        </div>
+      </a>
+
+      <!-- Large Intelligent Search Bar -->
+      <form class="search-form-center" onsubmit="handleSearchSubmit(event)">
+        <div class="search-box-wrap">
+          <input type="text" id="headerSearchInput" class="search-input-field" placeholder="Search products, brands, models..." required>
+          <button type="submit" class="search-submit-btn" title="Search Marketplace">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </form>
+
+      <!-- Header Tools & Mobile Hamburger Toggle -->
+      <div class="header-tools-group">
+        <div class="header-tools">
+          <a href="login.html" class="tool-item" title="Customer & Vendor Portal Login">
+            <i class="far fa-user"></i>
+            <span>Account</span>
+          </a>
+          <div class="tool-item" onclick="openModal('quoteDrawerModal')" title="Wishlist">
+            <i class="far fa-heart"></i>
+            <span>Wishlist</span>
+            <span class="tool-badge" id="wishlistCount">0</span>
+          </div>
+          <div class="tool-item" onclick="openQuoteDrawer()" title="Quote List">
+            <i class="fas fa-shopping-bag"></i>
+            <span>Quote List</span>
+            <span class="tool-badge" id="quoteCartCount">0</span>
+          </div>
+        </div>
+
+        <button class="mobile-nav-toggle-btn" id="mobileNavBtn" onclick="toggleMobileNav()" aria-label="Toggle Navigation Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- 3. COMPACT NAVIGATION ROW -->
+  <nav class="nav-row">
+    <div class="container nav-row-wrapper">
+      <ul class="nav-menu">
+        <li><a href="#home" class="nav-link-item active">Home</a></li>
+        <li><a href="#about" class="nav-link-item">About Us</a></li>
+        <li><a href="#categories" class="nav-link-item">Categories</a></li>
+        <li><a href="#featured" class="nav-link-item">Products</a></li>
+        <li><a href="#industries" class="nav-link-item">Industries</a></li>
+        <li><a href="#rfq" class="nav-link-item">Bulk RFQ</a></li>
+        <li><a href="#contact" class="nav-link-item">Contact Us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- 4. FULLWIDTH VIDEO HERO BANNER SECTION (VIDEO ONLY, ZERO OVERLAY TEXT) -->
+  <section id="home" class="hero-full-video-section">
+    <div class="hero-full-video-container">
+      <video class="hero-full-video-element" autoplay loop muted playsinline preload="auto">
+        <source src="iamges/Create_a_premium_cinematic_her_gwr_video_mvp.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+
+  <!-- 5. EXPLORE OUR PRODUCT RANGE (EXACT SCREENSHOT REPLICATION) -->
+  <section id="categories" class="section-padding bg-soft-section">
+    <div class="container">
+      
+      <!-- Top Header & Feature Nav Bar -->
+      <div class="explore-header-row reveal-from-top">
+        <div>
+          <div class="explore-eyebrow">
+            <span class="orange-line"></span> PRODUCT CATEGORIES
+          </div>
+          <h2 class="explore-main-title">
+            Explore Our <span class="text-marine-blue">Product Range</span>
+          </h2>
+          <p class="explore-subtitle">
+            Marine, industrial, safety and instrumentation solutions from one trusted supplier.
+          </p>
+        </div>
+
+        <!-- Top Right Quick Feature Pills Bar -->
+        <div class="explore-quick-pills reveal-from-right">
+          <div class="explore-pill-item">
+            <i class="fas fa-ship explore-pill-icon"></i>
+            <div>
+              <strong class="pill-bold">Marine</strong>
+              <span class="pill-sub">Supply</span>
+            </div>
+          </div>
+          <div class="explore-pill-divider"></div>
+          <div class="explore-pill-item">
+            <i class="fas fa-cogs explore-pill-icon"></i>
+            <div>
+              <strong class="pill-bold">Industrial</strong>
+              <span class="pill-sub">Solutions</span>
+            </div>
+          </div>
+          <div class="explore-pill-divider"></div>
+          <div class="explore-pill-item">
+            <i class="fas fa-shield-alt explore-pill-icon"></i>
+            <div>
+              <strong class="pill-bold">Safety</strong>
+              <span class="pill-sub">Equipment</span>
+            </div>
+          </div>
+          <div class="explore-pill-divider"></div>
+          <div class="explore-pill-item">
+            <i class="fas fa-tachometer-alt explore-pill-icon"></i>
+            <div>
+              <strong class="pill-bold">Precision</strong>
+              <span class="pill-sub">Instruments</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Layout Grid (Featured Left + 2x2 Grid Right) -->
+      <div class="explore-main-grid">
+        
+        <!-- LEFT: Large Featured Hero Card (Marine & Ship Supply) -->
+        <a href="#featured" onclick="renderFeaturedProducts('marine')" class="explore-featured-hero reveal-from-left">
+          <div class="explore-hero-bg" style="background-image: url('iamges/marine and shipping.png');"></div>
+          <div class="explore-hero-overlay"></div>
+          
+          <div class="explore-hero-content">
+            <div class="explore-hero-eyebrow">
+              <span class="orange-line"></span> FEATURED CATEGORY
+            </div>
+            <h3 class="explore-hero-title">Marine &<br>Ship Supply</h3>
+            <p class="explore-hero-desc">
+              Ship spares, deck hardware, lifesaving equipment, valves and essential vessel supplies.
+            </p>
+            
+            <div class="explore-hero-btn">
+              Explore Marine Products <i class="fas fa-arrow-right"></i>
+            </div>
+
+            <div class="explore-hero-footer">
+              <span><i class="fas fa-ship"></i> Reliable Supply</span>
+              <span class="footer-divider">|</span>
+              <span><i class="fas fa-shield-alt"></i> Trusted Quality</span>
+              <span class="footer-divider">|</span>
+              <span><i class="fas fa-globe"></i> Global Standards</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- RIGHT: 2x2 Split Category Cards Grid -->
+        <div class="explore-right-grid">
+          
+          <!-- Card 1: Fire & Safety -->
+          <a href="#featured" onclick="renderFeaturedProducts('safety')" class="explore-split-card reveal-from-right delay-100">
+            <div class="split-card-img-wrap">
+              <img src="iamges/fire.png" alt="Fire & Safety" class="split-card-img">
+            </div>
+            <div class="split-card-body">
+              <div class="split-card-top">
+                <div class="split-icon orange"><i class="fas fa-fire"></i></div>
+                <span class="split-count-badge">95+ Products</span>
+              </div>
+              <div>
+                <h4 class="split-card-title">Fire & Safety</h4>
+                <p class="split-card-desc">Fire-fighting, detection, SCBA & protective safety equipment.</p>
+              </div>
+              <div class="split-card-link">Explore Products <i class="fas fa-arrow-right"></i></div>
+            </div>
+          </a>
+
+          <!-- Card 2: Industrial Machinery -->
+          <a href="#featured" onclick="renderFeaturedProducts('machinery')" class="explore-split-card reveal-from-right delay-200">
+            <div class="split-card-img-wrap">
+              <img src="iamges/INDUSTRIAL & MFG].png" alt="Industrial Machinery" class="split-card-img">
+            </div>
+            <div class="split-card-body">
+              <div class="split-card-top">
+                <div class="split-icon blue"><i class="fas fa-cogs"></i></div>
+                <span class="split-count-badge">150+ Products</span>
+              </div>
+              <div>
+                <h4 class="split-card-title">Industrial Machinery</h4>
+                <p class="split-card-desc">Industrial machinery, AODD pumps, motors & engineering tools.</p>
+              </div>
+              <div class="split-card-link">Explore Products <i class="fas fa-arrow-right"></i></div>
+            </div>
+          </a>
+
+          <!-- Card 3: Rig & Marine Instruments -->
+          <a href="#featured" onclick="renderFeaturedProducts('instruments')" class="explore-split-card reveal-from-right delay-300">
+            <div class="split-card-img-wrap">
+              <img src="iamges/Offshore Rig Monitoring Control Telemetry.png" alt="Rig & Marine Instruments" class="split-card-img">
+            </div>
+            <div class="split-card-body">
+              <div class="split-card-top">
+                <div class="split-icon blue"><i class="fas fa-compass"></i></div>
+                <span class="split-count-badge">80+ Products</span>
+              </div>
+              <div>
+                <h4 class="split-card-title">Rig & Marine Instruments</h4>
+                <p class="split-card-desc">Pressure transmitters, telemetry & offshore rig instruments.</p>
+              </div>
+              <div class="split-card-link">Explore Products <i class="fas fa-arrow-right"></i></div>
+            </div>
+          </a>
+
+          <!-- Card 4: Breathing Air & Gas Detection -->
+          <a href="#featured" onclick="renderFeaturedProducts('gas')" class="explore-split-card reveal-from-right delay-400">
+            <div class="split-card-img-wrap">
+              <img src="iamges/prod_scba.jpg" alt="Breathing Air & Gas Detection" class="split-card-img">
+            </div>
+            <div class="split-card-body">
+              <div class="split-card-top">
+                <div class="split-icon blue"><i class="fas fa-lungs"></i></div>
+                <span class="split-count-badge">60+ Products</span>
+              </div>
+              <div>
+                <h4 class="split-card-title">Breathing Air & Gas Detection</h4>
+                <p class="split-card-desc">Gas detectors, SCBA air cylinders & monitoring systems.</p>
+              </div>
+              <div class="split-card-link">Explore Products <i class="fas fa-arrow-right"></i></div>
+            </div>
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- BOTTOM FULL-WIDTH BANNER: Industrial Consumables -->
+      <a href="#featured" onclick="renderFeaturedProducts('machinery')" class="explore-bottom-banner reveal-from-bottom">
+        <div class="banner-img-side">
+          <img src="iamges/consumables.jpg" alt="Industrial Consumables" class="banner-img">
+        </div>
+        <div class="banner-content-side">
+          <div class="banner-box-icon"><i class="fas fa-box-open"></i></div>
+          <div class="banner-text-wrap">
+            <h3 class="banner-title">Industrial Consumables</h3>
+            <p class="banner-sub">Sealants, compounds, tapes, repair kits and maintenance supplies.</p>
+          </div>
+        </div>
+        <div class="banner-action-side">
+          <div class="banner-btn-pill">
+            Explore Consumables <i class="fas fa-arrow-right"></i>
+          </div>
+          <span class="banner-script-text">Keep Industry Moving</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- 7. FEATURED PRODUCTS SHOWCASE -->
+  <section id="featured" class="section-padding">
+    <div class="container">
+      
+      <div class="section-header-editorial reveal-from-top" style="margin-bottom: 2rem;">
+        <div class="explore-eyebrow">
+          <span class="orange-line"></span> B2B CATALOGUE
+        </div>
+        <h2 class="explore-main-title">
+          Featured <span class="text-marine-blue">Products</span>
+        </h2>
+        <p class="explore-subtitle">Select B2B industrial, marine, safety and instrumentation items.</p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="product-tabs-header reveal-from-top delay-100">
+        <button class="prod-tab-item active" data-cat="all">All Products</button>
+        <button class="prod-tab-item" data-cat="marine">Marine</button>
+        <button class="prod-tab-item" data-cat="safety">Fire & Safety</button>
+        <button class="prod-tab-item" data-cat="machinery">Industrial</button>
+        <button class="prod-tab-item" data-cat="instruments">Instrumentation</button>
+      </div>
+
+      <!-- Product Grid (4 Per Row) -->
+      <div id="featuredProductsGrid" class="products-grid-4col reveal-3d-pop">
+        <!-- Rendered by app.js -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 8. EDITORIAL INDUSTRY PANELS (PREMIUM REDESIGN) -->
+  <section id="industry" class="section-padding bg-soft-section">
+    <div class="container">
+      
+      <div class="section-header-editorial reveal-from-top" style="margin-bottom: 2.5rem;">
+        <div class="explore-eyebrow">
+          <span class="orange-line"></span> TAILORED SOLUTIONS
+        </div>
+        <h2 class="explore-main-title">
+          Built Around <span class="text-marine-blue">Your Industry</span>
+        </h2>
+        <p class="explore-subtitle">Industry-tailored procurement solutions for specialized applications.</p>
+      </div>
+
+      <div class="industry-panels-grid">
+        
+        <a href="#featured" onclick="renderFeaturedProducts('marine')" class="industry-card-premium reveal-from-left delay-100">
+          <div class="ind-card-bg" style="background-image: url('iamges/marine and shipping.png');"></div>
+          <div class="ind-card-overlay"></div>
+          <div class="ind-card-badge"><i class="fas fa-ship"></i> Marine</div>
+          <div class="ind-card-content">
+            <span class="ind-card-icon-wrap"><i class="fas fa-anchor"></i></span>
+            <h3 class="ind-card-title">MARINE & SHIPPING</h3>
+            <p class="ind-card-desc">Vessel spares, propulsion & deck hardware.</p>
+            <div class="ind-card-btn">
+              Explore Solutions <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </a>
+
+        <a href="#featured" onclick="renderFeaturedProducts('instruments')" class="industry-card-premium reveal-from-left delay-200">
+          <div class="ind-card-bg" style="background-image: url('iamges/offshore and rig.png');"></div>
+          <div class="ind-card-overlay"></div>
+          <div class="ind-card-badge"><i class="fas fa-satellite-dish"></i> Offshore</div>
+          <div class="ind-card-content">
+            <span class="ind-card-icon-wrap"><i class="fas fa-compass"></i></span>
+            <h3 class="ind-card-title">OFFSHORE & RIG</h3>
+            <p class="ind-card-desc">Offshore telemetry & digital gauges.</p>
+            <div class="ind-card-btn">
+              Explore Solutions <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </a>
+
+        <a href="#featured" onclick="renderFeaturedProducts('machinery')" class="industry-card-premium reveal-from-bottom delay-300">
+          <div class="ind-card-bg" style="background-image: url('iamges/oil and gas.png');"></div>
+          <div class="ind-card-overlay"></div>
+          <div class="ind-card-badge"><i class="fas fa-oil-can"></i> Energy</div>
+          <div class="ind-card-content">
+            <span class="ind-card-icon-wrap"><i class="fas fa-fire-alt"></i></span>
+            <h3 class="ind-card-title">OIL & GAS</h3>
+            <p class="ind-card-desc">High-pressure valves & sealants.</p>
+            <div class="ind-card-btn">
+              Explore Solutions <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </a>
+
+        <a href="#featured" onclick="renderFeaturedProducts('machinery')" class="industry-card-premium reveal-from-right delay-400">
+          <div class="ind-card-bg" style="background-image: url('iamges/INDUSTRIAL & MFG].png');"></div>
+          <div class="ind-card-overlay"></div>
+          <div class="ind-card-badge"><i class="fas fa-industry"></i> Plant</div>
+          <div class="ind-card-content">
+            <span class="ind-card-icon-wrap"><i class="fas fa-cogs"></i></span>
+            <h3 class="ind-card-title">INDUSTRIAL & MFG</h3>
+            <p class="ind-card-desc">Automation, motors & AODD pumps.</p>
+            <div class="ind-card-btn">
+              Explore Solutions <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </a>
+
+        <a href="#featured" onclick="renderFeaturedProducts('safety')" class="industry-card-premium reveal-from-right delay-500">
+          <div class="ind-card-bg" style="background-image: url('iamges/fire.png');"></div>
+          <div class="ind-card-overlay"></div>
+          <div class="ind-card-badge"><i class="fas fa-shield-alt"></i> Safety</div>
+          <div class="ind-card-content">
+            <span class="ind-card-icon-wrap"><i class="fas fa-fire"></i></span>
+            <h3 class="ind-card-title">FIRE & SAFETY</h3>
+            <p class="ind-card-desc">SCBA gear, gas detectors & hoses.</p>
+            <div class="ind-card-btn">
+              Explore Solutions <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 9. DUAL TRAIN MARQUEE BRAND STRIP (DARK THEME) -->
+  <section id="brands" class="section-padding overflow-hidden bg-dark-brands reveal-from-bottom">
+    <div class="container">
+      
+      <div class="section-header-editorial reveal-from-top" style="margin-bottom: 2.5rem;">
+        <div class="explore-eyebrow">
+          <span class="orange-line"></span> GLOBAL PARTNERSHIPS
+        </div>
+        <h2 class="explore-main-title">
+          Brands & <span class="text-marine-blue">Product Partners</span>
+        </h2>
+        <p class="explore-subtitle">Supporting genuine products across globally recognized industrial & marine manufacturers.</p>
+      </div>
+
+    </div>
+
+    <!-- Full Width Train Marquee Container -->
+    <div class="brand-marquee-wrapper">
+      
+      <!-- MARQUEE ROW 1: Moves Right to Left -->
+      <div class="brand-marquee-row marquee-row-left">
+        <div class="marquee-track">
+          <div class="brand-strip-tile" title="Dräger Safety"><img src="iamges/brand_draeger.jpg" alt="Dräger Logo" class="brand-logo-img"></div>
+          <div class="brand-strip-tile" title="MSA Safety"><img src="iamges/brand_msa.jpg" alt="MSA Safety Logo" class="brand-logo-img"></div>
+          <div class="brand-strip-tile" title="Scott Safety"><span class="brand-text-mark" style="color:#D92626;">SCOTT</span></div>
+          <div class="brand-strip-tile" title="3M Industrial"><span class="brand-text-mark" style="color:#FF0000; font-size:1.6rem;">3M</span></div>
+          <div class="brand-strip-tile" title="SOLAS Approved"><span class="brand-text-mark" style="color:#087EA4;"><i class="fas fa-anchor"></i> SOLAS</span></div>
+          <div class="brand-strip-tile" title="Unitor Marine"><span class="brand-text-mark" style="color:#004B87;">UNITOR</span></div>
+          <div class="brand-strip-tile" title="Wilden Pumps"><span class="brand-text-mark" style="color:#0066B2; font-style:italic;">WILDEN</span></div>
+
+          <!-- Duplicate Set 1 -->
+          <div class="brand-strip-tile" title="Dräger Safety"><img src="iamges/brand_draeger.jpg" alt="Dräger Logo" class="brand-logo-img"></div>
+          <div class="brand-strip-tile" title="MSA Safety"><img src="iamges/brand_msa.jpg" alt="MSA Safety Logo" class="brand-logo-img"></div>
+          <div class="brand-strip-tile" title="Scott Safety"><span class="brand-text-mark" style="color:#D92626;">SCOTT</span></div>
+          <div class="brand-strip-tile" title="3M Industrial"><span class="brand-text-mark" style="color:#FF0000; font-size:1.6rem;">3M</span></div>
+          <div class="brand-strip-tile" title="SOLAS Approved"><span class="brand-text-mark" style="color:#087EA4;"><i class="fas fa-anchor"></i> SOLAS</span></div>
+          <div class="brand-strip-tile" title="Unitor Marine"><span class="brand-text-mark" style="color:#004B87;">UNITOR</span></div>
+          <div class="brand-strip-tile" title="Wilden Pumps"><span class="brand-text-mark" style="color:#0066B2; font-style:italic;">WILDEN</span></div>
+        </div>
+      </div>
+
+      <!-- MARQUEE ROW 2: Moves Left to Right -->
+      <div class="brand-marquee-row marquee-row-right">
+        <div class="marquee-track">
+          <div class="brand-strip-tile" title="Sikla Valves"><span class="brand-text-mark" style="color:#003B6D;">sikla</span></div>
+          <div class="brand-strip-tile" title="Permatex Sealants"><span class="brand-text-mark" style="color:#002D62; font-style:italic;">Permatex</span></div>
+          <div class="brand-strip-tile" title="Molykote Lubricants"><span class="brand-text-mark" style="color:#1E392A;">MOLYKOTE</span></div>
+          <div class="brand-strip-tile" title="Belzona Repair Compounds"><span class="brand-text-mark" style="color:#CC0000;">BELZONA</span></div>
+          <div class="brand-strip-tile" title="Consilium Navigation"><span class="brand-text-mark" style="color:#004A80;">consilium</span></div>
+          <div class="brand-strip-tile" title="Apollo Fire Detectors"><span class="brand-text-mark" style="color:#00A3E0;">apollo</span></div>
+          <div class="brand-strip-tile" title="Tyco Fire Suppression"><span class="brand-text-mark" style="color:#005A9C;">tyco</span></div>
+
+          <!-- Duplicate Set 2 -->
+          <div class="brand-strip-tile" title="Sikla Valves"><span class="brand-text-mark" style="color:#003B6D;">sikla</span></div>
+          <div class="brand-strip-tile" title="Permatex Sealants"><span class="brand-text-mark" style="color:#002D62; font-style:italic;">Permatex</span></div>
+          <div class="brand-strip-tile" title="Molykote Lubricants"><span class="brand-text-mark" style="color:#1E392A;">MOLYKOTE</span></div>
+          <div class="brand-strip-tile" title="Belzona Repair Compounds"><span class="brand-text-mark" style="color:#CC0000;">BELZONA</span></div>
+          <div class="brand-strip-tile" title="Consilium Navigation"><span class="brand-text-mark" style="color:#004A80;">consilium</span></div>
+          <div class="brand-strip-tile" title="Apollo Fire Detectors"><span class="brand-text-mark" style="color:#00A3E0;">apollo</span></div>
+          <div class="brand-strip-tile" title="Tyco Fire Suppression"><span class="brand-text-mark" style="color:#005A9C;">tyco</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 10. EDITORIAL WHY KEYAN TRUST SECTION (ANIMATED PREMIUM REDESIGN) -->
+  <section id="about" class="section-padding bg-soft-section">
+    <div class="container">
+      
+      <div class="why-trust-grid">
+        
+        <!-- Left Column: Header & Trust Showcase -->
+        <div class="why-trust-info-side reveal-from-left">
+          <div class="explore-eyebrow" style="margin-bottom: 0.8rem;">
+            <span class="orange-line"></span> WHY KEYAN CORPORATION
+          </div>
+          <h2 class="why-trust-statement">
+            One Supply Partner.<br>
+            <span class="text-marine-blue">Multiple Industrial Solutions.</span>
+          </h2>
+          <p class="why-trust-sub">
+            Keyan Corporation provides businesses with dependable sourcing and procurement solutions across marine, industrial, safety and instrumentation operations.
+          </p>
+
+          <div class="why-trust-highlights">
+            <div class="trust-badge-pill"><i class="fas fa-check-circle"></i> 100% Genuine Certified</div>
+            <div class="trust-badge-pill"><i class="fas fa-shipping-fast"></i> Rapid RFQ Turnaround</div>
+            <div class="trust-badge-pill"><i class="fas fa-globe"></i> Global Maritime Standards</div>
+          </div>
+
+          <button onclick="openModal('quoteModal')" class="btn btn-orange why-trust-cta-btn">
+            <i class="fas fa-paper-plane"></i> Request Official Quotation
+          </button>
+        </div>
+
+        <!-- Right Column: 4 Animated Benefit Cards -->
+        <div class="why-benefits-grid">
+          
+          <div class="benefit-card-animated reveal-from-right delay-100">
+            <div class="benefit-top-row">
+              <span class="benefit-icon-box"><i class="fas fa-boxes"></i></span>
+              <span class="benefit-number-gradient">01</span>
+            </div>
+            <h3 class="benefit-title">Wide Product Range</h3>
+            <p class="benefit-desc">Marine, industrial, safety and instrumentation products from trusted global manufacturers.</p>
+            <div class="benefit-hover-bar"></div>
+          </div>
+
+          <div class="benefit-card-animated reveal-from-right delay-200">
+            <div class="benefit-top-row">
+              <span class="benefit-icon-box"><i class="fas fa-industry"></i></span>
+              <span class="benefit-number-gradient">02</span>
+            </div>
+            <h3 class="benefit-title">Industry-Focused Supply</h3>
+            <p class="benefit-desc">Tailored procurement solutions for marine, offshore rig and heavy industrial plant requirements.</p>
+            <div class="benefit-hover-bar"></div>
+          </div>
+
+          <div class="benefit-card-animated reveal-from-right delay-300">
+            <div class="benefit-top-row">
+              <span class="benefit-icon-box"><i class="fas fa-truck-loading"></i></span>
+              <span class="benefit-number-gradient">03</span>
+            </div>
+            <h3 class="benefit-title">Reliable Procurement</h3>
+            <p class="benefit-desc">Dependable sourcing, quality assurance, and seamless logistics for critical operations.</p>
+            <div class="benefit-hover-bar"></div>
+          </div>
+
+          <div class="benefit-card-animated reveal-from-right delay-400">
+            <div class="benefit-top-row">
+              <span class="benefit-icon-box"><i class="fas fa-handshake"></i></span>
+              <span class="benefit-number-gradient">04</span>
+            </div>
+            <h3 class="benefit-title">B2B Expertise</h3>
+            <p class="benefit-desc">Dedicated B2B account support for standard, custom, and large-scale bulk orders.</p>
+            <div class="benefit-hover-bar"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 11. SPLIT RFQ CONVERSION SECTION -->
+  <section id="quote-section" class="container section-padding">
+    <div class="rfq-conversion-banner reveal-3d-pop">
+      <div class="rfq-split-grid">
+        
+        <div>
+          <h2 class="rfq-left-title">Need a Specific Product?</h2>
+          <p class="rfq-left-desc">Tell us what you need and our team will help you source the right solution.</p>
+          <div class="rfq-phone-badge">
+            <i class="fas fa-phone-alt"></i> Direct Sales: +91 9825207743
+          </div>
+        </div>
+
+        <div>
+          <form onsubmit="handleFormSubmit(event, 'RFQ Request')" class="rfq-form-compact">
+            <input type="text" class="rfq-input" placeholder="Product / Requirement *" required style="grid-column: span 2;">
+            <input type="text" class="rfq-input" placeholder="Quantity *" required>
+            <input type="text" class="rfq-input" placeholder="Company Name *" required>
+            <input type="text" class="rfq-input" placeholder="Email / Phone *" required style="grid-column: span 2;">
+            <button type="submit" class="btn btn-orange" style="grid-column: span 2; font-size: 1rem;">
+              Request a Quote →
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. STRUCTURED E-COMMERCE FOOTER -->
+  <footer id="contact" class="footer-marketplace reveal-from-bottom">
+    <div class="container">
+      
+      <div class="footer-main-grid">
+        
+        <!-- Col 1: Brand Info -->
+        <div class="footer-brand-wrap">
+          <a href="#home" class="footer-brand-link" style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.65rem; margin-bottom: 1.2rem; text-decoration: none;">
+            <img src="iamges/image.png" alt="KEYAN CORPORATION Logo" class="footer-logo" style="height: 58px; width: auto; object-fit: contain; background: #FFFFFF; padding: 6px 12px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);">
+            <div>
+              <div class="footer-brand-title" style="font-size: 1.3rem; font-weight: 900; color: #FFFFFF; line-height: 1.2; letter-spacing: -0.3px;">KEYAN CORPORATION</div>
+              <div class="footer-tagline" style="font-size: 0.75rem; color: var(--orange-accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; margin-top: 0.2rem;">From Port to Plant</div>
+            </div>
+          </a>
+          <p class="footer-desc">
+            Trusted supplier of Ship Supply, Industrial Automation & Machinery, Fire Safety Equipment, and Rig & Marine Instruments.
+          </p>
+        </div>
+
+        <!-- Col 2: Products -->
+        <div>
+          <h4 class="footer-col-heading">Our Products</h4>
+          <ul class="footer-links-group">
+            <li><a href="#categories">Marine & Ship Supply</a></li>
+            <li><a href="#categories">Fire & Safety Equipment</a></li>
+            <li><a href="#categories">Industrial Machinery</a></li>
+            <li><a href="#categories">Rig & Marine Instruments</a></li>
+            <li><a href="#categories">Gas Detection Systems</a></li>
+            <li><a href="#categories">Industrial Consumables</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Quick Links -->
+        <div>
+          <h4 class="footer-col-heading">Quick Links</h4>
+          <ul class="footer-links-group">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#featured">Featured Products</a></li>
+            <li><a href="#industry">Industry Solutions</a></li>
+            <li><a href="#brands">Partner Brands</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Contact Information -->
+        <div>
+          <h4 class="footer-col-heading">Contact Us</h4>
+          <p style="margin-bottom:0.7rem; line-height:1.5; color:#CBD5E1; font-size:0.88rem;">
+            <i class="fas fa-map-marker-alt" style="color:var(--orange-accent); width:20px;"></i> 
+            Plot No. 255, E/4, VIP (Vibrant Industrial Park), Moti Talav Road, Bhavnagar - 364001
+          </p>
+          <p style="margin-bottom:0.7rem; color:#CBD5E1; font-size:0.88rem;">
+            <i class="fas fa-phone-alt" style="color:var(--orange-accent); width:20px;"></i> 
+            +91 9825207743 | +91 9825206341
+          </p>
+          <p style="margin-bottom:0.7rem; color:#CBD5E1; font-size:0.88rem;">
+            <i class="fas fa-envelope" style="color:var(--orange-accent); width:20px;"></i> 
+            sales@keyancorporation.com
+          </p>
+          <p style="color:var(--orange-accent); font-weight:800; margin-top:0.9rem; font-size:0.88rem; letter-spacing:0.5px;">
+            GSTIN: 24BWNPV1980J1ZV
+          </p>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom-row">
+        <div>© 2026 KEYAN CORPORATION. All rights reserved. B2B Industrial Procurement Marketplace.</div>
+        <div>Bhavnagar, Gujarat, India</div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- MODALS -->
+  <div id="quoteModal" class="modal-backdrop">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('quoteModal')"><i class="fas fa-times"></i></button>
+      <h3 style="color:var(--navy-deep); margin-bottom:0.5rem;">Request Quotation</h3>
+      <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:1.5rem;">Fill in your product requirement for an official B2B quotation from Keyan Corporation.</p>
+      
+      <form onsubmit="handleFormSubmit(event, 'Quotation Request')">
+        <div style="margin-bottom:1rem;">
+          <label style="font-size:0.85rem; font-weight:600; display:block; margin-bottom:0.3rem;">Company / Contact Name *</label>
+          <input type="text" class="search-input-field" style="border:1px solid var(--border-color); border-radius:var(--radius-sm);" required>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+          <div>
+            <label style="font-size:0.85rem; font-weight:600; display:block; margin-bottom:0.3rem;">Phone *</label>
+            <input type="tel" class="search-input-field" style="border:1px solid var(--border-color); border-radius:var(--radius-sm);" required>
+          </div>
+          <div>
+            <label style="font-size:0.85rem; font-weight:600; display:block; margin-bottom:0.3rem;">Email *</label>
+            <input type="email" class="search-input-field" style="border:1px solid var(--border-color); border-radius:var(--radius-sm);" required>
+          </div>
+        </div>
+        <div style="margin-bottom:1.5rem;">
+          <label style="font-size:0.85rem; font-weight:600; display:block; margin-bottom:0.3rem;">Requirement Details / Part Numbers *</label>
+          <textarea rows="4" class="search-input-field" style="border:1px solid var(--border-color); border-radius:var(--radius-sm); width:100%;" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-orange" style="width:100%;">
+          <i class="fas fa-paper-plane"></i> Submit Quotation Request
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div id="quoteDrawerModal" class="modal-backdrop">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('quoteDrawerModal')"><i class="fas fa-times"></i></button>
+      <h3 style="color:var(--navy-deep); margin-bottom:1rem;">Selected Quote List</h3>
+      <div id="quoteDrawerItems" style="margin-bottom:1.5rem;">
+        <!-- Filled dynamically -->
+      </div>
+      <button class="btn btn-orange" style="width:100%;" onclick="closeModal('quoteDrawerModal'); openModal('quoteModal');">
+        <i class="fas fa-check-circle"></i> Submit Quote List
+      </button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

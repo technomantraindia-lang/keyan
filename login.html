@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer & B2B Portal Login | KEYAN CORPORATION</title>
+  <meta name="description" content="Access Keyan Corporation B2B Procurement Portal for custom quotes, order tracking, and industrial supply management.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* B2B SPLIT SCREEN PREMIUM LOGIN & REGISTER PORTAL */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body.split-login-body {
+      min-height: 100vh;
+      background-color: #F8FAFC;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      display: flex;
+      color: #063B5C;
+    }
+
+    .split-portal-container {
+      display: flex;
+      width: 100vw;
+      min-height: 100vh;
+    }
+
+    /* LEFT HERO visual SIDE */
+    .portal-hero-side {
+      flex: 1.1;
+      position: relative;
+      background-color: #063B5C;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 3.5rem 2.5rem;
+      color: #FFFFFF;
+      overflow: hidden;
+    }
+
+    .portal-hero-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url('iamges/ship_supplier.jpg');
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+      filter: brightness(0.85);
+    }
+
+    .portal-hero-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(135deg, rgba(6, 59, 92, 0.92) 0%, rgba(3, 32, 52, 0.96) 100%);
+      z-index: 2;
+    }
+
+    .portal-hero-content {
+      position: relative;
+      z-index: 3;
+    }
+
+    .portal-brand-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      margin-bottom: 3rem;
+    }
+
+    .portal-brand-logo {
+      height: 56px;
+      width: auto;
+      background: #FFFFFF;
+      padding: 6px;
+      border-radius: 12px;
+    }
+
+    .portal-brand-name {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #FFFFFF;
+      letter-spacing: -0.5px;
+    }
+
+    .portal-brand-sub {
+      font-size: 0.75rem;
+      color: #FFD1A3;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-headline {
+      font-size: 2.8rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-headline span {
+      color: #38BDF8;
+    }
+
+    .hero-subtext {
+      font-size: 1.05rem;
+      color: #CBD5E1;
+      line-height: 1.6;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+    }
+
+    .portal-features-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .portal-feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 0.8rem 1.4rem;
+      border-radius: 50px;
+      width: fit-content;
+      backdrop-filter: blur(8px);
+    }
+
+    .portal-feature-item i {
+      color: var(--orange-accent);
+      font-size: 1.1rem;
+    }
+
+    .portal-quote-card {
+      position: relative;
+      z-index: 3;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      padding: 1.5rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .quote-text {
+      font-size: 0.92rem;
+      font-style: italic;
+      color: #E2E8F0;
+      line-height: 1.5;
+      margin-bottom: 0.8rem;
+    }
+
+    .quote-author {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #FFD1A3;
+    }
+
+    /* RIGHT FORM SIDE - WIDE PREMIUM B2B FORM */
+    .portal-form-side {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 4rem;
+      background-color: #FFFFFF;
+      position: relative;
+    }
+
+    .form-container-wide {
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .back-nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--marine-blue);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: transform 0.2s ease;
+    }
+
+    .back-nav-link:hover {
+      transform: translateX(-4px);
+      color: var(--orange-accent);
+    }
+
+    .form-heading-title {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--navy-deep);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-heading-sub {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    /* Tab Switcher: Login vs Register vs Vendor */
+    .b2b-tab-row {
+      display: flex;
+      background-color: #F1F5F9;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 2rem;
+    }
+
+    .b2b-tab-btn {
+      flex: 1;
+      padding: 0.75rem 0.5rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .b2b-tab-btn.active {
+      background-color: #FFFFFF;
+      color: var(--navy-deep);
+      box-shadow: 0 2px 8px rgba(6, 59, 92, 0.1);
+    }
+
+    /* Form Elements */
+    .b2b-form-group {
+      margin-bottom: 1.35rem;
+    }
+
+    .b2b-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--navy-deep);
+      margin-bottom: 0.45rem;
+    }
+
+    .b2b-input-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .b2b-input-icon {
+      position: absolute;
+      left: 1.1rem;
+      color: var(--marine-blue);
+      font-size: 1rem;
+    }
+
+    .b2b-input-field {
+      width: 100%;
+      padding: 0.85rem 1.1rem 0.85rem 2.8rem;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--navy-deep);
+      background-color: #F8FAFC;
+      border: 1.5px solid var(--border-color);
+      border-radius: 10px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .b2b-input-field:focus {
+      background-color: #FFFFFF;
+      border-color: var(--marine-blue);
+      box-shadow: 0 0 0 4px rgba(8, 126, 164, 0.12);
+    }
+
+    .toggle-eye-icon {
+      position: absolute;
+      right: 1.1rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .toggle-eye-icon:hover {
+      color: var(--navy-deep);
+    }
+
+    .b2b-form-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .remember-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      cursor: pointer;
+    }
+
+    .forgot-pwd-link {
+      color: var(--marine-blue);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .forgot-pwd-link:hover {
+      color: var(--orange-accent);
+    }
+
+    .btn-b2b-submit {
+      width: 100%;
+      background-color: var(--orange-accent);
+      color: #FFFFFF;
+      border: none;
+      padding: 0.95rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: var(--transition);
+      box-shadow: 0 4px 16px rgba(244, 123, 32, 0.35);
+    }
+
+    .btn-b2b-submit:hover {
+      background-color: #E06912;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(244, 123, 32, 0.45);
+    }
+
+    /* SSO Section */
+    .b2b-or-divider {
+      display: flex;
+      align-items: center;
+      margin: 1.8rem 0;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .b2b-or-divider::before, .b2b-or-divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .b2b-or-divider span {
+      padding: 0 0.8rem;
+    }
+
+    .b2b-sso-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .sso-tile-btn {
+      background-color: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 0.7rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--navy-deep);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .sso-tile-btn:hover {
+      border-color: var(--navy-deep);
+      background-color: #F8FAFC;
+    }
+
+    .b2b-form-footer {
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .b2b-form-footer a {
+      color: var(--marine-blue);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .b2b-form-footer a:hover {
+      color: var(--orange-accent);
+    }
+
+    /* Form Panels Toggle */
+    .form-panel {
+      display: none;
+    }
+
+    .form-panel.active {
+      display: block;
+    }
+
+    /* Detailed Multi-Device Responsive Rules */
+    @media (max-width: 992px) {
+      .split-portal-container {
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .portal-hero-side {
+        padding: 2.5rem 1.8rem;
+        min-height: auto;
+      }
+      .portal-form-side {
+        padding: 2.5rem 1.5rem;
+        min-height: auto;
+      }
+      .portal-quote-card {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .portal-hero-side {
+        padding: 2rem 1.25rem;
+      }
+      .hero-headline {
+        font-size: 1.8rem;
+      }
+      .portal-brand-name {
+        font-size: 1.2rem;
+      }
+      .portal-form-side {
+        padding: 1.8rem 1rem;
+      }
+      .portal-card-box {
+        padding: 1.5rem 1.2rem;
+      }
+      .form-row-2col {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+      }
+      .b2b-sso-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .portal-hero-side {
+        padding: 1.5rem 1rem;
+      }
+      .hero-headline {
+        font-size: 1.5rem;
+      }
+      .portal-feature-item {
+        font-size: 0.85rem;
+      }
+      .tab-switch-btn {
+        font-size: 0.85rem;
+        padding: 0.65rem 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body class="split-login-body">
+
+  <div class="split-portal-container">
+    
+    <!-- LEFT SIDE: CINEMATIC B2B VISUAL HERO -->
+    <div class="portal-hero-side">
+      <div class="portal-hero-bg"></div>
+      <div class="portal-hero-overlay"></div>
+
+      <div class="portal-hero-content">
+        <a href="index.html" class="portal-brand-header">
+          <img src="iamges/image.png" alt="KEYAN Logo" class="portal-brand-logo">
+          <div>
+            <div class="portal-brand-name">KEYAN CORPORATION</div>
+            <div class="portal-brand-sub">From Port to Plant</div>
+          </div>
+        </a>
+
+        <h1 class="hero-headline">
+          Enterprise B2B<br>
+          <span>Procurement Portal</span>
+        </h1>
+        
+        <p class="hero-subtext">
+          Access genuine ship supplies, fire safety equipment, industrial machinery & precision instrumentation with corporate RFQ management.
+        </p>
+
+        <div class="portal-features-list">
+          <div class="portal-feature-item">
+            <i class="fas fa-certificate"></i> 100% Genuine Certified Manufacturers
+          </div>
+          <div class="portal-feature-item">
+            <i class="fas fa-bolt"></i> Instant Bulk RFQ & Order Tracking
+          </div>
+          <div class="portal-feature-item">
+            <i class="fas fa-anchor"></i> SOLAS & Marine Class Compliant
+          </div>
+        </div>
+      </div>
+
+      <div class="portal-quote-card">
+        <p class="quote-text">
+          "Keyan Corporation's single-source procurement platform simplified our fleet spares management across 4 ports seamlessly."
+        </p>
+        <div class="quote-author">
+          — Procurement Director, Global Vessel Management
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE: WIDE PREMIUM B2B FORM PANEL -->
+    <div class="portal-form-side">
+      <div class="form-container-wide">
+        
+        <a href="index.html" class="back-nav-link">
+          <i class="fas fa-arrow-left"></i> Back to KEYAN Marketplace
+        </a>
+
+        <h2 class="form-heading-title" id="panelTitle">B2B Portal Access</h2>
+        <p class="form-heading-sub" id="panelSub">Enter your enterprise credentials to access RFQs and inventory.</p>
+
+        <!-- Mode Switcher Tabs (Customer Sign In Default) -->
+        <div class="b2b-tab-row">
+          <button class="b2b-tab-btn active" id="tabBtnLogin" onclick="showPanel('login')">
+            <i class="fas fa-user-lock"></i> Customer Sign In
+          </button>
+          <button class="b2b-tab-btn" id="tabBtnRegister" onclick="showPanel('register')">
+            <i class="fas fa-user-plus"></i> Register
+          </button>
+        </div>
+
+        <!-- PANEL 1: CUSTOMER LOGIN -->
+        <div id="panelLogin" class="form-panel active">
+          <form onsubmit="handlePortalAuth(event, 'Customer Portal Login')">
+            
+            <div class="b2b-form-group">
+              <label class="b2b-label">Corporate Email / GSTIN / Account ID *</label>
+              <div class="b2b-input-box">
+                <i class="fas fa-user-shield b2b-input-icon"></i>
+                <input type="text" class="b2b-input-field" placeholder="name@company.com or 24BWNPV1980J1ZV" required>
+              </div>
+            </div>
+
+            <div class="b2b-form-group">
+              <label class="b2b-label">Password *</label>
+              <div class="b2b-input-box">
+                <i class="fas fa-lock b2b-input-icon"></i>
+                <input type="password" id="passLogin" class="b2b-input-field" placeholder="••••••••••••" required>
+                <i class="far fa-eye toggle-eye-icon" onclick="togglePass('passLogin', this)"></i>
+              </div>
+            </div>
+
+            <div class="b2b-form-flex">
+              <label class="remember-label">
+                <input type="checkbox" checked style="accent-color: var(--orange-accent);"> Remember Account
+              </label>
+              <a href="#" onclick="alert('Password reset instructions sent to your corporate email.')" class="forgot-pwd-link">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn-b2b-submit">
+              <i class="fas fa-sign-in-alt"></i> Access B2B Portal
+            </button>
+          </form>
+
+          <div class="b2b-or-divider"><span>OR LOG IN WITH ENTERPRISE SSO</span></div>
+
+          <div class="b2b-sso-grid">
+            <button class="sso-tile-btn" onclick="alert('Microsoft Azure B2B Single Sign-On Activated')">
+              <i class="fab fa-microsoft" style="color:#00A4EF;"></i> Microsoft B2B
+            </button>
+            <button class="sso-tile-btn" onclick="alert('Google Workspace Enterprise SSO Activated')">
+              <i class="fab fa-google" style="color:#EA4335;"></i> Google Workspace
+            </button>
+          </div>
+
+          <div class="b2b-form-footer">
+            Need a B2B Procurement Account? <a href="#" onclick="showPanel('register')">Register Company</a>
+          </div>
+        </div>
+
+        <!-- PANEL 2: REGISTER NEW B2B ACCOUNT -->
+        <div id="panelRegister" class="form-panel">
+          <form onsubmit="handlePortalAuth(event, 'B2B Account Registration')">
+            
+            <div class="b2b-form-group">
+              <label class="b2b-label">Company / Legal Entity Name *</label>
+              <div class="b2b-input-box">
+                <i class="fas fa-building b2b-input-icon"></i>
+                <input type="text" class="b2b-input-field" placeholder="e.g. Maritime Logistics Pvt Ltd" required>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+              <div class="b2b-form-group">
+                <label class="b2b-label">Corporate Email *</label>
+                <div class="b2b-input-box">
+                  <i class="fas fa-envelope b2b-input-icon"></i>
+                  <input type="email" class="b2b-input-field" placeholder="procurement@company.com" required>
+                </div>
+              </div>
+              <div class="b2b-form-group">
+                <label class="b2b-label">GSTIN / Tax ID *</label>
+                <div class="b2b-input-box">
+                  <i class="fas fa-id-card b2b-input-icon"></i>
+                  <input type="text" class="b2b-input-field" placeholder="24BWNPV1980J1ZV" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="b2b-form-group">
+              <label class="b2b-label">Phone / WhatsApp Number *</label>
+              <div class="b2b-input-box">
+                <i class="fas fa-phone-alt b2b-input-icon"></i>
+                <input type="tel" class="b2b-input-field" placeholder="+91 9825207743" required>
+              </div>
+            </div>
+
+            <div class="b2b-form-group">
+              <label class="b2b-label">Create Account Password *</label>
+              <div class="b2b-input-box">
+                <i class="fas fa-key b2b-input-icon"></i>
+                <input type="password" id="passReg" class="b2b-input-field" placeholder="••••••••••••" required>
+                <i class="far fa-eye toggle-eye-icon" onclick="togglePass('passReg', this)"></i>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-b2b-submit">
+              <i class="fas fa-user-check"></i> Register B2B Enterprise Account
+            </button>
+          </form>
+
+          <div class="b2b-form-footer" style="margin-top: 1.5rem;">
+            Already registered? <a href="#" onclick="showPanel('login')">Log In Here</a>
+          </div>
+        </div>
+
+        <!-- PANEL 3: VENDOR PORTAL LOGIN -->
+        <div id="panelVendor" class="form-panel">
+          <form onsubmit="handlePortalAuth(event, 'Vendor Portal Login')">
+            <div class="b2b-form-group">
+              <label class="b2b-label">Vendor Code / Registered Email *</label>
+              <div class="b2b-input-box">
+                <i class="fas fa-warehouse b2b-input-icon"></i>
+                <input type="text" class="b2b-input-field" placeholder="VND-88902 or vendor@supplier.com" required>
+              </div>
+            </div>
+
+            <div class="b2b-form-group">
+              <label class="b2b-label">Vendor Security Key *</label>
+              <div class="b2b-input-box">
+                <i class="fas fa-lock b2b-input-icon"></i>
+                <input type="password" id="passVnd" class="b2b-input-field" placeholder="••••••••••••" required>
+                <i class="far fa-eye toggle-eye-icon" onclick="togglePass('passVnd', this)"></i>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-b2b-submit">
+              <i class="fas fa-truck-loading"></i> Access Supplier Dashboard
+            </button>
+          </form>
+
+          <div class="b2b-form-footer" style="margin-top: 1.5rem;">
+            Interested in becoming a Keyan Supplier? <a href="mailto:sales@keyancorporation.com">Email Supplier Team</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function showPanel(panelName) {
+      document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.b2b-tab-btn').forEach(b => b.classList.remove('active'));
+
+      const title = document.getElementById('panelTitle');
+      const sub = document.getElementById('panelSub');
+
+      if (panelName === 'login') {
+        document.getElementById('panelLogin').classList.add('active');
+        document.getElementById('tabBtnLogin').classList.add('active');
+        title.innerText = 'Customer Sign In';
+        sub.innerText = 'Enter your enterprise credentials to access RFQs and inventory.';
+      } else {
+        document.getElementById('panelRegister').classList.add('active');
+        document.getElementById('tabBtnRegister').classList.add('active');
+        title.innerText = 'Register Account';
+        sub.innerText = 'Register your business entity for wholesale pricing & RFQ tools.';
+      }
+    }
+
+    function togglePass(inputId, icon) {
+      const field = document.getElementById(inputId);
+      if (field.type === 'password') {
+        field.type = 'text';
+        icon.className = 'far fa-eye-slash toggle-eye-icon';
+      } else {
+        field.type = 'password';
+        icon.className = 'far fa-eye toggle-eye-icon';
+      }
+    }
+
+    function handlePortalAuth(event, portalTitle) {
+      event.preventDefault();
+      alert(`Success! ${portalTitle} authenticated successfully.\nRedirecting to Keyan B2B Dashboard...`);
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>
