@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Keyan Corporation — Marine, Industrial & Fire Safety Procurement</title>
+  <meta name="description" content="Contact Keyan Corporation for B2B procurement of ship spare parts, industrial machinery, fire safety gear, and marine instruments. Operations desk, Alang Port Direct Desk & Bhavnagar HQ.">
+  
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="contact.css">
+</head>
+<body class="cnt-page-body">
+
+  <!-- UNIFIED MASTER HEADER CONTAINER -->
+  <div id="header-container">
+    <!-- 1. TOP UTILITY BAR -->
+    <div class="top-utility-bar">
+      <div class="container utility-wrapper">
+        <div class="utility-left">
+          <span class="utility-badge-pulse"></span>
+          <span>Marine • Industrial • Fire Safety • Instrumentation</span>
+        </div>
+        <div class="utility-right">
+          <a href="tel:+919825207743"><i class="fas fa-phone-alt"></i> +91 9825207743</a>
+          <a href="mailto:sales@keyancorporation.com"><i class="fas fa-envelope"></i> sales@keyancorporation.com</a>
+          <span class="utility-gstin">| GSTIN: 24BWNPV1980J1ZV</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. MOBILE NAVIGATION DRAWER OVERLAY -->
+    <div class="mobile-nav-backdrop" id="mobileNavBackdrop" onclick="closeMobileNav()"></div>
+    <aside class="mobile-nav-drawer" id="mobileNavDrawer">
+      <div class="mobile-nav-header">
+        <div class="mobile-brand">
+          <img src="iamges/image.png" alt="KEYAN CORPORATION Logo" class="mobile-logo">
+          <div>
+            <div class="brand-name">KEYAN CORP</div>
+            <div class="brand-sub">From Port to Plant</div>
+          </div>
+        </div>
+        <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Close Menu">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="mobile-nav-body">
+        <ul class="mobile-nav-menu">
+          <li><a href="index.html" class="mobile-nav-link" id="nav-mob-home" onclick="closeMobileNav()"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="about.html" class="mobile-nav-link" id="nav-mob-about" onclick="closeMobileNav()"><i class="fas fa-building"></i> About Us</a></li>
+          <li><a href="categories.html" class="mobile-nav-link" id="nav-mob-categories" onclick="closeMobileNav()"><i class="fas fa-th-large"></i> Categories</a></li>
+          <li><a href="products.html" class="mobile-nav-link" id="nav-mob-products" onclick="closeMobileNav()"><i class="fas fa-boxes"></i> Featured Products</a></li>
+          <li><a href="industries.html" class="mobile-nav-link" id="nav-mob-industries" onclick="closeMobileNav()"><i class="fas fa-industry"></i> Industry Sectors</a></li>
+          <li><a href="contact.html" class="mobile-nav-link active" id="nav-mob-contact" onclick="closeMobileNav()"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        </ul>
+        <div class="mobile-nav-actions">
+          <a href="login.html" class="btn btn-navy btn-full"><i class="far fa-user"></i> Account Login</a>
+          <button class="btn btn-orange btn-full" onclick="closeMobileNav(); openModal('quoteModal');"><i class="fas fa-paper-plane"></i> Submit RFQ</button>
+        </div>
+        <div class="mobile-nav-contact">
+          <a href="tel:+919825207743"><i class="fas fa-phone-alt"></i> +91 9825207743</a>
+          <a href="mailto:sales@keyancorporation.com"><i class="fas fa-envelope"></i> sales@keyancorporation.com</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 3. MAIN E-COMMERCE BRAND HEADER -->
+    <header class="main-header">
+      <div class="container header-grid">
+        
+        <!-- Brand Logo -->
+        <a href="index.html" class="header-brand">
+          <img src="iamges/image.png" alt="KEYAN CORPORATION Logo" class="header-logo">
+          <div class="brand-text-wrap">
+            <div class="brand-name">KEYAN CORPORATION</div>
+            <div class="brand-sub">From Port to Plant</div>
+          </div>
+        </a>
+
+        <!-- Intelligent Search Bar -->
+        <form class="search-form-center" action="products.html" method="GET" onsubmit="handleSearchSubmit(event)">
+          <div class="search-box-wrap">
+            <input type="text" id="headerSearchInput" name="q" class="search-input-field" placeholder="Search products, brands, models..." required>
+            <button type="submit" class="search-submit-btn" title="Search Catalog">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
+
+        <!-- Header Action Tools & Mobile Hamburger Toggle -->
+        <div class="header-tools-group">
+          <div class="header-tools">
+            <a href="login.html" class="tool-item" title="Customer & Vendor Portal Login">
+              <i class="far fa-user"></i>
+              <span>Account</span>
+            </a>
+            <a href="cart.html" class="tool-item" title="View Shopping Cart">
+              <i class="fas fa-shopping-cart"></i>
+              <span>Cart</span>
+              <span class="tool-badge" id="cartHeaderBadge">0</span>
+            </a>
+          </div>
+
+          <button class="btn btn-orange header-rfq-btn" onclick="if(typeof openModal === 'function') openModal('quoteModal')">
+            <i class="fas fa-paper-plane"></i> Request Quote
+          </button>
+
+          <button class="mobile-hamburger" id="mobileNavBtn" onclick="toggleMobileNav()" aria-label="Toggle Navigation Menu">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- PRIMARY COMPACT NAVIGATION ROW -->
+      <nav class="primary-nav">
+        <div class="container nav-flex">
+          <ul class="nav-links">
+            <li><a href="index.html" id="nav-link-home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="about.html" id="nav-link-about"><i class="fas fa-building"></i> About Us</a></li>
+            <li><a href="categories.html" id="nav-link-categories"><i class="fas fa-th-large"></i> Categories</a></li>
+            <li><a href="products.html" id="nav-link-products"><i class="fas fa-boxes"></i> Featured Products</a></li>
+            <li><a href="industries.html" id="nav-link-industries"><i class="fas fa-industry"></i> Industry Sectors</a></li>
+            <li><a href="contact.html" id="nav-link-contact" class="active"><i class="fas fa-envelope"></i> Contact Us</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+  </div>
+
+  <!-- 1. CLEAN HERO BANNER IMAGE (NO TEXT OVERLAY) -->
+  <section class="cnt-banner-section">
+    <div class="cnt-banner-wrapper">
+      <img src="iamges/contact.png" alt="Keyan Corporation Contact Hero Banner" class="cnt-banner-img">
+    </div>
+  </section>
+
+  <!-- 2. MAIN LAYOUT STAGE CONTAINER -->
+  <section class="cnt-stage-section">
+    <div class="cnt-stage-container">
+      <div class="cnt-main-card">
+        <div class="cnt-split-grid">
+
+          <!-- LEFT COLUMN: TYPOGRAPHY & VERTICAL CARDS -->
+          <div class="cnt-left-col">
+            <div class="cnt-eyebrow">GET IN TOUCH</div>
+            <h1 class="cnt-left-title">Let's Start a Conversation</h1>
+            
+            <svg class="cnt-squiggly-svg" viewBox="0 0 60 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 6C6 2 10 2 14 6C18 10 22 10 26 6C30 2 34 2 38 6C42 10 46 10 50 6C54 2 58 2 60 6" stroke="#FF7A18" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+
+            <p class="cnt-left-desc">
+              Fill out the form or contact us directly using the details below. We look forward to hearing from you.
+            </p>
+
+            <div class="cnt-info-cards-list">
+              
+              <!-- Card 1: Phone -->
+              <div class="cnt-info-card">
+                <div class="cnt-icon-box">
+                  <i class="fas fa-phone-alt"></i>
+                </div>
+                <div>
+                  <div class="cnt-info-label">Phone</div>
+                  <div class="cnt-info-value">
+                    <a href="tel:+919825207743">+91 9825207743</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 2: Email -->
+              <div class="cnt-info-card">
+                <div class="cnt-icon-box">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div>
+                  <div class="cnt-info-label">Email</div>
+                  <div class="cnt-info-value">
+                    <a href="mailto:sales@keyancorporation.com">sales@keyancorporation.com</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 3: Head Office -->
+              <div class="cnt-info-card">
+                <div class="cnt-icon-box">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div>
+                  <div class="cnt-info-label">Bhavnagar (Alang Hub) Head Office</div>
+                  <div class="cnt-info-value">
+                    Plot No. 255, E/4, VIP Industrial Park, Moti Talav Road,<br>
+                    Bhavnagar, Gujarat - 364001, India
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 4: Website -->
+              <div class="cnt-info-card">
+                <div class="cnt-icon-box">
+                  <i class="fas fa-globe"></i>
+                </div>
+                <div>
+                  <div class="cnt-info-label">Website & GSTIN</div>
+                  <div class="cnt-info-value">
+                    <a href="index.html">www.keyancorporation.com</a><br>
+                    <span style="font-size:0.8rem; color:#64748B;">GSTIN: 24BWNPV1980J1ZV</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: FLOATING DARK NAVY FORM CARD -->
+          <div class="cnt-right-col">
+            <div class="cnt-dark-card">
+              
+              <!-- Corner Ribbon Badge -->
+              <div class="cnt-ribbon-badge">OPERATIONS DESK</div>
+
+              <!-- Form Header -->
+              <div class="cnt-form-header">
+                <div class="cnt-form-circle-icon">
+                  <i class="fas fa-pencil-alt"></i>
+                </div>
+                <h2 class="cnt-form-title">Send Us a Message</h2>
+                <div style="margin: 0.3rem 0 0.5rem;">
+                  <svg width="40" height="8" viewBox="0 0 40 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 4C5 1.5 8 1.5 11 4C14 6.5 17 6.5 20 4C23 1.5 26 1.5 29 4C32 6.5 35 6.5 38 4" stroke="#FF7A18" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <p class="cnt-form-subtitle">Our team will get back to you as soon as possible.</p>
+              </div>
+
+              <!-- Contact Form -->
+              <form id="contactFormMain">
+                
+                <div class="cnt-form-row">
+                  <div class="cnt-input-group">
+                    <label for="cntFirstName">First Name *</label>
+                    <input type="text" id="cntFirstName" required placeholder="Your first name">
+                  </div>
+                  <div class="cnt-input-group">
+                    <label for="cntLastName">Last Name *</label>
+                    <input type="text" id="cntLastName" required placeholder="Your last name">
+                  </div>
+                </div>
+
+                <div class="cnt-form-row">
+                  <div class="cnt-input-group">
+                    <label for="cntEmail">Email Address *</label>
+                    <input type="email" id="cntEmail" required placeholder="your@email.com">
+                  </div>
+                  <div class="cnt-input-group">
+                    <label for="cntPhone">Phone Number *</label>
+                    <input type="tel" id="cntPhone" required placeholder="+91 98765 43210">
+                  </div>
+                </div>
+
+                <div class="cnt-input-group" style="margin-bottom: 1.2rem;">
+                  <label for="cntSubject">Subject *</label>
+                  <input type="text" id="cntSubject" required placeholder="How can we help you?">
+                </div>
+
+                <div class="cnt-input-group" style="margin-bottom: 1.5rem;">
+                  <label for="cntMessage">Message *</label>
+                  <textarea id="cntMessage" rows="4" required placeholder="Type your message here..."></textarea>
+                </div>
+
+                <div class="cnt-form-actions-flex">
+                  <button type="submit" class="cnt-btn-send">
+                    SEND MESSAGE <i class="fas fa-arrow-right"></i>
+                  </button>
+                  <div class="cnt-security-note">
+                    <i class="fas fa-lock" style="color:#FF7A18;"></i> Your information is safe with us.
+                  </div>
+                </div>
+
+                <!-- Bottom Pills -->
+                <div class="cnt-pills-row">
+                  <span class="cnt-pill-tag">MARINE SERVICES</span>
+                  <span class="cnt-pill-tag">PARTNERSHIPS</span>
+                  <span class="cnt-pill-tag">URGENT SUPPORT</span>
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. GEOGRAPHIC HUB & MAP SECTION -->
+  <section class="cnt-hub-section" style="padding: 0 0 4rem;">
+    <div class="cnt-stage-container">
+      <div style="background:#FFFFFF; border-radius:20px; border:1px solid #E2E8F0; padding:2.5rem; box-shadow:0 10px 30px rgba(0,0,0,0.04);">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem;">
+          <div>
+            <h3 style="font-size:1.5rem; font-weight:800; color:#0F172A; margin:0 0 0.3rem;"><i class="fas fa-map-marked-alt" style="color:var(--cnt-orange);"></i> Bhavnagar & Alang Port Direct Hub</h3>
+            <p style="color:#64748B; font-size:0.9rem; margin:0;">Strategically located in Gujarat, India — Asia's largest ship recycling & marine cluster.</p>
+          </div>
+          <a href="https://maps.google.com" target="_blank" class="btn btn-navy" style="text-decoration:none; padding:0.6rem 1.2rem; font-size:0.85rem;"><i class="fas fa-directions"></i> Get Directions</a>
+        </div>
+        
+        <div style="width:100%; height:320px; border-radius:12px; overflow:hidden; border:1px solid #CBD5E1;">
+          <iframe 
+            style="width:100%; height:100%; border:none;"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3705.474642938166!2d72.1333333!3d21.7666667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f50877a5e01b7%3A0x6b4bf28264e10b14!2sBhavnagar%2C%20Gujarat%20364001!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+            allowfullscreen="" 
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNIFIED MASTER FOOTER CONTAINER -->
+  <div id="footer-container">
+    <footer class="main-footer">
+      <div class="container">
+        <div class="footer-grid">
+          
+          <!-- Col 1: Brand & Tagline -->
+          <div class="footer-col-brand">
+            <a href="index.html" class="header-brand" style="margin-bottom: 1.2rem; display:inline-flex;">
+              <img src="iamges/image.png" alt="KEYAN CORPORATION Logo" class="header-logo" style="height: 60px;">
+              <div class="brand-text-wrap">
+                <div class="brand-name" style="color:#FFFFFF; font-size:1.35rem;">KEYAN CORPORATION</div>
+                <div class="brand-sub" style="color:var(--orange-accent, #FF7A18);">From Port to Plant</div>
+              </div>
+            </a>
+            <p style="color:#94A3B8; font-size:0.9rem; line-height:1.6; margin-bottom:1.2rem;">
+              Trusted B2B supplier of Ship Spare Parts, Industrial Machinery, Fire Safety Equipment, and Rig & Marine Measuring Instruments.
+            </p>
+            <div class="footer-tagline-quote">
+              <i class="fas fa-quote-left" style="color:var(--orange-accent, #FF7A18); margin-right:6px;"></i>
+              "From Port to Plant, We Supply with Confidence"
+            </div>
+          </div>
+
+          <!-- Col 2: Supply Verticals -->
+          <div>
+            <h4 class="footer-col-heading">Supply Verticals</h4>
+            <ul class="footer-links-group">
+              <li><a href="categories.html#marine-ship-supply"><i class="fas fa-ship"></i> Ship & Marine Supply</a></li>
+              <li><a href="categories.html#industrial-machinery"><i class="fas fa-industry"></i> Industrial Machinery</a></li>
+              <li><a href="categories.html#fire-safety"><i class="fas fa-fire-extinguisher"></i> Fire & Safety Equipment</a></li>
+              <li><a href="categories.html#marine-instruments"><i class="fas fa-microchip"></i> Rig & Marine Instruments</a></li>
+              <li><a href="categories.html#gas-detection"><i class="fas fa-bell"></i> Gas Detection Systems</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Quick Links -->
+          <div>
+            <h4 class="footer-col-heading">Quick Links</h4>
+            <ul class="footer-links-group">
+              <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+              <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+              <li><a href="categories.html"><i class="fas fa-chevron-right"></i> Categories</a></li>
+              <li><a href="products.html"><i class="fas fa-chevron-right"></i> Featured Products</a></li>
+              <li><a href="industries.html"><i class="fas fa-chevron-right"></i> Industry Sectors</a></li>
+              <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 4: Contact & Credentials -->
+          <div>
+            <h4 class="footer-col-heading">Contact Details</h4>
+            <p class="footer-contact-item">
+              <i class="fas fa-map-marker-alt"></i> 
+              <span>Plot No. 255, E/4, VIP (Vibrant Industrial Park), Moti Talav Road, Bhavnagar - 364001, Gujarat, India</span>
+            </p>
+            <p class="footer-contact-item">
+              <i class="fas fa-phone-alt"></i> 
+              <span><a href="tel:+919825207743">+91 9825207743</a> | <a href="tel:+919825206341">+91 9825206341</a></span>
+            </p>
+            <p class="footer-contact-item">
+              <i class="fas fa-envelope"></i> 
+              <span><a href="mailto:sales@keyancorporation.com">sales@keyancorporation.com</a></span>
+            </p>
+            <div class="footer-gstin-badge">
+              <i class="fas fa-shield-alt"></i> GSTIN: 24BWNPV1980J1ZV
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer Bottom Row -->
+        <div class="footer-bottom-row">
+          <div>© 2026 KEYAN CORPORATION. All rights reserved. B2B Industrial Procurement Marketplace.</div>
+          <div class="footer-bottom-right">
+            <span>Bhavnagar, Gujarat, India</span>
+            <button class="back-to-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Back to Top">
+              <i class="fas fa-arrow-up"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Master Quote List Drawer Modal -->
+  <div id="quoteDrawerModal" class="modal-backdrop">
+    <div class="modal-card" style="max-width: 650px;">
+      <div class="modal-header">
+        <h4><i class="fas fa-shopping-cart"></i> Your Cart & Quote Basket</h4>
+        <button class="modal-close" onclick="closeModal('quoteDrawerModal')" aria-label="Close Modal">&times;</button>
+      </div>
+      <div class="modal-body" id="quoteDrawerItems">
+        <!-- Cart items rendered dynamically -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-navy" onclick="closeModal('quoteDrawerModal')"><i class="fas fa-arrow-left"></i> Continue Browsing</button>
+        <a href="cart.html" class="btn btn-orange" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;"><i class="fas fa-shopping-cart"></i> View Full Cart & Checkout</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Master Request Quote Modal Form -->
+  <div id="quoteModal" class="modal-backdrop">
+    <div class="modal-card" style="max-width: 650px;">
+      <div class="modal-header">
+        <h4><i class="fas fa-paper-plane"></i> Submit Formal Request for Quote (RFQ)</h4>
+        <button class="modal-close" onclick="closeModal('quoteModal')" aria-label="Close Modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="handleFormSubmit(event, 'Request for Quote')">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
+            <div>
+              <label>FULL NAME *</label>
+              <input type="text" required placeholder="Enter full name">
+            </div>
+            <div>
+              <label>COMPANY / VESSEL *</label>
+              <input type="text" required placeholder="Company or vessel name">
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
+            <div>
+              <label>EMAIL ADDRESS *</label>
+              <input type="email" required placeholder="name@company.com">
+            </div>
+            <div>
+              <label>PHONE NUMBER *</label>
+              <input type="tel" required placeholder="+91 XXXXX XXXXX">
+            </div>
+          </div>
+          <div style="margin-bottom: 1.4rem;">
+            <label>SPECIFIC REQUIREMENTS / QUANTITY *</label>
+            <textarea rows="4" required placeholder="List products, model numbers, specifications or delivery port requirements..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-orange" style="width: 100%; padding: 1rem; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.05em; justify-content: center; box-shadow: 0 8px 25px rgba(255, 122, 24, 0.4);">
+            SUBMIT RFQ ENQUIRY <i class="fas fa-paper-plane" style="margin-left: 0.4rem;"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Scripts -->
+  <script src="app.js"></script>
+  <script src="contact.js"></script>
+</body>
+</html>

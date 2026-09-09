@@ -1,0 +1,554 @@
+/* ==================================================
+   KEYAN CORPORATION — DEDICATED INDUSTRY SECTORS CSS
+   ================================================== */
+
+:root {
+  --ind-bg-darkest: #050C1A;
+  --ind-bg-dark: #061325;
+  --ind-bg-card: #0A1628;
+  --ind-border: #1E3A5F;
+  --ind-border-light: rgba(255, 255, 255, 0.08);
+  --ind-orange: #FF7A18;
+  --ind-orange-glow: rgba(255, 122, 24, 0.25);
+  --ind-blue-light: #38BDF8;
+  --ind-text-white: #FFFFFF;
+  --ind-text-muted: #94A3B8;
+  --ind-text-subtle: #64748B;
+  --font-heading: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --radius-lg: 14px;
+  --radius-md: 10px;
+  --radius-sm: 6px;
+  --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+body.ind-page-body {
+  background-color: var(--ind-bg-darkest);
+  color: var(--ind-text-white);
+  font-family: var(--font-heading);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* 1. HERO BANNER SECTION */
+.ind-hero-section {
+  position: relative;
+  padding: 3rem 0 2.5rem;
+  background: radial-gradient(circle at 50% 20%, rgba(30, 58, 95, 0.4) 0%, rgba(6, 19, 37, 0.95) 70%, #050C1A 100%),
+              url('iamges/about_hero_bg.jpg') center/cover no-repeat;
+  border-bottom: none;
+  overflow: hidden;
+}
+
+.ind-hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(5, 12, 26, 0.82);
+  backdrop-filter: blur(2px);
+  z-index: 1;
+}
+
+.ind-hero-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.ind-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 122, 24, 0.12);
+  border: 1px solid var(--ind-orange);
+  padding: 0.35rem 0.85rem;
+  border-radius: 30px;
+  color: var(--ind-orange);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.ind-hero-title {
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-weight: 900;
+  color: var(--ind-text-white);
+  line-height: 1.2;
+  margin: 0 0 0.8rem;
+  letter-spacing: -0.02em;
+}
+
+.ind-hero-title span {
+  background: linear-gradient(135deg, #FF7A18 0%, #FFA857 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ind-hero-subtitle {
+  font-size: 0.98rem;
+  color: var(--ind-text-muted);
+  max-width: 720px;
+  margin-bottom: 1.8rem;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+/* Hero Key Stats Grid */
+.ind-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.ind-stat-card {
+  background: rgba(10, 22, 40, 0.85);
+  border: 1px solid var(--ind-border);
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  backdrop-filter: blur(8px);
+}
+
+.ind-stat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 122, 24, 0.15);
+  border: 1px solid var(--ind-orange);
+  color: var(--ind-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.ind-stat-num {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--ind-text-white);
+  font-family: var(--font-mono);
+  line-height: 1;
+}
+
+.ind-stat-label {
+  font-size: 0.72rem;
+  color: var(--ind-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.2rem;
+}
+
+
+/* 2. SECTOR FILTER TABS BAR (NO BORDER LINE) */
+.ind-filter-bar-section {
+  position: relative;
+  top: 0;
+  z-index: 10;
+  background: #050C1A;
+  border: none !important;
+  padding: 1rem 0;
+}
+
+.ind-filter-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.ind-filter-container::-webkit-scrollbar {
+  display: none;
+}
+
+.ind-tabs-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+}
+
+.ind-tab-btn {
+  background: #0A1628;
+  border: 1px solid var(--ind-border);
+  color: var(--ind-text-muted);
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.ind-tab-btn:hover {
+  background: #0D1D35;
+  color: var(--ind-text-white);
+  border-color: rgba(255, 122, 24, 0.4);
+}
+
+.ind-tab-btn.active {
+  background: var(--ind-orange);
+  color: #FFFFFF;
+  border-color: var(--ind-orange);
+  box-shadow: 0 4px 12px var(--ind-orange-glow);
+}
+
+
+/* 3. INDUSTRY SECTORS MAIN GRID */
+.ind-main-section {
+  padding: 2.5rem 0 5rem;
+}
+
+.ind-grid-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.ind-sectors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Individual Industry Card */
+.ind-sector-card {
+  background: var(--ind-bg-card);
+  border: 1px solid var(--ind-border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-card);
+  position: relative;
+}
+
+.ind-sector-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--ind-orange);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px var(--ind-orange-glow);
+}
+
+/* Card Header Media Stage */
+.ind-card-media {
+  position: relative;
+  height: 160px;
+  overflow: hidden;
+  background: #061325;
+}
+
+.ind-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ind-sector-card:hover .ind-card-img {
+  transform: scale(1.06);
+}
+
+.ind-card-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, rgba(6, 19, 37, 0.15) 0%, rgba(6, 19, 37, 0.92) 100%);
+}
+
+.ind-card-code-badge {
+  position: absolute;
+  top: 0.8rem;
+  left: 0.8rem;
+  background: rgba(5, 12, 26, 0.85);
+  border: 1px solid var(--ind-border);
+  color: var(--ind-orange);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  backdrop-filter: blur(6px);
+}
+
+.ind-card-icon-badge {
+  position: absolute;
+  bottom: 0.8rem;
+  right: 1rem;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(10, 22, 40, 0.95);
+  border: 1px solid var(--ind-orange);
+  color: var(--ind-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+/* Card Body Content */
+.ind-card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.ind-card-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--ind-text-white);
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.ind-card-desc {
+  font-size: 0.85rem;
+  color: var(--ind-text-muted);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+/* Equipment Manifest List */
+.ind-manifest-box {
+  background: #061325;
+  border: 1px solid var(--ind-border);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.ind-manifest-heading {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--ind-orange);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.ind-manifest-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.ind-manifest-items li {
+  font-size: 0.78rem;
+  color: #E2E8F0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  line-height: 1.35;
+}
+
+.ind-manifest-items li i {
+  color: var(--ind-blue-light);
+  font-size: 0.7rem;
+}
+
+/* Compliance Badges Row */
+.ind-compliance-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 1.2rem;
+}
+
+.ind-comp-badge {
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: var(--ind-blue-light);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* Card Action Footer */
+.ind-card-footer {
+  margin-top: auto;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--ind-border-light);
+  display: flex;
+  gap: 0.6rem;
+}
+
+.ind-btn-catalog {
+  flex: 1;
+  background: linear-gradient(135deg, #FF7A18 0%, #E06300 100%);
+  color: #FFFFFF;
+  border: none;
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 10px var(--ind-orange-glow);
+}
+
+.ind-btn-catalog:hover {
+  background: linear-gradient(135deg, #FF8C33 0%, #F56E00 100%);
+  transform: translateY(-1px);
+}
+
+.ind-btn-rfq {
+  background: #061325;
+  border: 1px solid var(--ind-border);
+  color: var(--ind-text-white);
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+}
+
+.ind-btn-rfq:hover {
+  background: #0D1D35;
+  border-color: var(--ind-orange);
+  color: var(--ind-orange);
+}
+
+
+/* 4. B2B PROCUREMENT & LOGISTICS CAPABILITIES BANNER */
+.ind-capabilities-section {
+  background: linear-gradient(180deg, #050C1A 0%, #08172E 100%);
+  border-top: 1px solid var(--ind-border);
+  border-bottom: 1px solid var(--ind-border);
+  padding: 5rem 0;
+}
+
+.ind-cap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.ind-cap-card {
+  background: var(--ind-bg-card);
+  border: 1px solid var(--ind-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.ind-cap-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 4px; height: 100%;
+  background: var(--ind-orange);
+}
+
+.ind-cap-icon {
+  font-size: 2.2rem;
+  color: var(--ind-orange);
+  margin-bottom: 1.2rem;
+}
+
+.ind-cap-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--ind-text-white);
+  margin: 0 0 0.8rem;
+}
+
+.ind-cap-desc {
+  font-size: 0.9rem;
+  color: var(--ind-text-muted);
+  line-height: 1.6;
+}
+
+
+/* 5. IN-PAGE CONSULTATION & RFQ SECTION */
+.ind-rfq-section {
+  padding: 6rem 0;
+  background: radial-gradient(circle at 50% 50%, rgba(30, 58, 95, 0.3) 0%, #050C1A 100%);
+}
+
+.ind-rfq-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.ind-rfq-card {
+  background: var(--ind-bg-card);
+  border: 1px solid var(--ind-border);
+  border-radius: 18px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+.ind-rfq-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.ind-rfq-title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--ind-text-white);
+  margin: 0 0 0.8rem;
+}
+
+.ind-rfq-subtitle {
+  font-size: 1rem;
+  color: var(--ind-text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Responsive Rules */
+@media (max-width: 992px) {
+  .ind-hero-section {
+    padding: 3.5rem 0 3rem;
+  }
+  .ind-filter-bar-section {
+    top: 0;
+  }
+  .ind-sectors-grid {
+    grid-template-columns: 1fr;
+  }
+  .ind-rfq-card {
+    padding: 2rem 1.5rem;
+  }
+}

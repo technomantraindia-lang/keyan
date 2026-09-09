@@ -2,92 +2,242 @@
  * KEYAN CORPORATION - 2026 Trend-Forward B2B Procurement Marketplace Logic
  */
 
-// B2B Catalogue Products
+// B2B Catalogue Products with USD Pricing & Technical Specifications
 const CATALOG_ITEMS = [
   {
     id: 'p1',
+    sku: 'KEY-GD-2500',
     name: 'Portable Multi Gas Detector X-am 2500',
     brand: 'Dräger',
     category: 'gas',
-    categoryName: 'Fire & Safety',
+    categoryName: 'Gas Detection & Safety',
     img: 'iamges/prod_gas_detector.jpg',
-    availability: 'Available on Request',
-    specs: 'O2, H2S, CO, Ex Gas Detection | IP67'
+    images: ['iamges/prod_gas_detector.jpg', 'iamges/prod_transmitter.jpg', 'iamges/rig_instruments.jpg'],
+    price_usd: 485.00,
+    availability: 'In Stock',
+    shortDesc: 'Continuous detection of up to 4 gases: O2, H2S, CO, and combustible gases (Ex). IP67 water and dust resistance with ATEX Zone 0/20 certification.',
+    fullDesc: 'The Dräger X-am 2500 was developed for personal monitoring. The 1 to 4 gas detector reliably detects combustible gases and vapors, as well as O2, CO, NO2, SO2 and H2S. Reliable and fully mature measurement technology, durable sensors and easy handling guarantee a high degree of safety with extremely low operating costs.',
+    specs: 'O2, H2S, CO, Ex Gas Detection | IP67 Water Resistant',
+    specifications: {
+      'Product Type': 'Portable Multi-Gas Detector',
+      'Brand': 'Dräger Safety',
+      'Model': 'X-am 2500 Series',
+      'Target Gases': 'O2, H2S, CO, Ex (Combustible Vapors)',
+      'Ingress Protection': 'IP67 Water & Dust Proof',
+      'Certification': 'ATEX Zone 0/20 | MED SOLAS Approved',
+      'Battery Life': '> 12 Hours Continuous Operation',
+      'Country of Origin': 'Germany'
+    },
+    applications: ['Confined Space Entry', 'Shiphold Inspection', 'Refinery Turnaround', 'Offshore Rig Monitoring'],
+    is_quote_only: false
   },
   {
     id: 'p2',
+    sku: 'KEY-SCBA-300',
     name: 'SCBA Air Breathing Apparatus System',
     brand: 'MSA Safety',
     category: 'safety',
-    categoryName: 'Fire & Safety',
+    categoryName: 'Fire & Safety Equipment',
     img: 'iamges/prod_scba.jpg',
+    images: ['iamges/prod_scba.jpg', 'iamges/fire_safety.jpg', 'iamges/fire.png'],
+    price_usd: 1450.00,
     availability: 'Available on Request',
-    specs: '300 Bar Carbon Composite Cylinder'
+    shortDesc: 'Heavy-duty 300 Bar composite carbon cylinder SCBA system with ergonomic harness, positive pressure full face mask, and acoustic alarm whistle.',
+    fullDesc: 'Self-Contained Breathing Apparatus (SCBA) engineered for firefighting, marine vessel emergency response, and industrial chemical safety. Features an ultra-lightweight carbon composite air cylinder rated for 300 Bar pressure.',
+    specs: '300 Bar Carbon Composite Cylinder | Ergonomic Harness',
+    specifications: {
+      'Product Type': 'Self-Contained Breathing Apparatus',
+      'Brand': 'MSA Safety / SOLAS',
+      'Cylinder Rating': '300 Bar Working Pressure',
+      'Cylinder Volume': '6.8 Liters Carbon Composite',
+      'Face Mask': 'Full Face Positive Pressure Silicone Mask',
+      'Whistle Alarm': 'Acoustic Signal > 90 dB at 55 Bar',
+      'Certification': 'EN 137 Type 2 | SOLAS / MED Certified',
+      'Country of Origin': 'United States / EU'
+    },
+    applications: ['Shipboard Firefighting', 'Chemical Plant Emergency', 'Industrial Rescue', 'Toxic Atmosphere Entry'],
+    is_quote_only: false
   },
   {
     id: 'p3',
+    sku: 'KEY-PMP-200',
     name: 'Air-Operated Double Diaphragm Pump (AODD)',
     brand: 'Wilden',
     category: 'machinery',
-    categoryName: 'Industrial Machinery',
+    categoryName: 'Industrial Machinery & Tools',
     img: 'iamges/prod_pump.jpg',
-    availability: 'In Stock / On Request',
-    specs: 'Heavy-Duty Industrial Duty | 2" Flange'
+    images: ['iamges/prod_pump.jpg', 'iamges/INDUSTRIAL & MFG].png', 'iamges/consumables.jpg'],
+    price_usd: 890.00,
+    availability: 'In Stock',
+    shortDesc: 'Heavy-duty 2" flanged aluminum body AODD pump for bilge transfer, chemical slurry, viscous fluids, and harsh marine environments.',
+    fullDesc: 'Wilden original air-operated double diaphragm pump designed for high-volume fluid transfer without electrical hazard. Self-priming up to 7.6m dry lift with dry-run capabilities.',
+    specs: 'Heavy-Duty Industrial Duty | 2" Flange Port',
+    specifications: {
+      'Product Type': 'Double Diaphragm AODD Pump',
+      'Brand': 'Wilden Pumps',
+      'Body Material': 'Cast Aluminum / Ductile Iron',
+      'Diaphragm Material': 'Buna-N / Teflon PTFE',
+      'Port Diameter': '2 Inch ANSI Flange',
+      'Max Flow Rate': '617 L/min (163 GPM)',
+      'Air Supply Pressure': '8.6 Bar (125 PSI)',
+      'Country of Origin': 'United States'
+    },
+    applications: ['Ship Bilge Pumping', 'Industrial Slurry Transfer', 'Chemical Transfer', 'Oil Spill Response'],
+    is_quote_only: false
   },
   {
     id: 'p4',
+    sku: 'KEY-VLV-100',
     name: 'Marine Bronze Flanged Globe Valve DN100',
     brand: 'Sikla / Marine Standard',
     category: 'marine',
     categoryName: 'Marine & Ship Supply',
     img: 'iamges/prod_valve.jpg',
+    images: ['iamges/prod_valve.jpg', 'iamges/marine and shipping.png', 'iamges/ship_supplier.jpg'],
+    price_usd: 320.00,
     availability: 'Available on Request',
-    specs: 'Class Approved | RG5 Bronze Marine Spec'
+    shortDesc: 'Class-approved RG5 bronze marine globe valve DN100 for seawater lines, cooling water, and fuel oil distribution.',
+    fullDesc: 'Heavy-duty cast bronze marine globe valve built to international SOLAS and classification society standards (DNV-GL, Lloyd\'s Register). Resistant to seawater corrosion.',
+    specs: 'Class Approved | RG5 Bronze Marine Spec',
+    specifications: {
+      'Product Type': 'Flanged Marine Globe Valve',
+      'Brand': 'Sikla / SOLAS Standard',
+      'Nominal Size': 'DN100 (4 Inch)',
+      'Pressure Rating': 'PN16 / 16 Bar',
+      'Material Body': 'RG5 Gunmetal Bronze',
+      'Connection': 'Flanged ANSI / DIN standard',
+      'Class Certification': 'DNV-GL / Lloyd\'s Register',
+      'Country of Origin': 'EU / India'
+    },
+    applications: ['Seawater Cooling Lines', 'Fuel Oil Transfer', 'Ballast Piping', 'Shipboard Engine Room'],
+    is_quote_only: false
   },
   {
     id: 'p5',
+    sku: 'KEY-TX-420',
     name: 'Digital Marine Pressure Transmitter Gauge',
     brand: 'Consilium / Nav-Tech',
     category: 'instruments',
-    categoryName: 'Rig & Instruments',
+    categoryName: 'Marine & Industrial Instruments',
     img: 'iamges/prod_transmitter.jpg',
-    availability: 'Available on Request',
-    specs: 'ATEX Certified | 4-20mA Output'
+    images: ['iamges/prod_transmitter.jpg', 'iamges/rig_instruments.jpg', 'iamges/Offshore Rig Monitoring Control Telemetry.png'],
+    price_usd: 650.00,
+    availability: 'In Stock',
+    shortDesc: 'ATEX Zone 0 certified piezoresistive pressure transmitter with 4-20mA HART protocol for rig depth and tank gauging.',
+    fullDesc: 'High-precision marine pressure transmitter engineered for tank level measurement, pipeline pressure monitoring, and offshore platform telemetry.',
+    specs: 'ATEX Certified | 4-20mA Output | IP68 Submersible',
+    specifications: {
+      'Product Type': 'Industrial Pressure Transmitter',
+      'Brand': 'Consilium Nav-Tech',
+      'Signal Output': '4-20mA HART Protocol',
+      'Pressure Range': '0 to 40 Bar (Customizable)',
+      'Accuracy': '±0.1% Full Scale',
+      'Explosion Proof': 'ATEX Ex ia IIC T4 Ga',
+      'Housing': '316L Stainless Steel / Titanium',
+      'Country of Origin': 'Sweden / Germany'
+    },
+    applications: ['Offshore Tank Level', 'Cargo Pipeline Monitoring', 'Hydraulic System Control', 'Rig Telemetry'],
+    is_quote_only: false
   },
   {
     id: 'p6',
+    sku: 'KEY-LJ-275',
     name: 'SOLAS Approved Inflatable Life Jacket (275N)',
     brand: 'Unitor / SOLAS',
     category: 'marine',
     categoryName: 'Marine & Ship Supply',
     img: 'iamges/prod_lifejacket.jpg',
-    availability: 'In Stock / On Request',
-    specs: 'MED Certified | Dual Chamber Auto-Inflate'
+    images: ['iamges/prod_lifejacket.jpg', 'iamges/ship_supplier.jpg', 'iamges/offshore and rig.png'],
+    price_usd: 195.00,
+    availability: 'In Stock',
+    shortDesc: 'Dual chamber automatic inflation 275N buoyancy SOLAS/MED certified life jacket with emergency light and whistle.',
+    fullDesc: 'Heavy-duty offshore life jacket engineered for heavy weather and industrial marine work. Provides 275 Newtons of buoyancy to self-right an unconscious wearer clad in heavy weather gear.',
+    specs: 'MED Certified | Dual Chamber Auto-Inflate 275N',
+    specifications: {
+      'Product Type': 'Inflatable SOLAS Life Jacket',
+      'Brand': 'Unitor SOLAS',
+      'Buoyancy Rating': '275 Newtons (ISO 12402-2)',
+      'Inflation Mechanism': 'Halkey-Roberts Automatic & Manual',
+      'Chamber Setup': 'Twin Independent Bladders',
+      'Light System': 'MED Approved Self-Igniting LED Light',
+      'Certification': 'SOLAS 74/96 | MED Wheelmark Approved',
+      'Country of Origin': 'United Kingdom / EU'
+    },
+    applications: ['Offshore Vessel Work', 'Ship Crew Safety', 'Pilot Transport', 'Rig Platform Operations'],
+    is_quote_only: false
   },
   {
     id: 'p7',
+    sku: 'KEY-FH-25',
     name: 'Heavy Duty Fire Hose & Couplings (2.5")',
     brand: 'Scott / Fire Guard',
     category: 'safety',
-    categoryName: 'Fire & Safety',
+    categoryName: 'Fire & Safety Equipment',
     img: 'iamges/fire.png',
-    availability: 'Available on Request',
-    specs: 'Rubber Lined High Pressure Hose'
+    images: ['iamges/fire.png', 'iamges/fire_safety.jpg', 'iamges/prod_scba.jpg'],
+    price_usd: 145.00,
+    availability: 'In Stock',
+    shortDesc: 'Synthetic rubber lined high pressure 2.5" 30m fire hose complete with Storz brass couplings and nozzle adapter.',
+    fullDesc: 'Heavy-duty all-weather marine and industrial fire hose. All-synthetic polyester jacket with internal EPDM rubber lining. Resistant to ozone, seawater, and chemical abrasion.',
+    specs: 'Rubber Lined High Pressure Hose | 30m Length',
+    specifications: {
+      'Product Type': 'Industrial Fire Hose Assembly',
+      'Brand': 'Scott Fire Guard',
+      'Internal Diameter': '2.5 Inch (65mm)',
+      'Length': '30 Meters Roll',
+      'Working Pressure': '16 Bar (230 PSI)',
+      'Burst Pressure': '48 Bar (690 PSI)',
+      'Coupling Type': 'Instantaneous BS336 / Storz Brass',
+      'Country of Origin': 'India / EU'
+    },
+    applications: ['Shipboard Hydrants', 'Industrial Plant Fire Protection', 'Refinery Safety Lines', 'Port Terminals'],
+    is_quote_only: false
   },
   {
     id: 'p8',
+    sku: 'KEY-RIG-88',
     name: 'Offshore Rig Monitoring Control Telemetry',
     brand: 'Apollo / Marine Instrumentation',
     category: 'instruments',
-    categoryName: 'Rig & Instruments',
+    categoryName: 'Marine & Industrial Instruments',
     img: 'iamges/Offshore Rig Monitoring Control Telemetry.png',
+    images: ['iamges/Offshore Rig Monitoring Control Telemetry.png', 'iamges/rig_instruments.jpg', 'iamges/oil and gas.png'],
+    price_usd: 2850.00,
     availability: 'Available on Request',
-    specs: 'Offshore Telemetry & Depth Gauge Unit'
+    shortDesc: 'Integrated offshore telemetry unit for real-time rig depth, inclination, ballast pressure, and gas alarm dashboard.',
+    fullDesc: 'Comprehensive rig control telemetry system engineered for jack-up rigs, drillships, and offshore platforms. Centralizes multi-sensor signals into an ATEX certified explosion-proof console.',
+    specs: 'Offshore Telemetry & Depth Gauge Unit | Modbus/Ethernet',
+    specifications: {
+      'Product Type': 'Offshore Telemetry Control Unit',
+      'Brand': 'Apollo Instrumentation',
+      'Display Interface': '15" Sunlight Readable Touch Console',
+      'Protocol': 'Modbus TCP/IP | RS485 | CANbus',
+      'Channels': '32 Sensor Inputs (Analog & Digital)',
+      'Enclosure': 'IP66 316 Stainless Steel Console',
+      'Certification': 'ATEX Zone 1 / DNV Offshore',
+      'Country of Origin': 'United Kingdom'
+    },
+    applications: ['Offshore Drilling Rigs', 'Jack-Up Platforms', 'FPSO Vessels', 'Subsea Telemetry'],
+    is_quote_only: true
   }
 ];
 
 let quoteBasket = [];
+let cartBasket = JSON.parse(localStorage.getItem('keyan_cart') || '[]');
 let wishlist = new Set();
+
+function saveCartToStorage() {
+  localStorage.setItem('keyan_cart', JSON.stringify(cartBasket));
+  updateCartBadgeCount();
+}
+
+function updateCartBadgeCount() {
+  const count = cartBasket.reduce((sum, item) => sum + item.qty, 0);
+  const badge = document.getElementById('quoteCartCount');
+  if (badge) {
+    badge.innerText = count;
+  }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   renderFeaturedProducts('all');
@@ -228,11 +378,14 @@ function addToQuote(productId) {
 }
 
 function updateQuoteBadge() {
-  const count = quoteBasket.reduce((sum, i) => sum + i.qty, 0);
+  const stored = localStorage.getItem('keyan_cart');
+  const cart = stored ? JSON.parse(stored) : quoteBasket;
+  const count = cart.reduce((sum, i) => sum + (i.qty || 1), 0);
+  
   const badge = document.getElementById('quoteCartCount');
-  if (badge) {
-    badge.innerText = count;
-  }
+  if (badge) badge.innerText = count;
+  const headerBadge = document.getElementById('cartHeaderBadge');
+  if (headerBadge) headerBadge.innerText = count;
 }
 
 function openQuoteDrawer() {
@@ -240,60 +393,135 @@ function openQuoteDrawer() {
   const body = document.getElementById('quoteDrawerItems');
   if (!modal || !body) return;
 
-  if (quoteBasket.length === 0) {
-    body.innerHTML = `<p style="text-align:center; color: var(--text-muted); padding: 2rem;">Your Quote List is empty. Select products from the catalogue!</p>`;
-  } else {
+  const stored = localStorage.getItem('keyan_cart');
+  const cart = stored ? JSON.parse(stored) : quoteBasket;
+
+  if (cart.length === 0) {
     body.innerHTML = `
-      <div style="display:flex; flex-direction:column; gap: 0.8rem;">
-        ${quoteBasket.map(item => `
-          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid var(--border-color); padding-bottom: 0.8rem;">
-            <div>
-              <h5 style="font-size:0.95rem; color:var(--navy-deep);">${item.name}</h5>
-              <span style="font-size:0.8rem; color:var(--marine-blue);">${item.brand}</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:0.8rem;">
-              <span style="font-weight:800; color:var(--orange-accent);">Qty: ${item.qty}</span>
-              <button onclick="removeFromQuote('${item.id}')" style="background:none; border:none; color:#E11D48; cursor:pointer;"><i class="fas fa-trash"></i></button>
-            </div>
+      <div style="text-align:center; padding: 2.5rem 1rem; color: #94A3B8;">
+        <i class="fas fa-shopping-basket" style="font-size: 2.8rem; color: #FF7A18; margin-bottom: 1rem;"></i>
+        <h4 style="color: #FFFFFF; font-weight: 800; font-size: 1.2rem; margin-bottom: 0.5rem;">Your Cart & Quote Basket is Empty</h4>
+        <p style="font-size: 0.88rem; color: #94A3B8; margin-bottom: 1.5rem;">Select products from the catalogue to generate a formal quote or place an order.</p>
+        <a href="products.html" class="btn btn-orange" style="display: inline-flex; width: auto;" onclick="closeModal('quoteDrawerModal')">
+          <i class="fas fa-boxes"></i> Explore Products Catalogue
+        </a>
+      </div>
+    `;
+  } else {
+    let subtotal = 0;
+    const itemsHTML = cart.map((item, index) => {
+      const price = parseFloat(item.price_usd || item.price || 125.00);
+      const lineTotal = price * (item.qty || 1);
+      subtotal += lineTotal;
+      const imgSrc = item.img || item.image || 'iamges/prod_gas_detector.jpg';
+
+      return `
+        <div style="display:flex; align-items:center; justify-content:space-between; background: #061325; border: 1px solid #1E3A5F; border-radius: 10px; padding: 0.9rem 1.1rem; gap: 1rem; margin-bottom: 0.8rem;">
+          <img src="${imgSrc}" alt="${item.name}" style="width: 54px; height: 54px; object-fit: cover; border-radius: 6px; border: 1px solid #1E3A5F; flex-shrink: 0; background: #0A1628;">
+          
+          <div style="flex: 1; min-width: 0;">
+            <div style="font-size: 0.72rem; color: #FF7A18; font-family: monospace; font-weight: 700; text-transform: uppercase;">SKU: ${item.sku || 'KEY-PROD-' + (index+1)}</div>
+            <h5 style="font-size: 0.92rem; color: #FFFFFF; font-weight: 700; margin: 0.2rem 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.name}</h5>
+            <div style="font-size: 0.8rem; color: #94A3B8;">$${price.toFixed(2)} USD / Unit</div>
           </div>
-        `).join('')}
+
+          <div style="display:flex; align-items:center; gap: 0.6rem; flex-shrink: 0;">
+            <div style="display:inline-flex; align-items:center; background: #0A1628; border: 1px solid #1E3A5F; border-radius: 6px; overflow: hidden;">
+              <button onclick="changeDrawerQty(${index}, -1)" style="background:none; border:none; color:#FFFFFF; width: 26px; height: 26px; font-weight: bold; cursor:pointer;">−</button>
+              <span style="color:#FF7A18; font-weight:800; font-size: 0.85rem; padding: 0 0.4rem;">${item.qty || 1}</span>
+              <button onclick="changeDrawerQty(${index}, 1)" style="background:none; border:none; color:#FFFFFF; width: 26px; height: 26px; font-weight: bold; cursor:pointer;">+</button>
+            </div>
+            <div style="text-align: right; min-width: 80px;">
+              <div style="font-weight: 800; color: #38BDF8; font-size: 0.9rem;">$${lineTotal.toFixed(2)}</div>
+              <div style="font-size: 0.7rem; color: #64748B;">USD</div>
+            </div>
+            <button onclick="removeFromQuote(${index})" style="background: rgba(225, 29, 72, 0.15); border: 1px solid rgba(225, 29, 72, 0.3); color: #F43F5E; width: 30px; height: 30px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;" title="Remove Item">
+              <i class="fas fa-trash-alt" style="font-size: 0.8rem;"></i>
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    body.innerHTML = `
+      <div style="display:flex; flex-direction:column;">
+        ${itemsHTML}
+        <div style="display:flex; justify-content:space-between; align-items:center; background: #050C1A; border: 1px solid #FF7A18; border-radius: 10px; padding: 1rem 1.2rem; margin-top: 0.5rem;">
+          <span style="font-weight: 700; color: #CBD5E1; font-size: 0.9rem;">ESTIMATED BASKET TOTAL:</span>
+          <span style="font-weight: 900; color: #FF7A18; font-size: 1.3rem; font-family: monospace;">$${subtotal.toFixed(2)} USD</span>
+        </div>
       </div>
     `;
   }
   openModal('quoteDrawerModal');
 }
 
-function removeFromQuote(productId) {
-  quoteBasket = quoteBasket.filter(q => q.id !== productId);
-  updateQuoteBadge();
-  openQuoteDrawer();
+function changeDrawerQty(index, delta) {
+  let stored = localStorage.getItem('keyan_cart');
+  let cart = stored ? JSON.parse(stored) : quoteBasket;
+  if (cart[index]) {
+    cart[index].qty = Math.max(1, (cart[index].qty || 1) + delta);
+    localStorage.setItem('keyan_cart', JSON.stringify(cart));
+    quoteBasket = cart;
+    updateQuoteBadge();
+    openQuoteDrawer();
+  }
+}
+
+function removeFromQuote(index) {
+  let stored = localStorage.getItem('keyan_cart');
+  let cart = stored ? JSON.parse(stored) : quoteBasket;
+  if (cart[index]) {
+    showToast(`Removed "${cart[index].name}" from basket.`);
+    cart.splice(index, 1);
+    localStorage.setItem('keyan_cart', JSON.stringify(cart));
+    quoteBasket = cart;
+    updateQuoteBadge();
+    openQuoteDrawer();
+  }
 }
 
 function initSearchAutocomplete() {
-  const input = document.getElementById('headerSearchInput');
-  if (!input) return;
-
-  input.addEventListener('input', (e) => {
-    const val = e.target.value.toLowerCase().trim();
-    if (val.length > 1) {
-      const match = CATALOG_ITEMS.filter(p => 
-        p.name.toLowerCase().includes(val) || 
-        p.brand.toLowerCase().includes(val) || 
-        p.categoryName.toLowerCase().includes(val)
-      );
-      if (match.length > 0) {
-        showToast(`Found ${match.length} product(s) matching "${val}".`);
-      }
-    }
-  });
+  // Silent autocomplete initialization - no toast popups on search
 }
 
 function handleSearchSubmit(event) {
-  event.preventDefault();
-  const input = document.getElementById('headerSearchInput');
-  const term = input ? input.value : '';
-  showToast(`Searching Keyan catalogue for "${term}"...`);
-  document.getElementById('categories').scrollIntoView({ behavior: 'smooth' });
+  if (event) event.preventDefault();
+  let term = '';
+  if (event && event.target) {
+    const input = event.target.querySelector('input[name="q"]') || 
+                  event.target.querySelector('input[type="text"]') || 
+                  document.getElementById('headerSearchInput');
+    if (input) term = input.value.trim();
+  }
+  if (!term) {
+    const headerInput = document.getElementById('headerSearchInput');
+    if (headerInput) term = headerInput.value.trim();
+  }
+
+  if (term) {
+    window.location.href = `products.html?q=${encodeURIComponent(term)}`;
+  } else {
+    window.location.href = `products.html`;
+  }
+}
+
+function handleHeroSearchSubmit(event) {
+  if (event) event.preventDefault();
+  const input = document.getElementById('heroSearchInput');
+  const term = input ? input.value.trim() : '';
+
+  if (term) {
+    window.location.href = `products.html?q=${encodeURIComponent(term)}`;
+  } else {
+    window.location.href = `products.html`;
+  }
+}
+
+function quickSearchTag(tag) {
+  if (tag) {
+    window.location.href = `products.html?q=${encodeURIComponent(tag)}`;
+  }
 }
 
 function openModal(id) {
@@ -373,4 +601,100 @@ window.addEventListener('keydown', (e) => {
     });
   }
 });
+
+// Component Loader for Header & Footer
+document.addEventListener('DOMContentLoaded', () => {
+  highlightActiveNavLinks();
+  loadExternalComponents();
+});
+
+function loadExternalComponents() {
+  const headerContainer = document.getElementById('header-container');
+  if (headerContainer && !headerContainer.innerHTML.trim()) {
+    fetch('header.html')
+      .then(res => res.text())
+      .then(data => {
+        headerContainer.innerHTML = data;
+        highlightActiveNavLinks();
+        updateCartBadgeCount();
+      })
+      .catch(err => console.log('Header load error:', err));
+  } else {
+    highlightActiveNavLinks();
+    updateCartBadgeCount();
+  }
+
+  const footerContainer = document.getElementById('footer-container');
+  if (footerContainer && !footerContainer.innerHTML.trim()) {
+    fetch('footer.html')
+      .then(res => res.text())
+      .then(data => {
+        footerContainer.innerHTML = data;
+      })
+      .catch(err => console.log('Footer load error:', err));
+  }
+}
+
+function updateCartBadgeCount() {
+  const stored = localStorage.getItem('keyan_cart');
+  const cart = stored ? JSON.parse(stored) : [];
+  const totalCount = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+
+  const cartHeaderBadge = document.getElementById('cartHeaderBadge');
+  if (cartHeaderBadge) {
+    cartHeaderBadge.textContent = totalCount;
+  }
+  const quoteCartCount = document.getElementById('quoteCartCount');
+  if (quoteCartCount) {
+    quoteCartCount.textContent = totalCount;
+  }
+}
+
+function highlightActiveNavLinks() {
+  const path = window.location.pathname.toLowerCase();
+  const isAbout = path.includes('about.html');
+  const isCategories = path.includes('categories.html');
+  const isProducts = path.includes('products.html');
+  const isIndustries = path.includes('industries.html');
+  const isContact = path.includes('contact.html');
+  const isHome = (path.includes('index.html') || path.endsWith('/') || path === '') && !isAbout && !isCategories && !isProducts && !isIndustries && !isContact;
+
+  const homeLink = document.getElementById('nav-link-home');
+  const aboutLink = document.getElementById('nav-link-about');
+  const catLink = document.getElementById('nav-link-categories');
+  const prodLink = document.getElementById('nav-link-products');
+  const indLink = document.getElementById('nav-link-industries');
+  const cntLink = document.getElementById('nav-link-contact');
+  const mobHomeLink = document.getElementById('nav-mob-home');
+  const mobAboutLink = document.getElementById('nav-mob-about');
+  const mobCatLink = document.getElementById('nav-mob-categories');
+  const mobProdLink = document.getElementById('nav-mob-products');
+  const mobIndLink = document.getElementById('nav-mob-industries');
+  const mobCntLink = document.getElementById('nav-mob-contact');
+
+  [homeLink, aboutLink, catLink, prodLink, indLink, cntLink, mobHomeLink, mobAboutLink, mobCatLink, mobProdLink, mobIndLink, mobCntLink].forEach(link => {
+    if (link) link.classList.remove('active');
+  });
+
+  if (isAbout) {
+    if (aboutLink) aboutLink.classList.add('active');
+    if (mobAboutLink) mobAboutLink.classList.add('active');
+  } else if (isCategories) {
+    if (catLink) catLink.classList.add('active');
+    if (mobCatLink) mobCatLink.classList.add('active');
+  } else if (isProducts) {
+    if (prodLink) prodLink.classList.add('active');
+    if (mobProdLink) mobProdLink.classList.add('active');
+  } else if (isIndustries) {
+    if (indLink) indLink.classList.add('active');
+    if (mobIndLink) mobIndLink.classList.add('active');
+  } else if (isContact) {
+    if (cntLink) cntLink.classList.add('active');
+    if (mobCntLink) mobCntLink.classList.add('active');
+  } else if (isHome) {
+    if (homeLink) homeLink.classList.add('active');
+    if (mobHomeLink) mobHomeLink.classList.add('active');
+  }
+}
+
 

@@ -1,0 +1,322 @@
+/* ==================================================
+   KEYAN CORPORATION — B2B PROCUREMENT CHECKOUT STYLESHEET
+   Design Concept: Multi-Step B2B Procurement Checkout
+   ================================================== */
+
+:root {
+  --chk-navy-darkest: #031F33;
+  --chk-navy-deep: #063B5C;
+  --chk-navy-mid: #0B4E74;
+  --chk-orange: #FF7A18;
+  --chk-orange-hover: #E06305;
+  --chk-orange-glow: rgba(255, 122, 24, 0.25);
+
+  --chk-bg-light: #F8FAFC;
+  --chk-border-light: #E2E8F0;
+  --chk-text-dark: #0A1C28;
+  --chk-text-muted: #64748B;
+
+  --font-heading: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-card: 0 10px 30px rgba(6, 59, 92, 0.08);
+}
+
+.chk-page-body {
+  background-color: #FFFFFF;
+  color: var(--chk-text-dark);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+.chk-hero-section {
+  background: var(--chk-navy-darkest);
+  color: #FFFFFF;
+  padding: 3.5rem 0 3rem;
+}
+
+.chk-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.chk-hero-sub {
+  font-size: 1.05rem;
+  color: #94A3B8;
+}
+
+/* 2-Column Stage */
+.chk-main-section {
+  padding: 3.5rem 0 5rem;
+  background: var(--chk-bg-light);
+}
+
+.chk-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* Form Steps Container */
+.chk-form-card {
+  background: #FFFFFF;
+  border: 1px solid var(--chk-border-light);
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: var(--shadow-card);
+}
+
+.chk-step-box {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--chk-border-light);
+}
+
+.chk-step-box:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.chk-step-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.chk-step-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--chk-orange);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chk-step-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--chk-navy-darkest);
+  text-transform: uppercase;
+}
+
+.chk-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.chk-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.chk-form-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--chk-navy-deep);
+}
+
+.chk-input-control {
+  background: #FFFFFF;
+  border: 1px solid var(--chk-border-light);
+  border-radius: 6px;
+  padding: 0.75rem 0.95rem;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--chk-text-dark);
+  outline: none;
+  transition: var(--transition-smooth);
+  width: 100%;
+}
+
+.chk-input-control:focus {
+  border-color: var(--chk-orange);
+  box-shadow: 0 0 0 3px var(--chk-orange-glow);
+}
+
+/* Payment Selection Radio Cards */
+.chk-payment-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.chk-pay-option-card {
+  border: 2px solid var(--chk-border-light);
+  border-radius: 8px;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  background: #FFFFFF;
+}
+
+.chk-pay-option-card:hover,
+.chk-pay-option-card.active {
+  border-color: var(--chk-orange);
+  background: rgba(255, 122, 24, 0.04);
+}
+
+.chk-pay-radio {
+  accent-color: var(--chk-orange);
+  width: 18px;
+  height: 18px;
+}
+
+.chk-pay-info h5 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--chk-navy-darkest);
+  margin-bottom: 0.2rem;
+}
+
+.chk-pay-info p {
+  font-size: 0.82rem;
+  color: var(--chk-text-muted);
+}
+
+/* Right Column: Review Panel */
+.chk-review-card {
+  background: #FFFFFF;
+  border: 1px solid var(--chk-border-light);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: var(--shadow-card);
+  position: sticky;
+  top: 100px;
+}
+
+.chk-review-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--chk-navy-darkest);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--chk-border-light);
+}
+
+.chk-review-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--chk-border-light);
+}
+
+.chk-review-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  background: var(--chk-bg-light);
+  border-radius: 6px;
+  padding: 0.3rem;
+}
+
+.chk-btn-place-order {
+  background: linear-gradient(135deg, var(--chk-orange) 0%, #D8630B 100%);
+  color: #FFFFFF;
+  border: none;
+  padding: 1.15rem 1.5rem;
+  border-radius: 6px;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  width: 100%;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: 0 8px 20px var(--chk-orange-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.chk-btn-place-order:hover {
+  background: linear-gradient(135deg, #FF8C33 0%, var(--chk-orange) 100%);
+  transform: translateY(-2px);
+}
+
+/* Order Confirmation Modal */
+.chk-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(3, 31, 51, 0.88);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.chk-modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.chk-confirm-card {
+  width: 100%;
+  max-width: 650px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+}
+
+.chk-success-icon {
+  width: 70px;
+  height: 70px;
+  background: rgba(5, 150, 105, 0.1);
+  color: #059669;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  margin: 0 auto 1.5rem;
+}
+
+@media (max-width: 992px) {
+  .chk-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .chk-form-row {
+    grid-template-columns: 1fr;
+  }
+}

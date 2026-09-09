@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Industry Sectors | Keyan Corporation — Marine, Industrial & Fire Safety Procurement</title>
+  <meta name="description" content="Explore Keyan Corporation's 8 core industry supply sectors: Maritime & Ship Supply, Oil & Gas, Fire Safety, Power Energy, Heavy Engineering, Chemical Processing, Ports & Shipbuilding, and Mining.">
+  
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="industries.css">
+</head>
+<body class="ind-page-body">
+
+  <!-- Master Header Container -->
+  <div id="header-container">
+    <!-- 1. TOP UTILITY BAR -->
+    <div class="top-utility-bar">
+      <div class="container utility-wrapper">
+        <div class="utility-left">
+          <span class="utility-badge-pulse"></span>
+          <span>Marine • Industrial • Fire Safety • Instrumentation</span>
+        </div>
+        <div class="utility-right">
+          <a href="tel:+919825207743"><i class="fas fa-phone-alt"></i> +91 9825207743</a>
+          <a href="mailto:sales@keyancorporation.com"><i class="fas fa-envelope"></i> sales@keyancorporation.com</a>
+          <span class="utility-gstin">| GSTIN: 24BWNPV1980J1ZV</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. MOBILE NAVIGATION DRAWER OVERLAY -->
+    <div class="mobile-nav-backdrop" id="mobileNavBackdrop" onclick="closeMobileNav()"></div>
+    <aside class="mobile-nav-drawer" id="mobileNavDrawer">
+      <div class="mobile-nav-header">
+        <div class="mobile-brand">
+          <img src="iamges/image.png" alt="KEYAN CORPORATION Logo" class="mobile-logo">
+          <div>
+            <div class="brand-name">KEYAN CORP</div>
+            <div class="brand-sub">From Port to Plant</div>
+          </div>
+        </div>
+        <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Close Menu">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="mobile-nav-body">
+        <ul class="mobile-nav-menu">
+          <li><a href="index.html" class="mobile-nav-link" id="nav-mob-home" onclick="closeMobileNav()"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="about.html" class="mobile-nav-link" id="nav-mob-about" onclick="closeMobileNav()"><i class="fas fa-building"></i> About Us</a></li>
+          <li><a href="categories.html" class="mobile-nav-link" id="nav-mob-categories" onclick="closeMobileNav()"><i class="fas fa-th-large"></i> Categories</a></li>
+          <li><a href="products.html" class="mobile-nav-link" id="nav-mob-products" onclick="closeMobileNav()"><i class="fas fa-boxes"></i> Featured Products</a></li>
+          <li><a href="industries.html" class="mobile-nav-link active" id="nav-mob-industries" onclick="closeMobileNav()"><i class="fas fa-industry"></i> Industry Sectors</a></li>
+          <li><a href="contact.html" class="mobile-nav-link" id="nav-mob-contact" onclick="closeMobileNav()"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        </ul>
+        <div class="mobile-nav-actions">
+          <a href="login.html" class="btn btn-navy btn-full"><i class="far fa-user"></i> Account Login</a>
+          <button class="btn btn-orange btn-full" onclick="closeMobileNav(); openModal('quoteModal');"><i class="fas fa-paper-plane"></i> Submit RFQ</button>
+        </div>
+        <div class="mobile-nav-contact">
+          <a href="tel:+919825207743"><i class="fas fa-phone-alt"></i> +91 9825207743</a>
+          <a href="mailto:sales@keyancorporation.com"><i class="fas fa-envelope"></i> sales@keyancorporation.com</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 3. MAIN E-COMMERCE BRAND HEADER -->
+    <header class="main-header">
+      <div class="container header-grid">
+        
+        <!-- Brand Logo -->
+        <a href="index.html" class="header-brand">
+          <img src="iamges/image.png" alt="KEYAN CORPORATION Logo" class="header-logo">
+          <div class="brand-text-wrap">
+            <div class="brand-name">KEYAN CORPORATION</div>
+            <div class="brand-sub">From Port to Plant</div>
+          </div>
+        </a>
+
+        <!-- Intelligent Search Bar -->
+        <form class="search-form-center" action="products.html" method="GET" onsubmit="handleSearchSubmit(event)">
+          <div class="search-box-wrap">
+            <input type="text" id="headerSearchInput" name="q" class="search-input-field" placeholder="Search products, brands, models..." required>
+            <button type="submit" class="search-submit-btn" title="Search Catalog">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
+
+        <!-- Header Action Tools & Mobile Hamburger Toggle -->
+        <div class="header-tools-group">
+          <div class="header-tools">
+            <a href="login.html" class="tool-item" title="Customer & Vendor Portal Login">
+              <i class="far fa-user"></i>
+              <span>Account</span>
+            </a>
+            <a href="cart.html" class="tool-item" title="View Shopping Cart">
+              <i class="fas fa-shopping-cart"></i>
+              <span>Cart</span>
+              <span class="tool-badge" id="cartHeaderBadge">0</span>
+            </a>
+          </div>
+
+          <button class="btn btn-orange header-rfq-btn" onclick="if(typeof openModal === 'function') openModal('quoteModal')">
+            <i class="fas fa-paper-plane"></i> Request Quote
+          </button>
+
+          <button class="mobile-hamburger" id="mobileNavBtn" onclick="toggleMobileNav()" aria-label="Toggle Navigation Menu">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- PRIMARY COMPACT NAVIGATION ROW -->
+      <nav class="primary-nav">
+        <div class="container nav-flex">
+          <ul class="nav-links">
+            <li><a href="index.html" id="nav-link-home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="about.html" id="nav-link-about"><i class="fas fa-building"></i> About Us</a></li>
+            <li><a href="categories.html" id="nav-link-categories"><i class="fas fa-th-large"></i> Categories</a></li>
+            <li><a href="products.html" id="nav-link-products"><i class="fas fa-boxes"></i> Featured Products</a></li>
+            <li><a href="industries.html" id="nav-link-industries" class="active"><i class="fas fa-industry"></i> Industry Sectors</a></li>
+            <li><a href="contact.html" id="nav-link-contact"><i class="fas fa-envelope"></i> Contact Us</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+  </div>
+
+  <!-- 1. HERO BANNER SECTION -->
+  <section class="ind-hero-section">
+    <div class="ind-hero-container">
+      <div class="ind-hero-badge">
+        <i class="fas fa-globe"></i> Sitewide B2B Supply Verticals
+      </div>
+      <h1 class="ind-hero-title">
+        Empowering Critical Operations <span>From Port to Plant</span>
+      </h1>
+      <p class="ind-hero-subtitle">
+        Keyan Corporation is a trusted single-source procurement partner for global maritime fleets, offshore platforms, petrochemical refineries, power generation plants, and heavy manufacturing clusters across Asia, Middle East, and worldwide shipping hubs.
+      </p>
+
+      <!-- Key Stats Grid -->
+      <div class="ind-stats-grid">
+        <div class="ind-stat-card">
+          <div class="ind-stat-icon"><i class="fas fa-ship"></i></div>
+          <div>
+            <div class="ind-stat-num">500+</div>
+            <div class="ind-stat-label">Ports & Plants Served</div>
+          </div>
+        </div>
+        <div class="ind-stat-card">
+          <div class="ind-stat-icon"><i class="fas fa-boxes"></i></div>
+          <div>
+            <div class="ind-stat-num">10,000+</div>
+            <div class="ind-stat-label">Certified SKUs</div>
+          </div>
+        </div>
+        <div class="ind-stat-card">
+          <div class="ind-stat-icon"><i class="fas fa-shipping-fast"></i></div>
+          <div>
+            <div class="ind-stat-num">24/7</div>
+            <div class="ind-stat-label">Port Direct Dispatch</div>
+          </div>
+        </div>
+        <div class="ind-stat-card">
+          <div class="ind-stat-icon"><i class="fas fa-certificate"></i></div>
+          <div>
+            <div class="ind-stat-num">100%</div>
+            <div class="ind-stat-label">SOLAS & Class Approved</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+
+  <!-- 3. MAIN SECTORS SHOWCASE GRID -->
+  <section class="ind-main-section" id="sectorsGrid">
+    <div class="ind-grid-container">
+      <div class="ind-sectors-grid">
+
+        <!-- 01 MARITIME & SHIP SUPPLY -->
+        <article class="ind-sector-card" data-sector="maritime">
+          <div class="ind-card-media">
+            <img src="iamges/image copy.png" alt="Maritime & Ship Supply" class="ind-card-img">
+            <div class="ind-card-overlay"></div>
+            <span class="ind-card-code-badge">SEC-MAR-01</span>
+            <div class="ind-card-icon-badge"><i class="fas fa-anchor"></i></div>
+          </div>
+          <div class="ind-card-body">
+            <h3 class="ind-card-title">Maritime & Ship Supply</h3>
+            <p class="ind-card-desc">
+              Comprehensive IMPA/ISSA ship stores, SOLAS life-saving appliances (LSA), firefighting equipment (FFA), marine valves, deck stores, and vessel-side supply at major ports & Alang Shipbreaking Cluster.
+            </p>
+            <div class="ind-manifest-box">
+              <div class="ind-manifest-heading"><i class="fas fa-clipboard-list"></i> Core Equipment Manifest</div>
+              <ul class="ind-manifest-items">
+                <li><i class="fas fa-check-circle"></i> SOLAS Approved Inflatable Life Rafts & Immersion Suits</li>
+                <li><i class="fas fa-check-circle"></i> Marine Breathing Air SCBA & EEBD Sets</li>
+                <li><i class="fas fa-check-circle"></i> IMPA Deck, Engine & Cabin Stores</li>
+                <li><i class="fas fa-check-circle"></i> High-Pressure Marine Pneumatic & Hydraulic Hose Assemblies</li>
+              </ul>
+            </div>
+            <div class="ind-compliance-row">
+              <span class="ind-comp-badge">SOLAS</span>
+              <span class="ind-comp-badge">MED / Wheelmark</span>
+              <span class="ind-comp-badge">DNV-GL</span>
+              <span class="ind-comp-badge">ClassNK</span>
+            </div>
+            <div class="ind-card-footer">
+              <a href="products.html?category=cat-marine" class="ind-btn-catalog">
+                EXPLORE MARINE PRODUCTS <i class="fas fa-arrow-right"></i>
+              </a>
+              <button class="ind-btn-rfq" onclick="openModal('quoteModal')" title="Request Quote">
+                <i class="fas fa-paper-plane"></i> RFQ
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 02 FIRE & SAFETY -->
+        <article class="ind-sector-card" data-sector="fire-safety">
+          <div class="ind-card-media">
+            <img src="iamges/Fire & Emergency Rescue Services.png" alt="Fire & Safety" class="ind-card-img">
+            <div class="ind-card-overlay"></div>
+            <span class="ind-card-code-badge">SEC-FRS-02</span>
+            <div class="ind-card-icon-badge"><i class="fas fa-fire-extinguisher"></i></div>
+          </div>
+          <div class="ind-card-body">
+            <h3 class="ind-card-title">Fire & Safety</h3>
+            <p class="ind-card-desc">
+              EN/NFPA certified turnout gear, thermal imaging cameras, positive pressure ventilation (PPV) fans, fire hydrants, foam monitors, and breathing air refilling compressors for municipal & industrial squads.
+            </p>
+            <div class="ind-manifest-box">
+              <div class="ind-manifest-heading"><i class="fas fa-clipboard-list"></i> Core Equipment Manifest</div>
+              <ul class="ind-manifest-items">
+                <li><i class="fas fa-check-circle"></i> EN 469 Firefighter Protective Suits & Helmets</li>
+                <li><i class="fas fa-check-circle"></i> High-Flow Industrial Foam Monitors & Nozzles</li>
+                <li><i class="fas fa-check-circle"></i> 300 Bar High-Pressure Breathing Air Compressors</li>
+                <li><i class="fas fa-check-circle"></i> Portable Hydrant Valves & Canvas Fire Hoses</li>
+              </ul>
+            </div>
+            <div class="ind-compliance-row">
+              <span class="ind-comp-badge">EN 469</span>
+              <span class="ind-comp-badge">NFPA 1971</span>
+              <span class="ind-comp-badge">CE Approved</span>
+              <span class="ind-comp-badge">UL Listed</span>
+            </div>
+            <div class="ind-card-footer">
+              <a href="products.html?category=cat-fire" class="ind-btn-catalog">
+                EXPLORE FIRE SAFETY PRODUCTS <i class="fas fa-arrow-right"></i>
+              </a>
+              <button class="ind-btn-rfq" onclick="openModal('quoteModal')" title="Request Quote">
+                <i class="fas fa-paper-plane"></i> RFQ
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 03 OIL & GAS & INDUSTRIAL PROCESS -->
+        <article class="ind-sector-card" data-sector="oil-gas">
+          <div class="ind-card-media">
+            <img src="iamges/Oil .png" alt="Oil & Gas & Industrial Process" class="ind-card-img">
+            <div class="ind-card-overlay"></div>
+            <span class="ind-card-code-badge">SEC-ONG-03</span>
+            <div class="ind-card-icon-badge"><i class="fas fa-fire-flame-curved"></i></div>
+          </div>
+          <div class="ind-card-body">
+            <h3 class="ind-card-title">Oil & Gas & Industrial Process</h3>
+            <p class="ind-card-desc">
+              ATEX Explosion-proof instrumentation, portable & fixed multi-gas detection systems, hazardous location lighting, and heavy-duty process control valves for refineries, FPSO vessels, and offshore rigs.
+            </p>
+            <div class="ind-manifest-box">
+              <div class="ind-manifest-heading"><i class="fas fa-clipboard-list"></i> Core Equipment Manifest</div>
+              <ul class="ind-manifest-items">
+                <li><i class="fas fa-check-circle"></i> Dräger & MSA Portable 4-Gas Monitors (O2, H2S, CO, LEL)</li>
+                <li><i class="fas fa-check-circle"></i> ATEX Zone 0/20 Intrinsically Safe Flashlights & Torches</li>
+                <li><i class="fas fa-check-circle"></i> High-Pressure Stainless Steel Needle & Ball Valves</li>
+                <li><i class="fas fa-check-circle"></i> Flameproof Junction Boxes & Control Stations</li>
+              </ul>
+            </div>
+            <div class="ind-compliance-row">
+              <span class="ind-comp-badge">ATEX Zone 0/1</span>
+              <span class="ind-comp-badge">IECEx</span>
+              <span class="ind-comp-badge">OSHA 1910</span>
+              <span class="ind-comp-badge">ISO 9001</span>
+            </div>
+            <div class="ind-card-footer">
+              <a href="products.html?category=cat-gas" class="ind-btn-catalog">
+                EXPLORE OIL & GAS PRODUCTS <i class="fas fa-arrow-right"></i>
+              </a>
+              <button class="ind-btn-rfq" onclick="openModal('quoteModal')" title="Request Quote">
+                <i class="fas fa-paper-plane"></i> RFQ
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 04 HEAVY ENGINEERING & INDUSTRIAL EQUIPMENT -->
+        <article class="ind-sector-card" data-sector="heavy-engineering">
+          <div class="ind-card-media">
+            <img src="iamges/image copy 3.png" alt="Heavy Engineering & Industrial Equipment" class="ind-card-img">
+            <div class="ind-card-overlay"></div>
+            <span class="ind-card-code-badge">SEC-ENG-04</span>
+            <div class="ind-card-icon-badge"><i class="fas fa-cogs"></i></div>
+          </div>
+          <div class="ind-card-body">
+            <h3 class="ind-card-title">Heavy Engineering & Industrial Equipment</h3>
+            <p class="ind-card-desc">
+              Heavy-lift rigging slings, pneumatic double diaphragm (AODD) pumps, hydraulic jacks, welding consumables, and heat-resistant PPE for foundries, steel mills, and heavy fabrication shops.
+            </p>
+            <div class="ind-manifest-box">
+              <div class="ind-manifest-heading"><i class="fas fa-clipboard-list"></i> Core Equipment Manifest</div>
+              <ul class="ind-manifest-items">
+                <li><i class="fas fa-check-circle"></i> Wilden & Sandpiper Air-Operated Double Diaphragm Pumps</li>
+                <li><i class="fas fa-check-circle"></i> 50-Ton Hydraulic Pullers & Cylinders</li>
+                <li><i class="fas fa-check-circle"></i> Grade 80 & 100 Alloy Steel Lifting Chain Slings</li>
+                <li><i class="fas fa-check-circle"></i> Aluminized Heat-Reflective Foundry Aprons & Gloves</li>
+              </ul>
+            </div>
+            <div class="ind-compliance-row">
+              <span class="ind-comp-badge">EN 818-2</span>
+              <span class="ind-comp-badge">ASME B30.9</span>
+              <span class="ind-comp-badge">CE Marked</span>
+              <span class="ind-comp-badge">ISO 9001</span>
+            </div>
+            <div class="ind-card-footer">
+              <a href="products.html?category=cat-machinery" class="ind-btn-catalog">
+                EXPLORE ENGINEERING PRODUCTS <i class="fas fa-arrow-right"></i>
+              </a>
+              <button class="ind-btn-rfq" onclick="openModal('quoteModal')" title="Request Quote">
+                <i class="fas fa-paper-plane"></i> RFQ
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 05 CHEMICAL & PROCESS SAFETY -->
+        <article class="ind-sector-card" data-sector="chemical">
+          <div class="ind-card-media">
+            <img src="iamges/Chemical & Process Safety.png" alt="Chemical & Process Safety" class="ind-card-img">
+            <div class="ind-card-overlay"></div>
+            <span class="ind-card-code-badge">SEC-CHM-05</span>
+            <div class="ind-card-icon-badge"><i class="fas fa-vial"></i></div>
+          </div>
+          <div class="ind-card-body">
+            <h3 class="ind-card-title">Chemical & Process Safety</h3>
+            <p class="ind-card-desc">
+              Gas-tight Type 1A chemical protective suits, PTFE lined chemical hoses, acid splash goggles, emergency eyewash stations, and toxic gas leak detection equipment for fertilizer and chemical plants.
+            </p>
+            <div class="ind-manifest-box">
+              <div class="ind-manifest-heading"><i class="fas fa-clipboard-list"></i> Core Equipment Manifest</div>
+              <ul class="ind-manifest-items">
+                <li><i class="fas fa-check-circle"></i> EN 943-1 Gas-Tight Reusable Chemical Hazmat Suits</li>
+                <li><i class="fas fa-check-circle"></i> Stainless Steel Emergency Eyewash & Safety Showers</li>
+                <li><i class="fas fa-check-circle"></i> Composite & PTFE Lined Acid Transfer Hoses</li>
+                <li><i class="fas fa-check-circle"></i> Toxic Gas Detector Tubes & Sampling Pumps</li>
+              </ul>
+            </div>
+            <div class="ind-compliance-row">
+              <span class="ind-comp-badge">EN 943-1</span>
+              <span class="ind-comp-badge">ANSI Z358.1</span>
+              <span class="ind-comp-badge">OSHA 1910.120</span>
+              <span class="ind-comp-badge">CE</span>
+            </div>
+            <div class="ind-card-footer">
+              <a href="products.html?category=cat-air" class="ind-btn-catalog">
+                EXPLORE CHEMICAL SAFETY <i class="fas fa-arrow-right"></i>
+              </a>
+              <button class="ind-btn-rfq" onclick="openModal('quoteModal')" title="Request Quote">
+                <i class="fas fa-paper-plane"></i> RFQ
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 06 MARINE RESCUE & LIFE-SAVING -->
+        <article class="ind-sector-card" data-sector="marine-rescue">
+          <div class="ind-card-media">
+            <img src="iamges/Marine Rescue & Life-Saving.png" alt="Marine Rescue & Life-Saving" class="ind-card-img">
+            <div class="ind-card-overlay"></div>
+            <span class="ind-card-code-badge">SEC-RSC-06</span>
+            <div class="ind-card-icon-badge"><i class="fas fa-life-ring"></i></div>
+          </div>
+          <div class="ind-card-body">
+            <h3 class="ind-card-title">Marine Rescue & Life-Saving</h3>
+            <p class="ind-card-desc">
+              SOLAS SOLAS/MED certified inflatable life rafts, immersion suits, SOLAS 275N lifejackets, pyrotechnic distress signals, hydrostatic release units (HRU), and marine rescue line throwers.
+            </p>
+            <div class="ind-manifest-box">
+              <div class="ind-manifest-heading"><i class="fas fa-clipboard-list"></i> Core Equipment Manifest</div>
+              <ul class="ind-manifest-items">
+                <li><i class="fas fa-check-circle"></i> SOLAS Inflatable Throw-Over Life Rafts (6 to 25 Person)</li>
+                <li><i class="fas fa-check-circle"></i> Neoprene Insulated Immersion Suits & Thermal Protective Aids</li>
+                <li><i class="fas fa-check-circle"></i> SOLAS Approved Rocket Parachute Flares & Smoke Signals</li>
+                <li><i class="fas fa-check-circle"></i> Automatic Hydrostatic Release Units (Hammar H20)</li>
+              </ul>
+            </div>
+            <div class="ind-compliance-row">
+              <span class="ind-comp-badge">SOLAS / MED</span>
+              <span class="ind-comp-badge">USCG Approved</span>
+              <span class="ind-comp-badge">Wheelmark</span>
+              <span class="ind-comp-badge">ClassNK</span>
+            </div>
+            <div class="ind-card-footer">
+              <a href="products.html?category=cat-rescue" class="ind-btn-catalog">
+                EXPLORE RESCUE PRODUCTS <i class="fas fa-arrow-right"></i>
+              </a>
+              <button class="ind-btn-rfq" onclick="openModal('quoteModal')" title="Request Quote">
+                <i class="fas fa-paper-plane"></i> RFQ
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 07 INDUSTRIAL INSTRUMENTATION & MEASUREMENT -->
+        <article class="ind-sector-card" data-sector="instrumentation">
+          <div class="ind-card-media">
+            <img src="iamges/image copy 2.png" alt="Industrial Instrumentation & Measurement" class="ind-card-img">
+            <div class="ind-card-overlay"></div>
+            <span class="ind-card-code-badge">SEC-INS-07</span>
+            <div class="ind-card-icon-badge"><i class="fas fa-microchip"></i></div>
+          </div>
+          <div class="ind-card-body">
+            <h3 class="ind-card-title">Industrial Instrumentation & Measurement</h3>
+            <p class="ind-card-desc">
+              Precision pressure transmitters, digital flowmeters, temperature sensors, oil-in-water monitors, marine tachometers, and calibration equipment for industrial plants and ship engine rooms.
+            </p>
+            <div class="ind-manifest-box">
+              <div class="ind-manifest-heading"><i class="fas fa-clipboard-list"></i> Core Equipment Manifest</div>
+              <ul class="ind-manifest-items">
+                <li><i class="fas fa-check-circle"></i> Rosemount & WIKA Smart Pressure Transmitters</li>
+                <li><i class="fas fa-check-circle"></i> Electromagnetic & Ultrasonic Liquid Flowmeters</li>
+                <li><i class="fas fa-check-circle"></i> RTD Temperature Sensors & Thermowells</li>
+                <li><i class="fas fa-check-circle"></i> Portable Pneumatic & Electrical Calibration Pumps</li>
+              </ul>
+            </div>
+            <div class="ind-compliance-row">
+              <span class="ind-comp-badge">HART Protocol</span>
+              <span class="ind-comp-badge">SIL 2 / SIL 3</span>
+              <span class="ind-comp-badge">ATEX / IECEx</span>
+              <span class="ind-comp-badge">ISO 17025</span>
+            </div>
+            <div class="ind-card-footer">
+              <a href="products.html?category=cat-instruments" class="ind-btn-catalog">
+                EXPLORE INSTRUMENTS <i class="fas fa-arrow-right"></i>
+              </a>
+              <button class="ind-btn-rfq" onclick="openModal('quoteModal')" title="Request Quote">
+                <i class="fas fa-paper-plane"></i> RFQ
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 08 PORTS, SHIPYARDS & MARINE OPERATIONS -->
+        <article class="ind-sector-card" data-sector="ports-logistics">
+          <div class="ind-card-media">
+            <img src="iamges/Ports, Shipyards & Marine Operations.png" alt="Ports, Shipyards & Marine Operations" class="ind-card-img">
+            <div class="ind-card-overlay"></div>
+            <span class="ind-card-code-badge">SEC-PRT-08</span>
+            <div class="ind-card-icon-badge"><i class="fas fa-dolly"></i></div>
+          </div>
+          <div class="ind-card-body">
+            <h3 class="ind-card-title">Ports, Shipyards & Marine Operations</h3>
+            <p class="ind-card-desc">
+              Pneumatic rubber fenders, mooring ropes, container crane wire ropes, shipyard blast pots, spray painting pumps, and berth safety equipment for commercial ports & shipyards.
+            </p>
+            <div class="ind-manifest-box">
+              <div class="ind-manifest-heading"><i class="fas fa-clipboard-list"></i> Core Equipment Manifest</div>
+              <ul class="ind-manifest-items">
+                <li><i class="fas fa-check-circle"></i> Yokohama Type Pneumatic Floating Rubber Fenders</li>
+                <li><i class="fas fa-check-circle"></i> High-Strength Polypropylene & UHMWPE Mooring Lines</li>
+                <li><i class="fas fa-check-circle"></i> Airless Paint Spray Pumps & Grit Blasting Nozzles</li>
+                <li><i class="fas fa-check-circle"></i> Dockside Safety Ladders & Lifebuoy Stations</li>
+              </ul>
+            </div>
+            <div class="ind-compliance-row">
+              <span class="ind-comp-badge">ISO 17357</span>
+              <span class="ind-comp-badge">OCIMF</span>
+              <span class="ind-comp-badge">SOLAS Approved</span>
+              <span class="ind-comp-badge">BV Certified</span>
+            </div>
+            <div class="ind-card-footer">
+              <a href="products.html?category=cat-rescue" class="ind-btn-catalog">
+                EXPLORE PORT SUPPLIES <i class="fas fa-arrow-right"></i>
+              </a>
+              <button class="ind-btn-rfq" onclick="openModal('quoteModal')" title="Request Quote">
+                <i class="fas fa-paper-plane"></i> RFQ
+              </button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. B2B PROCUREMENT & LOGISTICS CAPABILITIES BANNER -->
+  <section class="ind-capabilities-section">
+    <div class="container">
+      <div style="text-align: center; max-width: 750px; margin: 0 auto 3.5rem;">
+        <div class="ind-hero-badge"><i class="fas fa-truck-loading"></i> Procurement Assurance</div>
+        <h2 style="font-size: 2.2rem; font-weight: 800; color: #FFFFFF; margin: 0.5rem 0 1rem;">
+          Why Global Fleets & Plants Choose Keyan Corporation
+        </h2>
+        <p style="color: var(--ind-text-muted); font-size: 1rem;">
+          Strategic location in Bhavnagar / Alang cluster with direct access to major Indian ports, shipbreaking yards, and heavy industrial belts.
+        </p>
+      </div>
+
+      <div class="ind-cap-grid">
+        <div class="ind-cap-card">
+          <div class="ind-cap-icon"><i class="fas fa-ship"></i></div>
+          <h3 class="ind-cap-title">Port & Anchorage Direct Supply</h3>
+          <p class="ind-cap-desc">
+            Direct vessel-side delivery to ships docked at Alang, Pipavav, Kandla, Mundra, Hazira, Mumbai, and JNPT ports with custom clearance support.
+          </p>
+        </div>
+        <div class="ind-cap-card">
+          <div class="ind-cap-icon"><i class="fas fa-stamp"></i></div>
+          <h3 class="ind-cap-title">Class Certified & OEM Genuine</h3>
+          <p class="ind-cap-desc">
+            All safety and engineering products carry genuine OEM batch test certificates, SOLAS, MED, ATEX, and major classification society approvals.
+          </p>
+        </div>
+        <div class="ind-cap-card">
+          <div class="ind-cap-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+          <h3 class="ind-cap-title">B2B Credit & Contract Procurement</h3>
+          <p class="ind-cap-desc">
+            Flexible B2B procurement terms, Proforma Invoicing in USD/INR, Purchase Order (PO Net 30/60), and annual contract supply agreements.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. IN-PAGE CONSULTATION & RFQ SECTION -->
+  <section class="ind-rfq-section">
+    <div class="ind-rfq-container">
+      <div class="ind-rfq-card">
+        <div class="ind-rfq-header">
+          <div class="ind-hero-badge"><i class="fas fa-paper-plane"></i> Direct Procurement Inquiry</div>
+          <h2 class="ind-rfq-title">Request Industry Procurement Quotation</h2>
+          <p class="ind-rfq-subtitle">
+            Need specialized equipment, bulk vessel stores, or custom industrial safety gear? Submit your requirements for an official quotation within 24 hours.
+          </p>
+        </div>
+
+        <form onsubmit="handleFormSubmit(event, 'Industry Sectors RFQ')">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem;">
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #CBD5E1; margin-bottom: 0.4rem; text-transform: uppercase;">FULL NAME *</label>
+              <input type="text" required placeholder="Enter full name" style="width:100%; background:#061325; border:1px solid #1E3A5F; border-radius:8px; padding:0.85rem 1rem; color:#FFF;">
+            </div>
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #CBD5E1; margin-bottom: 0.4rem; text-transform: uppercase;">COMPANY / VESSEL NAME *</label>
+              <input type="text" required placeholder="Company or vessel name" style="width:100%; background:#061325; border:1px solid #1E3A5F; border-radius:8px; padding:0.85rem 1rem; color:#FFF;">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem;">
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #CBD5E1; margin-bottom: 0.4rem; text-transform: uppercase;">EMAIL ADDRESS *</label>
+              <input type="email" required placeholder="name@company.com" style="width:100%; background:#061325; border:1px solid #1E3A5F; border-radius:8px; padding:0.85rem 1rem; color:#FFF;">
+            </div>
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #CBD5E1; margin-bottom: 0.4rem; text-transform: uppercase;">PHONE NUMBER *</label>
+              <input type="tel" required placeholder="+91 XXXXX XXXXX" style="width:100%; background:#061325; border:1px solid #1E3A5F; border-radius:8px; padding:0.85rem 1rem; color:#FFF;">
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #CBD5E1; margin-bottom: 0.4rem; text-transform: uppercase;">INDUSTRY SECTOR & SPECIFIC REQUIREMENTS *</label>
+            <textarea rows="4" required placeholder="Select industry, list part numbers, quantities, target delivery port or plant location..." style="width:100%; background:#061325; border:1px solid #1E3A5F; border-radius:8px; padding:0.85rem 1rem; color:#FFF;"></textarea>
+          </div>
+
+          <button type="submit" class="ind-btn-catalog" style="width: 100%; justify-content: center; padding: 1.1rem; font-size: 1rem;">
+            SUBMIT INDUSTRY PROCUREMENT INQUIRY <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Master Footer Container -->
+  <div id="footer-container">
+    <footer class="main-footer">
+      <div class="container">
+        <div class="footer-grid">
+          
+          <!-- Col 1: Brand & Tagline -->
+          <div class="footer-col-brand">
+            <a href="index.html" class="header-brand" style="margin-bottom: 1.2rem; display:inline-flex;">
+              <img src="iamges/image.png" alt="KEYAN CORPORATION Logo" class="header-logo" style="height: 60px;">
+              <div class="brand-text-wrap">
+                <div class="brand-name" style="color:#FFFFFF; font-size:1.35rem;">KEYAN CORPORATION</div>
+                <div class="brand-sub" style="color:var(--orange-accent, #FF7A18);">From Port to Plant</div>
+              </div>
+            </a>
+            <p style="color:#94A3B8; font-size:0.9rem; line-height:1.6; margin-bottom:1.2rem;">
+              Trusted B2B supplier of Ship Spare Parts, Industrial Machinery, Fire Safety Equipment, and Rig & Marine Measuring Instruments.
+            </p>
+            <div class="footer-tagline-quote">
+              <i class="fas fa-quote-left" style="color:var(--orange-accent, #FF7A18); margin-right:6px;"></i>
+              "From Port to Plant, We Supply with Confidence"
+            </div>
+          </div>
+
+          <!-- Col 2: Supply Verticals -->
+          <div>
+            <h4 class="footer-col-heading">Supply Verticals</h4>
+            <ul class="footer-links-group">
+              <li><a href="categories.html#marine-ship-supply"><i class="fas fa-ship"></i> Ship & Marine Supply</a></li>
+              <li><a href="categories.html#industrial-machinery"><i class="fas fa-industry"></i> Industrial Machinery</a></li>
+              <li><a href="categories.html#fire-safety"><i class="fas fa-fire-extinguisher"></i> Fire & Safety Equipment</a></li>
+              <li><a href="categories.html#marine-instruments"><i class="fas fa-microchip"></i> Rig & Marine Instruments</a></li>
+              <li><a href="categories.html#gas-detection"><i class="fas fa-bell"></i> Gas Detection Systems</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Quick Links -->
+          <div>
+            <h4 class="footer-col-heading">Quick Links</h4>
+            <ul class="footer-links-group">
+              <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+              <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+              <li><a href="categories.html"><i class="fas fa-chevron-right"></i> Categories</a></li>
+              <li><a href="products.html"><i class="fas fa-chevron-right"></i> Featured Products</a></li>
+              <li><a href="industries.html"><i class="fas fa-chevron-right"></i> Industry Sectors</a></li>
+              <li><a href="about.html#story"><i class="fas fa-chevron-right"></i> Geographic Hub</a></li>
+              <li><a href="about.html#why"><i class="fas fa-chevron-right"></i> Why Choose Keyan</a></li>
+              <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 4: Contact & Credentials -->
+          <div>
+            <h4 class="footer-col-heading">Contact Details</h4>
+            <p class="footer-contact-item">
+              <i class="fas fa-map-marker-alt"></i> 
+              <span>Plot No. 255, E/4, VIP (Vibrant Industrial Park), Moti Talav Road, Bhavnagar - 364001, Gujarat, India</span>
+            </p>
+            <p class="footer-contact-item">
+              <i class="fas fa-phone-alt"></i> 
+              <span><a href="tel:+919825207743">+91 9825207743</a> | <a href="tel:+919825206341">+91 9825206341</a></span>
+            </p>
+            <p class="footer-contact-item">
+              <i class="fas fa-envelope"></i> 
+              <span><a href="mailto:sales@keyancorporation.com">sales@keyancorporation.com</a></span>
+            </p>
+            <div class="footer-gstin-badge">
+              <i class="fas fa-shield-alt"></i> GSTIN: 24BWNPV1980J1ZV
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer Bottom Row -->
+        <div class="footer-bottom-row">
+          <div>© 2026 KEYAN CORPORATION. All rights reserved. B2B Industrial Procurement Marketplace.</div>
+          <div class="footer-bottom-right">
+            <span>Bhavnagar, Gujarat, India</span>
+            <button class="back-to-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Back to Top">
+              <i class="fas fa-arrow-up"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Master Quote List Drawer Modal -->
+  <div id="quoteDrawerModal" class="modal-backdrop">
+    <div class="modal-card" style="max-width: 650px;">
+      <div class="modal-header">
+        <h4><i class="fas fa-shopping-cart"></i> Your Cart & Quote Basket</h4>
+        <button class="modal-close" onclick="closeModal('quoteDrawerModal')" aria-label="Close Modal">&times;</button>
+      </div>
+      <div class="modal-body" id="quoteDrawerItems">
+        <!-- Cart items rendered dynamically -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-navy" onclick="closeModal('quoteDrawerModal')"><i class="fas fa-arrow-left"></i> Continue Browsing</button>
+        <a href="cart.html" class="btn btn-orange" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;"><i class="fas fa-shopping-cart"></i> View Full Cart & Checkout</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Master Request Quote Modal Form -->
+  <div id="quoteModal" class="modal-backdrop">
+    <div class="modal-card" style="max-width: 650px;">
+      <div class="modal-header">
+        <h4><i class="fas fa-paper-plane"></i> Submit Formal Request for Quote (RFQ)</h4>
+        <button class="modal-close" onclick="closeModal('quoteModal')" aria-label="Close Modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="handleFormSubmit(event, 'Request for Quote')">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
+            <div>
+              <label>FULL NAME *</label>
+              <input type="text" required placeholder="Enter full name">
+            </div>
+            <div>
+              <label>COMPANY / VESSEL *</label>
+              <input type="text" required placeholder="Company or vessel name">
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
+            <div>
+              <label>EMAIL ADDRESS *</label>
+              <input type="email" required placeholder="name@company.com">
+            </div>
+            <div>
+              <label>PHONE NUMBER *</label>
+              <input type="tel" required placeholder="+91 XXXXX XXXXX">
+            </div>
+          </div>
+          <div style="margin-bottom: 1.4rem;">
+            <label>SPECIFIC REQUIREMENTS / QUANTITY *</label>
+            <textarea rows="4" required placeholder="List products, model numbers, specifications or delivery port requirements..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-orange" style="width: 100%; padding: 1rem; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.05em; justify-content: center; box-shadow: 0 8px 25px rgba(255, 122, 24, 0.4);">
+            SUBMIT RFQ ENQUIRY <i class="fas fa-paper-plane" style="margin-left: 0.4rem;"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Scripts -->
+  <script src="app.js"></script>
+  <script src="industries.js"></script>
+</body>
+</html>

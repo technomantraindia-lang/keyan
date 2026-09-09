@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHOPPING CART | KEYAN CORPORATION — B2B Procurement Marketplace</title>
+  <meta name="description" content="Review selected marine, industrial, fire safety, and instrumentation items in your Keyan Corporation B2B procurement cart with live USD price calculations and quotation options.">
+  
+  <!-- Modern Industrial & Monospace Typography System -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="categories.css">
+  <link rel="stylesheet" href="cart.css">
+</head>
+<body class="cart-page-body">
+
+  <!-- UNIFIED MASTER HEADER CONTAINER -->
+  <div id="header-container">
+    <!-- 1. TOP UTILITY BAR -->
+    <div class="top-utility-bar">
+      <div class="container utility-wrapper">
+        <div class="utility-left">
+          <span class="utility-badge-pulse"></span>
+          <span>Marine • Industrial • Fire Safety • Instrumentation</span>
+        </div>
+        <div class="utility-right">
+          <a href="tel:+919825207743"><i class="fas fa-phone-alt"></i> +91 9825207743</a>
+          <a href="mailto:sales@keyancorporation.com"><i class="fas fa-envelope"></i> sales@keyancorporation.com</a>
+          <span class="utility-gstin">| GSTIN: 24BWNPV1980J1ZV</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. MOBILE NAVIGATION DRAWER OVERLAY -->
+    <div class="mobile-nav-backdrop" id="mobileNavBackdrop" onclick="closeMobileNav()"></div>
+    <aside class="mobile-nav-drawer" id="mobileNavDrawer">
+      <div class="mobile-nav-header">
+        <div class="mobile-brand">
+          <img src="iamges/image.png" alt="KEYAN CORPORATION Logo" class="mobile-logo">
+          <div>
+            <div class="brand-name">KEYAN CORP</div>
+            <div class="brand-sub">From Port to Plant</div>
+          </div>
+        </div>
+        <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Close Menu">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="mobile-nav-body">
+        <ul class="mobile-nav-menu">
+          <li><a href="index.html" class="mobile-nav-link" id="nav-mob-home" onclick="closeMobileNav()"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="about.html" class="mobile-nav-link" id="nav-mob-about" onclick="closeMobileNav()"><i class="fas fa-building"></i> About Us</a></li>
+          <li><a href="categories.html" class="mobile-nav-link" id="nav-mob-categories" onclick="closeMobileNav()"><i class="fas fa-th-large"></i> Categories</a></li>
+          <li><a href="products.html" class="mobile-nav-link" id="nav-mob-products" onclick="closeMobileNav()"><i class="fas fa-boxes"></i> Featured Products</a></li>
+          <li><a href="index.html#industries" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fas fa-industry"></i> Industry Sectors</a></li>
+          <li><a href="contact.html" class="mobile-nav-link" id="nav-mob-contact" onclick="closeMobileNav()"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        </ul>
+        <div class="mobile-nav-actions">
+          <a href="login.html" class="btn btn-navy btn-full"><i class="far fa-user"></i> Account Login</a>
+          <button class="btn btn-orange btn-full" onclick="closeMobileNav(); openModal('quoteModal');"><i class="fas fa-paper-plane"></i> Submit RFQ</button>
+        </div>
+        <div class="mobile-nav-contact">
+          <a href="tel:+919825207743"><i class="fas fa-phone-alt"></i> +91 9825207743</a>
+          <a href="mailto:sales@keyancorporation.com"><i class="fas fa-envelope"></i> sales@keyancorporation.com</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 3. MAIN E-COMMERCE BRAND HEADER -->
+    <header class="main-header">
+      <div class="container header-grid">
+        
+        <!-- Brand Logo -->
+        <a href="index.html" class="header-brand">
+          <img src="iamges/image.png" alt="KEYAN CORPORATION Logo" class="header-logo">
+          <div class="brand-text-wrap">
+            <div class="brand-name">KEYAN CORPORATION</div>
+            <div class="brand-sub">From Port to Plant</div>
+          </div>
+        </a>
+
+        <!-- Intelligent Search Bar -->
+        <form class="search-form-center" action="products.html" method="GET" onsubmit="handleSearchSubmit(event)">
+          <div class="search-box-wrap">
+            <input type="text" id="headerSearchInput" name="q" class="search-input-field" placeholder="Search products, brands, models..." required>
+            <button type="submit" class="search-submit-btn" title="Search Catalog">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
+
+        <!-- Header Action Tools & Mobile Hamburger Toggle -->
+        <div class="header-tools-group">
+          <div class="header-tools">
+            <a href="login.html" class="tool-item" title="Customer & Vendor Portal Login">
+              <i class="far fa-user"></i>
+              <span>Account</span>
+            </a>
+            <a href="cart.html" class="tool-item" title="View Shopping Cart">
+              <i class="fas fa-shopping-cart"></i>
+              <span>Cart</span>
+              <span class="tool-badge" id="cartHeaderBadge">0</span>
+            </a>
+          </div>
+
+          <button class="btn btn-orange header-rfq-btn" onclick="openModal('quoteModal')">
+            <i class="fas fa-paper-plane"></i> Request Quote
+          </button>
+
+          <button class="mobile-hamburger" id="mobileNavBtn" onclick="toggleMobileNav()" aria-label="Toggle Navigation Menu">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- PRIMARY COMPACT NAVIGATION ROW -->
+      <nav class="primary-nav">
+        <div class="container nav-flex">
+          <ul class="nav-links">
+            <li><a href="index.html" id="nav-link-home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="about.html" id="nav-link-about"><i class="fas fa-building"></i> About Us</a></li>
+            <li><a href="categories.html" id="nav-link-categories"><i class="fas fa-th-large"></i> Categories</a></li>
+            <li><a href="products.html" id="nav-link-products"><i class="fas fa-boxes"></i> Featured Products</a></li>
+            <li><a href="index.html#industries"><i class="fas fa-industry"></i> Industry Sectors</a></li>
+            <li><a href="contact.html" id="nav-link-contact"><i class="fas fa-envelope"></i> Contact Us</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+  </div>
+
+  <!-- ==================================================
+       1. HERO HEADER
+       ================================================== -->
+  <section class="cart-hero-section">
+    <div class="container">
+      <div class="cat-hud-badge" style="background: rgba(255,122,24,0.15); border-color: rgba(255,122,24,0.4);">
+        <span class="dot"></span> B2B PROCUREMENT BASKET
+      </div>
+      <h1 class="cart-hero-title">YOUR B2B SHOPPING CART</h1>
+      <p class="cart-hero-sub">Review selected equipment, adjust order quantities, or request a formal commercial quotation.</p>
+    </div>
+  </section>
+
+  <!-- ==================================================
+       2. MAIN CART STAGE (2-COLUMN GRID)
+       ================================================== -->
+  <section class="cart-main-section">
+    <div class="container cart-grid">
+      
+      <!-- LEFT COLUMN: CART ITEMS LIST -->
+      <div class="cart-items-card">
+        <div class="cart-items-header">
+          <h2 class="cart-items-title"><i class="fas fa-boxes text-orange"></i> SELECTED PRODUCTS</h2>
+          <a href="products.html" style="font-family:var(--font-mono); font-size:0.78rem; font-weight:700; color:var(--cart-orange); text-decoration:none;">
+            + ADD MORE ITEMS
+          </a>
+        </div>
+
+        <div id="cartItemsList">
+          <!-- Populated dynamically by cart.js -->
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: ORDER SUMMARY CARD -->
+      <div id="cartSummaryContent" class="cart-summary-card">
+        <h3 class="cart-summary-title">ORDER SUMMARY</h3>
+
+        <div class="cart-summary-row">
+          <span style="color:var(--cart-text-muted);">Items Subtotal</span>
+          <span id="cartSubtotal" style="font-weight:700;">$0.00 USD</span>
+        </div>
+
+        <div class="cart-summary-row">
+          <span style="color:var(--cart-text-muted);">Port Shipping & Dispatch (Est.)</span>
+          <span id="cartShipping" style="font-weight:700;">$45.00 USD</span>
+        </div>
+
+        <div id="cartDiscountRow" class="cart-summary-row" style="display:none; color:#059669; font-weight:700;">
+          <span>B2B Partner Discount</span>
+          <span id="cartDiscountVal">-$0.00 USD</span>
+        </div>
+
+
+        <div class="cart-summary-row grand-total">
+          <span style="font-family:var(--font-heading); font-weight:800; color:var(--cart-navy-darkest);">ESTIMATED TOTAL</span>
+          <div style="text-align:right;">
+            <span id="cartGrandTotal" class="cart-grand-amount">$0.00</span>
+            <span style="font-family:var(--font-mono); font-size:0.8rem; color:var(--cart-orange); font-weight:700; display:block;">USD</span>
+          </div>
+        </div>
+
+        <p style="font-size:0.78rem; color:var(--cart-text-muted); margin-bottom:1.5rem; line-height:1.5;">
+          <i class="fas fa-info-circle text-orange"></i> Taxes and final delivery duties calculated based on vessel port of call or delivery address.
+        </p>
+
+        <button class="cart-btn-checkout" onclick="proceedToCheckout()">
+          PROCEED TO CHECKOUT <i class="fas fa-arrow-right"></i>
+        </button>
+
+        <button class="cart-btn-rfq-outline" onclick="openModal('quoteModal')">
+          SUBMIT FORMAL RFQ <i class="fas fa-file-signature"></i>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- UNIFIED MASTER FOOTER CONTAINER -->
+  <div id="footer-container">
+    <footer class="main-footer">
+      <div class="container">
+        <div class="footer-grid">
+          
+          <!-- Col 1: Brand & Tagline -->
+          <div class="footer-col-brand">
+            <a href="index.html" class="header-brand" style="margin-bottom: 1.2rem; display:inline-flex;">
+              <img src="iamges/image.png" alt="KEYAN CORPORATION Logo" class="header-logo" style="height: 60px;">
+              <div class="brand-text-wrap">
+                <div class="brand-name" style="color:#FFFFFF; font-size:1.35rem;">KEYAN CORPORATION</div>
+                <div class="brand-sub" style="color:var(--orange-accent, #FF7A18);">From Port to Plant</div>
+              </div>
+            </a>
+            <p style="color:#94A3B8; font-size:0.9rem; line-height:1.6; margin-bottom:1.2rem;">
+              Trusted B2B supplier of Ship Spare Parts, Industrial Machinery, Fire Safety Equipment, and Rig & Marine Measuring Instruments.
+            </p>
+            <div class="footer-tagline-quote">
+              <i class="fas fa-quote-left" style="color:var(--orange-accent, #FF7A18); margin-right:6px;"></i>
+              "From Port to Plant, We Supply with Confidence"
+            </div>
+          </div>
+
+          <!-- Col 2: Supply Verticals -->
+          <div>
+            <h4 class="footer-col-heading">Supply Verticals</h4>
+            <ul class="footer-links-group">
+              <li><a href="products.html?category=marine-ship-supply"><i class="fas fa-ship"></i> Ship & Marine Supply</a></li>
+              <li><a href="products.html?category=industrial-machinery"><i class="fas fa-industry"></i> Industrial Machinery</a></li>
+              <li><a href="products.html?category=fire-safety"><i class="fas fa-fire-extinguisher"></i> Fire & Safety Equipment</a></li>
+              <li><a href="products.html?category=marine-instruments"><i class="fas fa-microchip"></i> Rig & Marine Instruments</a></li>
+              <li><a href="products.html?category=gas-detection"><i class="fas fa-bell"></i> Gas Detection Systems</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Quick Links -->
+          <div>
+            <h4 class="footer-col-heading">Quick Links</h4>
+            <ul class="footer-links-group">
+              <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+              <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+              <li><a href="categories.html"><i class="fas fa-chevron-right"></i> Categories</a></li>
+              <li><a href="products.html"><i class="fas fa-chevron-right"></i> Featured Products</a></li>
+              <li><a href="about.html#story"><i class="fas fa-chevron-right"></i> Geographic Hub</a></li>
+              <li><a href="about.html#why"><i class="fas fa-chevron-right"></i> Why Choose Keyan</a></li>
+              <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 4: Contact & Credentials -->
+          <div>
+            <h4 class="footer-col-heading">Contact Details</h4>
+            <p class="footer-contact-item">
+              <i class="fas fa-map-marker-alt"></i> 
+              <span>Plot No. 255, E/4, VIP (Vibrant Industrial Park), Moti Talav Road, Bhavnagar - 364001, Gujarat, India</span>
+            </p>
+            <p class="footer-contact-item">
+              <i class="fas fa-phone-alt"></i> 
+              <span><a href="tel:+919825207743">+91 9825207743</a> | <a href="tel:+919825206341">+91 9825206341</a></span>
+            </p>
+            <p class="footer-contact-item">
+              <i class="fas fa-envelope"></i> 
+              <span><a href="mailto:sales@keyancorporation.com">sales@keyancorporation.com</a></span>
+            </p>
+            <div class="footer-gstin-badge">
+              <i class="fas fa-shield-alt"></i> GSTIN: 24BWNPV1980J1ZV
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer Bottom Row -->
+        <div class="footer-bottom-row">
+          <div>© 2026 KEYAN CORPORATION. All rights reserved. B2B Industrial Procurement Marketplace.</div>
+          <div class="footer-bottom-right">
+            <span>Bhavnagar, Gujarat, India</span>
+            <button class="back-to-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Back to Top">
+              <i class="fas fa-arrow-up"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Master Request Quote Modal Form -->
+  <div id="quoteModal" class="modal-backdrop">
+    <div class="modal-card" style="max-width: 650px;">
+      <div class="modal-header">
+        <h4><i class="fas fa-paper-plane"></i> Submit Formal Request for Quote (RFQ)</h4>
+        <button class="modal-close" onclick="closeModal('quoteModal')" aria-label="Close Modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="handleFormSubmit(event, 'Request for Quote')">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
+            <div>
+              <label>FULL NAME *</label>
+              <input type="text" required placeholder="Enter full name">
+            </div>
+            <div>
+              <label>COMPANY / VESSEL *</label>
+              <input type="text" required placeholder="Company or vessel name">
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
+            <div>
+              <label>EMAIL ADDRESS *</label>
+              <input type="email" required placeholder="name@company.com">
+            </div>
+            <div>
+              <label>PHONE NUMBER *</label>
+              <input type="tel" required placeholder="+91 XXXXX XXXXX">
+            </div>
+          </div>
+          <div style="margin-bottom: 1.4rem;">
+            <label>SPECIFIC REQUIREMENTS / QUANTITY *</label>
+            <textarea rows="4" required placeholder="List products, model numbers, specifications or delivery port requirements..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-orange" style="width: 100%; padding: 1rem; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.05em; justify-content: center; box-shadow: 0 8px 25px rgba(255, 122, 24, 0.4);">
+            SUBMIT RFQ ENQUIRY <i class="fas fa-paper-plane" style="margin-left: 0.4rem;"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+  <script src="cart.js"></script>
+</body>
+</html>

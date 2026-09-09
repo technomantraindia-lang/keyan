@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABOUT US | KEYAN CORPORATION — Marine, Industrial, Fire Safety & Instrumentation</title>
+  <meta name="description" content="Learn about Keyan Corporation, leading B2B supplier of Ship Spare Parts, Industrial Automation & Machinery, Fire Safety Equipment, and Rig & Marine Instruments based in Bhavnagar, Gujarat near Alang.">
+  
+  <!-- Modern Industrial Typography System -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Base Core Styles + bespoke About Styles -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="about.css">
+</head>
+<body class="about-page-wrapper">
+
+  <!-- UNIFIED MASTER HEADER CONTAINER -->
+  <div id="header-container">
+    <!-- 1. TOP UTILITY BAR -->
+    <div class="top-utility-bar">
+      <div class="container utility-wrapper">
+        <div class="utility-left">
+          <span class="utility-badge-pulse"></span>
+          <span>Marine • Industrial • Fire Safety • Instrumentation</span>
+        </div>
+        <div class="utility-right">
+          <a href="tel:+919825207743"><i class="fas fa-phone-alt"></i> +91 9825207743</a>
+          <a href="mailto:sales@keyancorporation.com"><i class="fas fa-envelope"></i> sales@keyancorporation.com</a>
+          <span class="utility-gstin">| GSTIN: 24BWNPV1980J1ZV</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. MOBILE NAVIGATION DRAWER OVERLAY -->
+    <div class="mobile-nav-backdrop" id="mobileNavBackdrop" onclick="closeMobileNav()"></div>
+    <aside class="mobile-nav-drawer" id="mobileNavDrawer">
+      <div class="mobile-nav-header">
+        <div class="mobile-brand">
+          <img src="iamges/image.png" alt="KEYAN CORPORATION Logo" class="mobile-logo">
+          <div>
+            <div class="brand-name">KEYAN CORP</div>
+            <div class="brand-sub">From Port to Plant</div>
+          </div>
+        </div>
+        <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Close Menu">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="mobile-nav-body">
+        <ul class="mobile-nav-menu">
+          <li><a href="index.html" class="mobile-nav-link" id="nav-mob-home" onclick="closeMobileNav()"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="about.html" class="mobile-nav-link active" id="nav-mob-about" onclick="closeMobileNav()"><i class="fas fa-building"></i> About Us</a></li>
+          <li><a href="categories.html" class="mobile-nav-link" id="nav-mob-categories" onclick="closeMobileNav()"><i class="fas fa-th-large"></i> Categories</a></li>
+          <li><a href="products.html" class="mobile-nav-link" id="nav-mob-products" onclick="closeMobileNav()"><i class="fas fa-boxes"></i> Featured Products</a></li>
+          <li><a href="index.html#industries" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fas fa-industry"></i> Industry Sectors</a></li>
+          <li><a href="contact.html" class="mobile-nav-link" id="nav-mob-contact" onclick="closeMobileNav()"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        </ul>
+        <div class="mobile-nav-actions">
+          <a href="login.html" class="btn btn-navy btn-full"><i class="far fa-user"></i> Account Login</a>
+          <button class="btn btn-orange btn-full" onclick="closeMobileNav(); openModal('quoteModal');"><i class="fas fa-paper-plane"></i> Submit RFQ</button>
+        </div>
+        <div class="mobile-nav-contact">
+          <a href="tel:+919825207743"><i class="fas fa-phone-alt"></i> +91 9825207743</a>
+          <a href="mailto:sales@keyancorporation.com"><i class="fas fa-envelope"></i> sales@keyancorporation.com</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 3. MAIN E-COMMERCE BRAND HEADER -->
+    <header class="main-header">
+      <div class="container header-grid">
+        
+        <!-- Brand Logo -->
+        <a href="index.html" class="header-brand">
+          <img src="iamges/image.png" alt="KEYAN CORPORATION Logo" class="header-logo">
+          <div class="brand-text-wrap">
+            <div class="brand-name">KEYAN CORPORATION</div>
+            <div class="brand-sub">From Port to Plant</div>
+          </div>
+        </a>
+
+        <!-- Intelligent Search Bar -->
+        <form class="search-form-center" action="products.html" method="GET" onsubmit="handleSearchSubmit(event)">
+          <div class="search-box-wrap">
+            <input type="text" id="headerSearchInput" name="q" class="search-input-field" placeholder="Search products, brands, models..." required>
+            <button type="submit" class="search-submit-btn" title="Search Catalog">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
+
+        <!-- Header Action Tools & Mobile Hamburger Toggle -->
+        <div class="header-tools-group">
+          <div class="header-tools">
+            <a href="login.html" class="tool-item" title="Customer & Vendor Portal Login">
+              <i class="far fa-user"></i>
+              <span>Account</span>
+            </a>
+            <a href="cart.html" class="tool-item" title="View Shopping Cart">
+              <i class="fas fa-shopping-cart"></i>
+              <span>Cart</span>
+              <span class="tool-badge" id="cartHeaderBadge">0</span>
+            </a>
+          </div>
+
+          <button class="btn btn-orange header-rfq-btn" onclick="openModal('quoteModal')">
+            <i class="fas fa-paper-plane"></i> Request Quote
+          </button>
+
+          <button class="mobile-hamburger" id="mobileNavBtn" onclick="toggleMobileNav()" aria-label="Toggle Navigation Menu">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- PRIMARY COMPACT NAVIGATION ROW -->
+      <nav class="primary-nav">
+        <div class="container nav-flex">
+          <ul class="nav-links">
+            <li><a href="index.html" id="nav-link-home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="about.html" id="nav-link-about" class="active"><i class="fas fa-building"></i> About Us</a></li>
+            <li><a href="categories.html" id="nav-link-categories"><i class="fas fa-th-large"></i> Categories</a></li>
+            <li><a href="products.html" id="nav-link-products"><i class="fas fa-boxes"></i> Featured Products</a></li>
+            <li><a href="index.html#industries"><i class="fas fa-industry"></i> Industry Sectors</a></li>
+            <li><a href="contact.html" id="nav-link-contact"><i class="fas fa-envelope"></i> Contact Us</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+  </div>
+
+
+
+  <!-- ==================================================
+       SECTION 01 — CINEMATIC ABOUT HERO
+       ================================================== -->
+  <section class="about-hero">
+    <div class="about-hero-bg"></div>
+    <div class="about-hero-grid-overlay"></div>
+    
+    <div class="container about-hero-container">
+      <div class="about-hero-grid">
+        
+        <!-- Left Side Hero Content -->
+        <div class="hero-left-content">
+          <div class="tech-tag">
+            <span class="dot"></span> ABOUT / KEYAN CORPORATION / 01
+          </div>
+          <h1 class="hero-main-title">
+            FROM PORT TO<br><span style="color:var(--orange-accent);">PLANT.</span>
+          </h1>
+          <p class="hero-sub-title">
+            We supply the equipment, safety systems and industrial essentials that keep critical operations moving.
+          </p>
+          <div class="hero-tagline-quote">
+            "From Port to Plant, We Supply with Confidence."
+          </div>
+          <div>
+            <a href="#capabilities" class="hero-cta-btn">
+              EXPLORE OUR CAPABILITIES <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Side Floating Technical HUD Panel -->
+        <div class="hero-hud-panel">
+          <div class="hud-header">
+            <span class="hud-title">KEYAN CORPORATION / SUPPLY NETWORK</span>
+            <div class="hud-status-badge">
+              <span class="hud-status-dot"></span> ACTIVE HUB
+            </div>
+          </div>
+
+          <div class="hud-verticals-grid">
+            <div class="hud-vertical-item">
+              <div class="icon"><i class="fas fa-ship"></i></div>
+              <div class="label">MARINE SUPPLY</div>
+            </div>
+            <div class="hud-vertical-item">
+              <div class="icon"><i class="fas fa-industry"></i></div>
+              <div class="label">INDUSTRIAL & MACH.</div>
+            </div>
+            <div class="hud-vertical-item">
+              <div class="icon"><i class="fas fa-fire-extinguisher"></i></div>
+              <div class="label">FIRE & SAFETY</div>
+            </div>
+            <div class="hud-vertical-item">
+              <div class="icon"><i class="fas fa-microchip"></i></div>
+              <div class="label">INSTRUMENTATION</div>
+            </div>
+          </div>
+
+          <div class="hud-meta-footer">
+            <span>LOCATION: BHAVNAGAR (GUJARAT)</span>
+            <span>GSTIN: 24BWNPV1980J1ZV</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Hero Scroll Indicator -->
+    <div class="hero-scroll-indicator">
+      <span>SCROLL DOWN</span>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+
+  <!-- ==================================================
+       SECTION 02 — "BUILT WHERE INDUSTRY MOVES"
+       ================================================== -->
+  <section class="section-built" id="story">
+    <div class="container">
+      <div class="built-grid">
+        
+        <!-- Left Editorial Typography -->
+        <div>
+          <div class="tech-tag">
+            <span class="dot"></span> GEOGRAPHIC POSITIONING / 02
+          </div>
+          <h2 class="built-left-heading">
+            BUILT IN<br>
+            <span class="accent">BHAVNAGAR.</span><br>
+            CONNECTED TO<br>
+            INDUSTRY.
+          </h2>
+        </div>
+
+        <!-- Right Verified Positioning Story & Animated Map HUD -->
+        <div class="built-right-content">
+          <p class="lead">
+            Keyan Corporation is a well-established B2B supplier serving requirements across ship spare parts, drilling equipment, safety equipment, industrial items, valves, fire-fighting equipment and industrial measuring tools.
+          </p>
+          <p>
+            Strategically located in Bhavnagar, Gujarat, our facility is positioned close to Alang — one of the world’s major ship recycling yards and maritime industrial clusters. This proximity grants us rapid procurement responsiveness, direct access to maritime equipment, and streamlined logistical dispatch for commercial vessels and manufacturing plants alike.
+          </p>
+
+          <!-- Technical Map Route HUD -->
+          <div class="built-map-box">
+            <div class="map-hud-header">
+              <span><i class="fas fa-route"></i> REGIONAL MARITIME LOGISTICS HUB</span>
+              <span>GULF OF KHAMBHAT VECTOR</span>
+            </div>
+            <div class="map-img-container">
+              <img src="iamges/alang_map_hub.jpg" alt="Bhavnagar Alang Marine Supply Network Map Graphic">
+            </div>
+            <div class="map-route-bar">
+              <div class="route-step">
+                <span class="route-step-num">01</span>
+                <div>
+                  <span class="route-step-text">BHAVNAGAR</span>
+                  <span class="route-step-sub">VIP INDUSTRIAL PARK</span>
+                </div>
+              </div>
+              <div class="route-step">
+                <span class="route-step-num">02</span>
+                <div>
+                  <span class="route-step-text">ALANG CLUSTER</span>
+                  <span class="route-step-sub">~50 KM MARITIME HUB</span>
+                </div>
+              </div>
+              <div class="route-step">
+                <span class="route-step-num">03</span>
+                <div>
+                  <span class="route-step-text">PORT TO PLANT</span>
+                  <span class="route-step-sub">DISPATCH READY</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================================================
+       SECTION 03 — COMPANY DNA ("WHAT DRIVES KEYAN")
+       ================================================== -->
+  <section class="section-dna" id="capabilities">
+    <div class="container">
+      
+      <div class="about-section-header">
+        <div class="tech-tag">
+          <span class="dot"></span> BUSINESS VERTICALS / 03
+        </div>
+        <h2 class="about-display-title">WHAT DRIVES <span class="highlight-orange">KEYAN</span></h2>
+        <p class="about-section-desc">
+          Four distinct operational pillars engineered to deliver reliability, safety compliance, and speed across marine and industrial procurement.
+        </p>
+      </div>
+
+      <div class="dna-panels-container">
+        
+        <!-- Panel 01 -->
+        <div class="dna-panel">
+          <div class="dna-panel-bg" style="background-image: url('iamges/ship_supplier.jpg');"></div>
+          <div class="dna-num">01</div>
+          <div class="dna-title-wrap">
+            <h3>MARINE SUPPLY</h3>
+            <p>Ship spare parts, safety equipment, liferafts, navigation lights, and vessel maintenance supplies supporting maritime operations.</p>
+          </div>
+          <div class="dna-arrow-wrap">
+            <span class="dna-arrow-btn"><i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <!-- Panel 02 -->
+        <div class="dna-panel">
+          <div class="dna-panel-bg" style="background-image: url('iamges/industrial_automation.jpg');"></div>
+          <div class="dna-num">02</div>
+          <div class="dna-title-wrap">
+            <h3>INDUSTRIAL AUTOMATION & MACHINERY</h3>
+            <p>Industrial equipment, pneumatic tools, portable ventilators, diaphragm pumps, valves, and operational components for manufacturing environments.</p>
+          </div>
+          <div class="dna-arrow-wrap">
+            <span class="dna-arrow-btn"><i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <!-- Panel 03 -->
+        <div class="dna-panel">
+          <div class="dna-panel-bg" style="background-image: url('iamges/fire_safety.jpg');"></div>
+          <div class="dna-num">03</div>
+          <div class="dna-title-wrap">
+            <h3>FIRE & SAFETY</h3>
+            <p>Fire protection, emergency response suits, fire hoses, hydrant valves, SCBA breathing apparatus, and smoke detection gear.</p>
+          </div>
+          <div class="dna-arrow-wrap">
+            <span class="dna-arrow-btn"><i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <!-- Panel 04 -->
+        <div class="dna-panel">
+          <div class="dna-panel-bg" style="background-image: url('iamges/rig_instruments.jpg');"></div>
+          <div class="dna-num">04</div>
+          <div class="dna-title-wrap">
+            <h3>RIG & MARINE INSTRUMENTS</h3>
+            <p>Marine aneroid barometers, liquid level indicators, clinometers, temperature calibrators, and specialized measuring instrumentation.</p>
+          </div>
+          <div class="dna-arrow-wrap">
+            <span class="dna-arrow-btn"><i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==================================================
+       SECTION 04 — "THE SUPPLY ECOSYSTEM"
+       ================================================== -->
+  <section class="section-ecosystem" id="ecosystem">
+    <div class="container">
+      
+      <div class="about-section-header">
+        <div class="tech-tag">
+          <span class="dot"></span> PRODUCT MATRIX / 04
+        </div>
+        <h2 class="about-display-title">
+          ONE SUPPLY PARTNER.<br><span class="highlight-orange">MULTIPLE INDUSTRIAL NEEDS.</span>
+        </h2>
+        <p class="about-section-desc">
+          Interact with our four primary supply verticals below to explore exact verified products and specialized equipment categories.
+        </p>
+      </div>
+
+      <div class="ecosystem-grid">
+        
+        <!-- Left Side Category Navigation -->
+        <div class="ecosystem-nav-list">
+          
+          <div class="eco-nav-item active" data-target="marine">
+            <div class="eco-nav-left">
+              <div class="eco-icon-box"><i class="fas fa-ship"></i></div>
+              <span class="eco-title-text">01. Marine Supply</span>
+            </div>
+            <span class="eco-indicator-dot"></span>
+          </div>
+
+          <div class="eco-nav-item" data-target="industrial">
+            <div class="eco-nav-left">
+              <div class="eco-icon-box"><i class="fas fa-industry"></i></div>
+              <span class="eco-title-text">02. Industrial Automation</span>
+            </div>
+            <span class="eco-indicator-dot"></span>
+          </div>
+
+          <div class="eco-nav-item" data-target="fire">
+            <div class="eco-nav-left">
+              <div class="eco-icon-box"><i class="fas fa-fire-extinguisher"></i></div>
+              <span class="eco-title-text">03. Fire & Safety</span>
+            </div>
+            <span class="eco-indicator-dot"></span>
+          </div>
+
+          <div class="eco-nav-item" data-target="instruments">
+            <div class="eco-nav-left">
+              <div class="eco-icon-box"><i class="fas fa-microchip"></i></div>
+              <span class="eco-title-text">04. Rig & Marine Instruments</span>
+            </div>
+            <span class="eco-indicator-dot"></span>
+          </div>
+
+        </div>
+
+        <!-- Right Side Interactive Details Card -->
+        <div class="ecosystem-detail-card">
+          <div class="eco-detail-header">
+            <span class="eco-category-badge" id="ecoCategoryBadge">01 / MARINE SUPPLY</span>
+            <h3 class="eco-category-name" id="ecoCategoryName">Ship Spare Parts & Vessel Equipment</h3>
+          </div>
+          
+          <p class="eco-category-desc" id="ecoCategoryDesc">
+            Comprehensive marine supply solutions supporting vessel maintenance, deck machinery, safety, navigation, and offshore operations across ports.
+          </p>
+
+          <div class="eco-products-label">
+            <i class="fas fa-layer-group"></i> VERIFIED PRODUCT CATALOG PORTFOLIO:
+          </div>
+
+          <div class="eco-products-chips" id="ecoProductsChips">
+            <div class="eco-chip"><i class="fas fa-life-ring"></i> Rescue Boat</div>
+            <div class="eco-chip"><i class="fas fa-ship"></i> Liferaft</div>
+            <div class="eco-chip"><i class="fas fa-ring"></i> Lifebuoy</div>
+            <div class="eco-chip"><i class="fas fa-lightbulb"></i> Navigation Lights</div>
+            <div class="eco-chip"><i class="fas fa-stream"></i> Pilot Ladder</div>
+            <div class="eco-chip"><i class="fas fa-compass"></i> Nautical Sextant</div>
+            <div class="eco-chip"><i class="fas fa-anchor"></i> Anchor & Mooring Chain</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==================================================
+       SECTION 05 — "WHY KEYAN" (4 PRINCIPLES)
+       ================================================== -->
+  <section class="section-why" id="why">
+    <div class="container">
+      
+      <div class="about-section-header">
+        <div class="tech-tag">
+          <span class="dot"></span> OPERATIONAL CORE / 05
+        </div>
+        <h2 class="about-display-title">
+          WHY INDUSTRIES <span class="highlight-orange">CHOOSE KEYAN</span>
+        </h2>
+        <p class="about-section-desc">
+          Rooted in engineering integrity, multi-disciplinary sourcing, and rapid response logistics.
+        </p>
+      </div>
+
+      <div class="why-principles-grid">
+        
+        <div class="why-card">
+          <div class="why-card-num">01</div>
+          <h3 class="why-card-title">RELIABLE PROCUREMENT</h3>
+          <p class="why-card-desc">
+            Direct access to genuine marine spares, safety equipment, and industrial tools sourced to rigorous quality standards for zero-downtime operations.
+          </p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-card-num">02</div>
+          <h3 class="why-card-title">MULTI-INDUSTRY SUPPLY</h3>
+          <p class="why-card-desc">
+            Unified B2B procurement spanning marine shipping, manufacturing plants, fire safety compliance, and offshore rig instrumentation under one roof.
+          </p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-card-num">03</div>
+          <h3 class="why-card-title">SAFETY-FOCUSED SOLUTIONS</h3>
+          <p class="why-card-desc">
+            Emergency response systems, certified SCBA units, chemical suits, and fire hydrant valves tailored for high-risk industrial & vessel environments.
+          </p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-card-num">04</div>
+          <h3 class="why-card-title">RESPONSIVE SOURCING</h3>
+          <p class="why-card-desc">
+            Strategically located near Alang maritime cluster for fast quotation turnaround, technical specification matching, and rapid port/plant dispatch.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+
+
+  <!-- ==================================================
+       SECTION 07 — TRUST / BRANDS
+       ================================================== -->
+  <section class="section-brands">
+    <div class="container">
+      
+      <div class="about-section-header text-center">
+        <div class="tech-tag">
+          <span class="dot"></span> BRAND PORTFOLIO / 07
+        </div>
+        <h2 class="about-display-title">
+          BRANDS & PRODUCTS <span class="highlight-orange">WE WORK WITH</span>
+        </h2>
+        <p class="about-section-desc">
+          Featured within our product and supply ecosystem across marine, safety, industrial, and instrumentation requirements.
+        </p>
+      </div>
+
+      <div class="brands-grid">
+        <div class="brand-chip">
+          <span class="brand-chip-name">DRAEGER</span>
+          <span class="brand-chip-sub">Gas & Safety</span>
+        </div>
+        <div class="brand-chip">
+          <span class="brand-chip-name">MSA</span>
+          <span class="brand-chip-sub">Breathing Gear</span>
+        </div>
+        <div class="brand-chip">
+          <span class="brand-chip-name">SCOTT</span>
+          <span class="brand-chip-sub">Fire Safety</span>
+        </div>
+        <div class="brand-chip">
+          <span class="brand-chip-name">3M</span>
+          <span class="brand-chip-sub">Personal Protection</span>
+        </div>
+        <div class="brand-chip">
+          <span class="brand-chip-name">SOLAS</span>
+          <span class="brand-chip-sub">Marine Standard</span>
+        </div>
+        <div class="brand-chip">
+          <span class="brand-chip-name">UNITOR</span>
+          <span class="brand-chip-sub">Marine Chemicals</span>
+        </div>
+        <div class="brand-chip">
+          <span class="brand-chip-name">WILDAN</span>
+          <span class="brand-chip-sub">Air Pumps</span>
+        </div>
+        <div class="brand-chip">
+          <span class="brand-chip-name">PERMATEX</span>
+          <span class="brand-chip-sub">Industrial Sealants</span>
+        </div>
+        <div class="brand-chip">
+          <span class="brand-chip-name">MOLYKOTE</span>
+          <span class="brand-chip-sub">Specialty Lubricants</span>
+        </div>
+        <div class="brand-chip">
+          <span class="brand-chip-name">BELZONA</span>
+          <span class="brand-chip-sub">Polymer Coatings</span>
+        </div>
+        <div class="brand-chip">
+          <span class="brand-chip-name">CONSILIUM</span>
+          <span class="brand-chip-sub">Fire Alarm Tech</span>
+        </div>
+        <div class="brand-chip">
+          <span class="brand-chip-name">APOLLO</span>
+          <span class="brand-chip-sub">Smoke Detectors</span>
+        </div>
+        <div class="brand-chip">
+          <span class="brand-chip-name">TYCO</span>
+          <span class="brand-chip-sub">Valves & Hydrants</span>
+        </div>
+        <div class="brand-chip">
+          <span class="brand-chip-name">SIKLA</span>
+          <span class="brand-chip-sub">Industrial Mounts</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==================================================
+       SECTION 08 — INTERACTIVE COMPANY JOURNEY TIMELINE
+       ================================================== -->
+  <section class="section-timeline">
+    <div class="container">
+      
+      <div class="about-section-header text-center">
+        <div class="tech-tag">
+          <span class="dot"></span> COMPANY EVOLUTION / 08
+        </div>
+        <h2 class="about-display-title">
+          CAPABILITY & <span class="highlight-orange">SUPPLY EVOLUTION</span>
+        </h2>
+        <p class="about-section-desc">
+          Building multi-industry procurement depth from the heart of Gujarat's maritime industrial hub.
+        </p>
+      </div>
+
+      <div class="timeline-wrapper">
+        <div class="timeline-central-line"></div>
+        <div class="timeline-progress-line" id="timelineProgressLine"></div>
+
+        <!-- Item 01 -->
+        <div class="timeline-item active">
+          <div class="timeline-node"></div>
+          <div class="timeline-card">
+            <div class="timeline-step-code">MILESTONE 01</div>
+            <h3 class="timeline-title">ROOTED IN BHAVNAGAR</h3>
+            <p class="timeline-desc">
+              Established operations in Vibrant Industrial Park (VIP), Bhavnagar, positioning close to Alang ship recycling cluster for direct access to marine and industrial inventory.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 02 -->
+        <div class="timeline-item">
+          <div class="timeline-node"></div>
+          <div class="timeline-card">
+            <div class="timeline-step-code">MILESTONE 02</div>
+            <h3 class="timeline-title">MARINE & SHIP SUPPLY</h3>
+            <p class="timeline-desc">
+              Expanded vessel spares supply, anchor chains, liferafts, rescue boats, navigation lights, and deck equipment for international and coastal maritime operators.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 03 -->
+        <div class="timeline-item">
+          <div class="timeline-node"></div>
+          <div class="timeline-card">
+            <div class="timeline-step-code">MILESTONE 03</div>
+            <h3 class="timeline-title">INDUSTRIAL & MACHINERY</h3>
+            <p class="timeline-desc">
+              Integrated heavy industrial equipment sourcing, air diaphragm pumps, pneumatic jet chisels, portable ventilators, and gas cutting apparatus for manufacturing plants.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 04 -->
+        <div class="timeline-item">
+          <div class="timeline-node"></div>
+          <div class="timeline-card">
+            <div class="timeline-step-code">MILESTONE 04</div>
+            <h3 class="timeline-title">FIRE & SAFETY COMPLIANCE</h3>
+            <p class="timeline-desc">
+              Structured complete safety lines including SCBA breathing apparatus, chemical protection suits, fire hose systems, hydrant valves, and gas detection monitoring.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 05 -->
+        <div class="timeline-item">
+          <div class="timeline-node"></div>
+          <div class="timeline-card">
+            <div class="timeline-step-code">MILESTONE 05</div>
+            <h3 class="timeline-title">INSTRUMENTATION & SPECIALIZED REQUIREMENTS</h3>
+            <p class="timeline-desc">
+              Advanced precision measuring solutions including marine aneroid barometers, level indicators, clinometers, and temperature calibrators for offshore rig telemetry.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==================================================
+       SECTION 09 — LOCATION / MARINE CONNECTION
+       ================================================== -->
+  <section class="section-location" id="location">
+    <div class="container">
+      
+      <div class="location-grid">
+        
+        <!-- Left Side Location Data -->
+        <div>
+          <div class="tech-tag">
+            <span class="dot"></span> HEADQUARTERS & LOGISTICS / 09
+          </div>
+          <h2 class="about-display-title">
+            POSITIONED CLOSE TO<br>
+            <span class="highlight-orange">WHERE MARINE INDUSTRY MOVES.</span>
+          </h2>
+          <p class="about-section-desc" style="margin-top:1rem;">
+            Situated in Bhavnagar's Vibrant Industrial Park, Keyan Corporation operates within close proximity (~50 km) of the world-famous Alang maritime cluster.
+          </p>
+
+          <div class="location-info-box">
+            <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--orange-accent); letter-spacing:0.1em; margin-bottom:0.8rem;">
+              <i class="fas fa-building"></i> REGISTERED OFFICE & DISTRIBUTION HUB
+            </div>
+
+            <div class="location-detail-list">
+              <div class="loc-detail-item">
+                <div class="loc-detail-icon"><i class="fas fa-map-marked-alt"></i></div>
+                <div>
+                  <div class="loc-detail-title">FACILITY ADDRESS</div>
+                  <div class="loc-detail-text">
+                    Plot No. 255, E/4, VIP (Vibrant Industrial Park),<br>
+                    Moti Talav Road, Bhavnagar - 364001, Gujarat, India
+                  </div>
+                </div>
+              </div>
+
+              <div class="loc-detail-item">
+                <div class="loc-detail-icon"><i class="fas fa-file-invoice"></i></div>
+                <div>
+                  <div class="loc-detail-title">GSTIN REGISTRATION</div>
+                  <div class="loc-detail-text" style="font-family:var(--font-mono); color:#FFFFFF; font-weight:700;">
+                    24BWNPV1980J1ZV
+                  </div>
+                </div>
+              </div>
+
+              <div class="loc-detail-item">
+                <div class="loc-detail-icon"><i class="fas fa-phone-alt"></i></div>
+                <div>
+                  <div class="loc-detail-title">PROCUREMENT HELPLINE</div>
+                  <div class="loc-detail-text">
+                    +91 9825207743 / +91 9825206341
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Side Interactive Google Map Embed -->
+        <div class="location-map-wrapper">
+          <div class="loc-map-header">
+            <span><i class="fas fa-globe-asia"></i> GUJARAT MARITIME REGION</span>
+            <span>21.7645° N, 72.1519° E</span>
+          </div>
+          <div class="loc-map-frame">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14838.256193798935!2d72.1388889!3d21.7644444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f5080e72251a3%3A0xb3ff76c6ecae505a!2sBhavnagar%2C%20Gujarat%20364001!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade" 
+              title="Keyan Corporation Location Map">
+            </iframe>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==================================================
+       SECTION 10 — CONTACT CTA
+       ================================================== -->
+  <section class="section-cta">
+    <div class="container">
+      
+      <div class="cta-box-wrapper">
+        <div class="tech-tag" style="justify-content:center;">
+          <span class="dot"></span> DIRECT PROCUREMENT INQUIRY / 10
+        </div>
+
+        <h2 class="cta-heading">
+          NEED A SPECIFIC<br><span style="color:var(--orange-accent);">INDUSTRIAL REQUIREMENT?</span>
+        </h2>
+
+        <p class="cta-sub-copy">
+          Tell us what you need. Our team will help identify the right supply solution for your marine, industrial, fire safety or instrumentation requirement.
+        </p>
+
+        <div class="cta-actions-group">
+          <button class="btn-cta-primary" onclick="openModal('quoteModal')">
+            REQUEST A QUOTE <i class="fas fa-paper-plane"></i>
+          </button>
+          <a href="index.html#featured" class="btn-cta-secondary">
+            EXPLORE PRODUCTS <i class="fas fa-boxes"></i>
+          </a>
+        </div>
+
+        <div class="cta-contact-meta">
+          <div class="cta-meta-item">
+            <i class="fas fa-phone-alt"></i>
+            <span><a href="tel:+919825207743">+91 9825207743</a> | <a href="tel:+919825206341">+91 9825206341</a></span>
+          </div>
+          <div class="cta-meta-item">
+            <i class="fas fa-envelope"></i>
+            <span><a href="mailto:sales@keyancorporation.com">sales@keyancorporation.com</a></span>
+          </div>
+          <div class="cta-meta-item">
+            <i class="fas fa-globe"></i>
+            <span>www.keyancorporation.com</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==================================================
+       SITE FOOTER (Brand Consistency)
+       ================  <!-- UNIFIED MASTER FOOTER CONTAINER -->
+  <div id="footer-container">
+    <footer class="main-footer">
+      <div class="container">
+        <div class="footer-grid">
+          
+          <!-- Col 1: Brand & Tagline -->
+          <div class="footer-col-brand">
+            <a href="index.html" class="header-brand" style="margin-bottom: 1.2rem; display:inline-flex;">
+              <img src="iamges/image.png" alt="KEYAN CORPORATION Logo" class="header-logo" style="height: 60px;">
+              <div class="brand-text-wrap">
+                <div class="brand-name" style="color:#FFFFFF; font-size:1.35rem;">KEYAN CORPORATION</div>
+                <div class="brand-sub" style="color:var(--orange-accent, #FF7A18);">From Port to Plant</div>
+              </div>
+            </a>
+            <p style="color:#94A3B8; font-size:0.9rem; line-height:1.6; margin-bottom:1.2rem;">
+              Trusted B2B supplier of Ship Spare Parts, Industrial Machinery, Fire Safety Equipment, and Rig & Marine Measuring Instruments.
+            </p>
+            <div class="footer-tagline-quote">
+              <i class="fas fa-quote-left" style="color:var(--orange-accent, #FF7A18); margin-right:6px;"></i>
+              "From Port to Plant, We Supply with Confidence"
+            </div>
+          </div>
+
+          <!-- Col 2: Supply Verticals -->
+          <div>
+            <h4 class="footer-col-heading">Supply Verticals</h4>
+            <ul class="footer-links-group">
+              <li><a href="about.html#capabilities"><i class="fas fa-ship"></i> Ship & Marine Supply</a></li>
+              <li><a href="about.html#capabilities"><i class="fas fa-industry"></i> Industrial Automation</a></li>
+              <li><a href="about.html#capabilities"><i class="fas fa-fire-extinguisher"></i> Fire & Safety Equipment</a></li>
+              <li><a href="about.html#capabilities"><i class="fas fa-microchip"></i> Rig & Marine Instruments</a></li>
+              <li><a href="index.html#categories"><i class="fas fa-bell"></i> Gas Detection Systems</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Quick Links -->
+          <div>
+            <h4 class="footer-col-heading">Quick Links</h4>
+            <ul class="footer-links-group">
+              <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+              <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+              <li><a href="index.html#featured"><i class="fas fa-chevron-right"></i> Featured Products</a></li>
+              <li><a href="about.html#story"><i class="fas fa-chevron-right"></i> Geographic Hub</a></li>
+              <li><a href="about.html#why"><i class="fas fa-chevron-right"></i> Why Choose Keyan</a></li>
+              <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 4: Contact & Credentials -->
+          <div>
+            <h4 class="footer-col-heading">Contact Details</h4>
+            <p class="footer-contact-item">
+              <i class="fas fa-map-marker-alt"></i> 
+              <span>Plot No. 255, E/4, VIP (Vibrant Industrial Park), Moti Talav Road, Bhavnagar - 364001, Gujarat, India</span>
+            </p>
+            <p class="footer-contact-item">
+              <i class="fas fa-phone-alt"></i> 
+              <span><a href="tel:+919825207743">+91 9825207743</a> | <a href="tel:+919825206341">+91 9825206341</a></span>
+            </p>
+            <p class="footer-contact-item">
+              <i class="fas fa-envelope"></i> 
+              <span><a href="mailto:sales@keyancorporation.com">sales@keyancorporation.com</a></span>
+            </p>
+            <div class="footer-gstin-badge">
+              <i class="fas fa-shield-alt"></i> GSTIN: 24BWNPV1980J1ZV
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer Bottom Row -->
+        <div class="footer-bottom-row">
+          <div>© 2026 KEYAN CORPORATION. All rights reserved. B2B Industrial Procurement Marketplace.</div>
+          <div class="footer-bottom-right">
+            <span>Bhavnagar, Gujarat, India</span>
+            <button class="back-to-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Back to Top">
+              <i class="fas fa-arrow-up"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+
+  <!-- RFQ & QUOTE LIST MODALS -->
+  <div id="quoteModal" class="modal-backdrop">
+    <div class="modal-card" style="max-width: 650px;">
+      <div class="modal-header">
+        <h4><i class="fas fa-paper-plane"></i> Submit Formal Request for Quote (RFQ)</h4>
+        <button class="modal-close" onclick="closeModal('quoteModal')" aria-label="Close Modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="handleFormSubmit(event, 'Request for Quote')">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
+            <div>
+              <label>FULL NAME *</label>
+              <input type="text" required placeholder="Enter full name">
+            </div>
+            <div>
+              <label>COMPANY / VESSEL *</label>
+              <input type="text" required placeholder="Company or vessel name">
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
+            <div>
+              <label>EMAIL ADDRESS *</label>
+              <input type="email" required placeholder="name@company.com">
+            </div>
+            <div>
+              <label>PHONE NUMBER *</label>
+              <input type="tel" required placeholder="+91 XXXXX XXXXX">
+            </div>
+          </div>
+          <div style="margin-bottom: 1.4rem;">
+            <label>SPECIFIC REQUIREMENTS / QUANTITY *</label>
+            <textarea rows="4" required placeholder="List products, model numbers, specifications or delivery port requirements..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-orange" style="width: 100%; padding: 1rem; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.05em; justify-content: center; box-shadow: 0 8px 25px rgba(255, 122, 24, 0.4);">
+            SUBMIT RFQ ENQUIRY <i class="fas fa-paper-plane" style="margin-left: 0.4rem;"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="quoteDrawerModal" class="modal-backdrop">
+    <div class="modal-card" style="max-width: 650px;">
+      <div class="modal-header">
+        <h4><i class="fas fa-shopping-cart"></i> Your Cart & Quote Basket</h4>
+        <button class="modal-close" onclick="closeModal('quoteDrawerModal')" aria-label="Close Modal">&times;</button>
+      </div>
+      <div class="modal-body" id="quoteDrawerItems">
+        <!-- Cart items rendered dynamically -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-navy" onclick="closeModal('quoteDrawerModal')"><i class="fas fa-arrow-left"></i> Continue Browsing</button>
+        <a href="cart.html" class="btn btn-orange" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;"><i class="fas fa-shopping-cart"></i> View Full Cart & Checkout</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared App Logic & Bespoke About JS -->
+  <script src="app.js"></script>
+  <script src="about.js"></script>
+</body>
+</html>

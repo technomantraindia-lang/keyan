@@ -1,0 +1,1409 @@
+/* 
+  KEYAN CORPORATION - ABOUT US PAGE STYLESHEET (2026 EDITION)
+  Visual Language: Dark Navy + White + Industrial Orange
+  Typography: Space Grotesk / Plus Jakarta Sans (Headings), Inter (Body), JetBrains Mono (Technical HUD)
+  Design System: High-precision Marine Engineering & Industrial Supply Platform
+*/
+
+:root {
+  --navy-darkest: #03283E;
+  --navy-deep: #063B5A;
+  --navy-mid: #0B4E74;
+  --navy-card: #08334D;
+  --navy-surface: #0E4466;
+
+  --orange-accent: #FF7A18;
+  --orange-glow: rgba(255, 122, 24, 0.25);
+  --orange-hover: #E06305;
+
+  --text-light: #FFFFFF;
+  --text-muted-light: #A0C0D0;
+  --text-dark: #0A1C28;
+  --text-muted-dark: #5A7080;
+
+  --bg-light: #F3F7F9;
+  --bg-card-light: #FFFFFF;
+  --border-dark: rgba(220, 234, 241, 0.12);
+  --border-light: #DCEAF1;
+
+  --font-heading: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base resets & typography for About page */
+.about-page-wrapper {
+  background-color: var(--navy-darkest);
+  color: var(--text-light);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  position: relative;
+}
+
+.about-page-wrapper h1,
+.about-page-wrapper h2,
+.about-page-wrapper h3,
+.about-page-wrapper h4,
+.about-page-wrapper h5,
+.about-page-wrapper h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+/* Micro Technical Label */
+.tech-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange-accent);
+  margin-bottom: 1rem;
+}
+
+.tech-tag .dot {
+  width: 7px;
+  height: 7px;
+  background-color: var(--orange-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--orange-accent);
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.5; }
+}
+
+/* Section Header Typography System */
+.about-section-header {
+  margin-bottom: 3.5rem;
+}
+
+.about-section-header.text-center {
+  text-align: center;
+}
+
+.about-display-title {
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.08;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+.about-display-title .highlight-orange {
+  color: var(--orange-accent);
+}
+
+.about-section-desc {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-muted-light);
+  max-width: 680px;
+  margin-top: 1.2rem;
+}
+
+.about-section-header.text-center .about-section-desc {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ==================================================
+   SECTION 01: HERO SECTION
+   ================================================== */
+.about-hero {
+  position: relative;
+  min-height: 720px;
+  display: flex;
+  align-items: center;
+  background-color: var(--navy-darkest);
+  overflow: hidden;
+  padding: 6rem 0 4rem;
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.about-hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(90deg, rgba(3, 40, 62, 0.95) 0%, rgba(3, 40, 62, 0.85) 45%, rgba(3, 40, 62, 0.6) 100%), url('iamges/about_hero.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.about-hero-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.about-hero-container {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+}
+
+.about-hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero-left-content {
+  max-width: 680px;
+}
+
+.hero-main-title {
+  font-size: clamp(2.8rem, 5.2vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1.02;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.03em;
+}
+
+.hero-sub-title {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: #E2EFF6;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.hero-tagline-quote {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--orange-accent);
+  background: rgba(255, 122, 24, 0.1);
+  border-left: 3px solid var(--orange-accent);
+  padding: 0.6rem 1.2rem;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 2.2rem;
+}
+
+.hero-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  background-color: var(--orange-accent);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: 0.05em;
+  padding: 1.1rem 2.2rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  box-shadow: 0 8px 24px var(--orange-glow);
+  transition: var(--transition);
+}
+
+.hero-cta-btn:hover {
+  background-color: var(--orange-hover);
+  color: #FFFFFF;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(255, 122, 24, 0.4);
+}
+
+.hero-cta-btn i {
+  transition: transform 0.3s ease;
+}
+
+.hero-cta-btn:hover i {
+  transform: translateX(5px);
+}
+
+/* Glassmorphic Right HUD Panel */
+.hero-hud-panel {
+  background: rgba(6, 59, 90, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-left: 4px solid var(--orange-accent);
+  border-radius: 12px;
+  padding: 2.2rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.hud-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.hud-title {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted-light);
+  letter-spacing: 0.1em;
+}
+
+.hud-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #4ADE80;
+  background: rgba(74, 222, 128, 0.12);
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+}
+
+.hud-status-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #4ADE80;
+  border-radius: 50%;
+}
+
+.hud-verticals-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.8rem;
+}
+
+.hud-vertical-item {
+  background: rgba(3, 40, 62, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 1rem;
+  transition: var(--transition);
+}
+
+.hud-vertical-item:hover {
+  border-color: var(--orange-accent);
+  background: rgba(255, 122, 24, 0.08);
+}
+
+.hud-vertical-item .icon {
+  color: var(--orange-accent);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.hud-vertical-item .label {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.hud-meta-footer {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted-light);
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px dashed rgba(255, 255, 255, 0.12);
+  padding-top: 1rem;
+}
+
+/* Scroll indicator */
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted-light);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  opacity: 0.8;
+}
+
+.hero-scroll-indicator i {
+  animation: bounce-down 2s infinite;
+  color: var(--orange-accent);
+}
+
+@keyframes bounce-down {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(6px); }
+  60% { transform: translateY(3px); }
+}
+
+/* ==================================================
+   SECTION 02: EDITORIAL SPLIT "BUILT WHERE INDUSTRY MOVES"
+   ================================================== */
+.section-built {
+  padding: 7rem 0;
+  background-color: var(--navy-darkest);
+  position: relative;
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.built-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.built-left-heading {
+  font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+.built-left-heading span {
+  display: block;
+}
+
+.built-left-heading .accent {
+  color: var(--orange-accent);
+}
+
+.built-right-content p {
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: var(--text-muted-light);
+  margin-bottom: 1.5rem;
+}
+
+.built-right-content p.lead {
+  font-size: 1.25rem;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+/* Map Logistics HUD Box */
+.built-map-box {
+  margin-top: 2.5rem;
+  background: var(--navy-card);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+}
+
+.map-hud-header {
+  background: var(--navy-deep);
+  padding: 0.8rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--orange-accent);
+}
+
+.map-img-container {
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+}
+
+.map-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.1) brightness(0.9);
+  transition: transform 0.6s ease;
+}
+
+.built-map-box:hover .map-img-container img {
+  transform: scale(1.03);
+}
+
+.map-route-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.2fr;
+  background: #042031;
+  padding: 1.2rem;
+  gap: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.route-step {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.route-step-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--orange-accent);
+  background: rgba(255, 122, 24, 0.12);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.route-step-text {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+.route-step-sub {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted-light);
+  display: block;
+}
+
+/* ==================================================
+   SECTION 03: COMPANY DNA ("WHAT DRIVES KEYAN")
+   ================================================== */
+.section-dna {
+  padding: 7rem 0;
+  background-color: #042336;
+  position: relative;
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.dna-panels-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.dna-panel {
+  position: relative;
+  background: var(--navy-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 2.2rem 2.8rem;
+  cursor: pointer;
+  transition: all 0.4s var(--ease-out-expo);
+  display: grid;
+  grid-template-columns: 80px 1.5fr 1fr;
+  align-items: center;
+  gap: 2rem;
+}
+
+.dna-panel::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.dna-panel-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: scale(1.05);
+  pointer-events: none;
+  filter: brightness(0.35) contrast(1.1);
+}
+
+.dna-panel:hover {
+  border-color: var(--orange-accent);
+  background: var(--navy-deep);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+.dna-panel:hover::before {
+  background-color: var(--orange-accent);
+}
+
+.dna-panel:hover .dna-panel-bg {
+  opacity: 0.35;
+  transform: scale(1);
+}
+
+.dna-num {
+  font-family: var(--font-mono);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-muted-light);
+  transition: color 0.3s ease;
+}
+
+.dna-panel:hover .dna-num {
+  color: var(--orange-accent);
+}
+
+.dna-title-wrap h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin-bottom: 0.4rem;
+}
+
+.dna-title-wrap p {
+  font-size: 0.98rem;
+  color: var(--text-muted-light);
+  line-height: 1.5;
+}
+
+.dna-arrow-wrap {
+  text-align: right;
+}
+
+.dna-arrow-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: var(--transition);
+}
+
+.dna-panel:hover .dna-arrow-btn {
+  background: var(--orange-accent);
+  border-color: var(--orange-accent);
+  color: #FFFFFF;
+  transform: translateX(6px);
+}
+
+/* ==================================================
+   SECTION 04: THE SUPPLY ECOSYSTEM (INTERACTIVE DIAGRAM)
+   ================================================== */
+.section-ecosystem {
+  padding: 7rem 0;
+  background-color: var(--navy-darkest);
+  position: relative;
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.ecosystem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.ecosystem-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.eco-nav-item {
+  background: var(--navy-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out-expo);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.eco-nav-item.active,
+.eco-nav-item:hover {
+  background: var(--navy-deep);
+  border-color: var(--orange-accent);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.eco-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.eco-icon-box {
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 122, 24, 0.12);
+  color: var(--orange-accent);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.eco-title-text {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+.eco-indicator-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: background 0.3s ease;
+}
+
+.eco-nav-item.active .eco-indicator-dot {
+  background: var(--orange-accent);
+  box-shadow: 0 0 10px var(--orange-accent);
+}
+
+/* Ecosystem Details Display Card */
+.ecosystem-detail-card {
+  background: var(--navy-card);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 2.5rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.eco-detail-header {
+  margin-bottom: 1.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 1.2rem;
+}
+
+.eco-category-badge {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--orange-accent);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.eco-category-name {
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+.eco-category-desc {
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--text-muted-light);
+  margin-bottom: 2rem;
+}
+
+.eco-products-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.eco-products-label i {
+  color: var(--orange-accent);
+}
+
+.eco-products-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.eco-chip {
+  background: rgba(6, 59, 90, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #E2EFF6;
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 0.55rem 1.1rem;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+}
+
+.eco-chip:hover {
+  border-color: var(--orange-accent);
+  color: #FFFFFF;
+  background: rgba(255, 122, 24, 0.12);
+  transform: translateY(-2px);
+}
+
+.eco-chip i {
+  color: var(--orange-accent);
+  font-size: 0.8rem;
+}
+
+/* ==================================================
+   SECTION 05: WHY KEYAN (STICKY / INTERACTIVE PRINCIPLES)
+   ================================================== */
+.section-why {
+  padding: 7rem 0;
+  background-color: #021C2C;
+  position: relative;
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.why-principles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.why-card {
+  background: var(--navy-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid rgba(255, 122, 24, 0.3);
+  border-radius: 10px;
+  padding: 2.2rem 1.8rem;
+  transition: all 0.4s var(--ease-out-expo);
+  position: relative;
+}
+
+.why-card:hover {
+  border-top-color: var(--orange-accent);
+  background: var(--navy-deep);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+.why-card-num {
+  font-family: var(--font-mono);
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.15);
+  margin-bottom: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.why-card:hover .why-card-num {
+  color: var(--orange-accent);
+}
+
+.why-card-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin-bottom: 0.9rem;
+  line-height: 1.25;
+}
+
+.why-card-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-muted-light);
+}
+
+/* ==================================================
+   SECTION 06: PRODUCT & INDUSTRY DEPTH
+   ================================================== */
+.section-products {
+  padding: 7rem 0;
+  background-color: var(--navy-darkest);
+  position: relative;
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.product-strip-wrapper {
+  overflow-x: auto;
+  padding-bottom: 1.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--orange-accent) var(--navy-deep);
+}
+
+.product-strip-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.product-strip-wrapper::-webkit-scrollbar-track {
+  background: var(--navy-deep);
+  border-radius: 4px;
+}
+
+.product-strip-wrapper::-webkit-scrollbar-thumb {
+  background: var(--orange-accent);
+  border-radius: 4px;
+}
+
+.product-strip-grid {
+  display: flex;
+  gap: 1.5rem;
+  min-width: max-content;
+}
+
+.prod-depth-card {
+  width: 290px;
+  background: var(--navy-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.prod-depth-card:hover {
+  border-color: var(--orange-accent);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+}
+
+.prod-depth-img {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  background: #031B2A;
+}
+
+.prod-depth-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.prod-depth-card:hover .prod-depth-img img {
+  transform: scale(1.08);
+}
+
+.prod-depth-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(3, 40, 62, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--orange-accent);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.prod-depth-body {
+  padding: 1.3rem;
+}
+
+.prod-depth-name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #FFFFFF;
+  margin-bottom: 0.5rem;
+}
+
+.prod-depth-spec {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted-light);
+  line-height: 1.4;
+}
+
+/* ==================================================
+   SECTION 07: TRUST / BRANDS
+   ================================================== */
+.section-brands {
+  padding: 6rem 0;
+  background-color: #042336;
+  position: relative;
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.brands-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+}
+
+.brand-chip {
+  background: var(--navy-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 1.2rem 0.8rem;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.brand-chip:hover {
+  border-color: var(--orange-accent);
+  background: var(--navy-deep);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.brand-chip-name {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #FFFFFF;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.brand-chip-sub {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted-light);
+  margin-top: 0.2rem;
+  display: block;
+}
+
+/* ==================================================
+   SECTION 08: INTERACTIVE COMPANY JOURNEY TIMELINE
+   ================================================== */
+.section-timeline {
+  padding: 7rem 0;
+  background-color: var(--navy-darkest);
+  position: relative;
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.timeline-wrapper {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.timeline-central-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(-50%);
+}
+
+.timeline-progress-line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 3px;
+  height: 0%;
+  background: var(--orange-accent);
+  transform: translateX(-50%);
+  box-shadow: 0 0 12px var(--orange-accent);
+  transition: height 0.2s ease-out;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: flex-end;
+  width: 50%;
+  padding-right: 3rem;
+}
+
+.timeline-item:nth-child(even) {
+  align-self: flex-end;
+  margin-left: 50%;
+  justify-content: flex-start;
+  padding-right: 0;
+  padding-left: 3rem;
+}
+
+.timeline-node {
+  position: absolute;
+  top: 10px;
+  right: -9px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--navy-darkest);
+  border: 3px solid var(--text-muted-light);
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.timeline-item:nth-child(even) .timeline-node {
+  right: auto;
+  left: -9px;
+}
+
+.timeline-item.active .timeline-node {
+  border-color: var(--orange-accent);
+  background: var(--orange-accent);
+  box-shadow: 0 0 16px var(--orange-accent);
+}
+
+.timeline-card {
+  background: var(--navy-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 1.8rem;
+  width: 100%;
+  transition: var(--transition);
+}
+
+.timeline-card:hover {
+  border-color: var(--orange-accent);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.timeline-step-code {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--orange-accent);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.4rem;
+}
+
+.timeline-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin-bottom: 0.6rem;
+}
+
+.timeline-desc {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-muted-light);
+}
+
+/* ==================================================
+   SECTION 09: LOCATION / MARINE CONNECTION
+   ================================================== */
+.section-location {
+  padding: 7rem 0;
+  background-color: #021927;
+  position: relative;
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.location-info-box {
+  background: var(--navy-card);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-left: 4px solid var(--orange-accent);
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.location-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  margin-top: 1.8rem;
+}
+
+.loc-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.loc-detail-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(255, 122, 24, 0.12);
+  color: var(--orange-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.loc-detail-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+
+.loc-detail-text {
+  font-size: 0.95rem;
+  color: var(--text-muted-light);
+  line-height: 1.45;
+}
+
+.location-map-wrapper {
+  background: var(--navy-card);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.loc-map-header {
+  background: var(--navy-deep);
+  padding: 0.8rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--orange-accent);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.loc-map-frame {
+  height: 360px;
+  width: 100%;
+}
+
+.loc-map-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: invert(90%) hue-rotate(180deg) contrast(1.2) grayscale(30%);
+}
+
+/* ==================================================
+   SECTION 10: CONTACT CTA
+   ================================================== */
+.section-cta {
+  padding: 8rem 0;
+  background: linear-gradient(135deg, var(--navy-darkest) 0%, #042D45 100%);
+  position: relative;
+  text-align: center;
+}
+
+.cta-box-wrapper {
+  background: rgba(6, 59, 90, 0.45);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 4px solid var(--orange-accent);
+  border-radius: 16px;
+  padding: 4.5rem 3rem;
+  max-width: 960px;
+  margin: 0 auto;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+.cta-heading {
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin-bottom: 1.2rem;
+  line-height: 1.05;
+}
+
+.cta-sub-copy {
+  font-size: 1.15rem;
+  color: var(--text-muted-light);
+  max-width: 650px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+}
+
+.cta-actions-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.btn-cta-primary {
+  background: var(--orange-accent);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  padding: 1.1rem 2.4rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+  box-shadow: 0 8px 24px var(--orange-glow);
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.btn-cta-primary:hover {
+  background: var(--orange-hover);
+  color: #FFFFFF;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(255, 122, 24, 0.4);
+}
+
+.btn-cta-secondary {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  padding: 1.1rem 2.4rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.btn-cta-secondary:hover {
+  border-color: var(--orange-accent);
+  background: rgba(255, 122, 24, 0.1);
+  color: #FFFFFF;
+  transform: translateY(-3px);
+}
+
+.cta-contact-meta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+  padding-top: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: #E2EFF6;
+}
+
+.cta-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.cta-meta-item i {
+  color: var(--orange-accent);
+}
+
+.cta-meta-item a {
+  color: #E2EFF6;
+}
+
+.cta-meta-item a:hover {
+  color: var(--orange-accent);
+}
+
+/* RESPONSIVE DESIGN ADJUSTMENTS */
+@media (max-width: 1024px) {
+  .about-hero-grid,
+  .built-grid,
+  .location-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .dna-panel {
+    grid-template-columns: 60px 1fr;
+    gap: 1.2rem;
+  }
+
+  .dna-arrow-wrap {
+    display: none;
+  }
+
+  .ecosystem-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .why-principles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .brands-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-main-title {
+    font-size: 2.4rem;
+  }
+
+  .hud-verticals-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .why-principles-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .brands-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .timeline-central-line,
+  .timeline-progress-line {
+    left: 20px;
+  }
+
+  .timeline-item,
+  .timeline-item:nth-child(even) {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 3.5rem;
+    padding-right: 0;
+  }
+
+  .timeline-node,
+  .timeline-item:nth-child(even) .timeline-node {
+    left: 11px;
+  }
+
+  .cta-box-wrapper {
+    padding: 3rem 1.5rem;
+  }
+
+  .map-route-bar {
+    grid-template-columns: 1fr;
+  }
+}
