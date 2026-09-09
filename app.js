@@ -416,26 +416,26 @@ function openQuoteDrawer() {
       const imgSrc = item.img || item.image || 'iamges/prod_gas_detector.jpg';
 
       return `
-        <div style="display:flex; align-items:center; justify-content:space-between; background: #061325; border: 1px solid #1E3A5F; border-radius: 10px; padding: 0.9rem 1.1rem; gap: 1rem; margin-bottom: 0.8rem;">
-          <img src="${imgSrc}" alt="${item.name}" style="width: 54px; height: 54px; object-fit: cover; border-radius: 6px; border: 1px solid #1E3A5F; flex-shrink: 0; background: #0A1628;">
+        <div class="drawer-cart-item">
+          <img src="${imgSrc}" alt="${item.name}" class="drawer-item-img">
           
-          <div style="flex: 1; min-width: 0;">
-            <div style="font-size: 0.72rem; color: #FF7A18; font-family: monospace; font-weight: 700; text-transform: uppercase;">SKU: ${item.sku || 'KEY-PROD-' + (index+1)}</div>
-            <h5 style="font-size: 0.92rem; color: #FFFFFF; font-weight: 700; margin: 0.2rem 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.name}</h5>
-            <div style="font-size: 0.8rem; color: #94A3B8;">$${price.toFixed(2)} USD / Unit</div>
+          <div class="drawer-item-info">
+            <div class="drawer-item-sku">SKU: ${item.sku || 'KEY-PROD-' + (index+1)}</div>
+            <h5 class="drawer-item-title">${item.name}</h5>
+            <div class="drawer-item-unit-price">$${price.toFixed(2)} USD / Unit</div>
           </div>
 
-          <div style="display:flex; align-items:center; gap: 0.6rem; flex-shrink: 0;">
-            <div style="display:inline-flex; align-items:center; background: #0A1628; border: 1px solid #1E3A5F; border-radius: 6px; overflow: hidden;">
-              <button onclick="changeDrawerQty(${index}, -1)" style="background:none; border:none; color:#FFFFFF; width: 26px; height: 26px; font-weight: bold; cursor:pointer;">−</button>
-              <span style="color:#FF7A18; font-weight:800; font-size: 0.85rem; padding: 0 0.4rem;">${item.qty || 1}</span>
-              <button onclick="changeDrawerQty(${index}, 1)" style="background:none; border:none; color:#FFFFFF; width: 26px; height: 26px; font-weight: bold; cursor:pointer;">+</button>
+          <div class="drawer-item-actions">
+            <div class="drawer-item-qty">
+              <button onclick="changeDrawerQty(${index}, -1)">−</button>
+              <span>${item.qty || 1}</span>
+              <button onclick="changeDrawerQty(${index}, 1)">+</button>
             </div>
-            <div style="text-align: right; min-width: 80px;">
-              <div style="font-weight: 800; color: #38BDF8; font-size: 0.9rem;">$${lineTotal.toFixed(2)}</div>
-              <div style="font-size: 0.7rem; color: #64748B;">USD</div>
+            <div class="drawer-item-subtotal">
+              <div class="total-amount">$${lineTotal.toFixed(2)}</div>
+              <div class="total-curr">USD</div>
             </div>
-            <button onclick="removeFromQuote(${index})" style="background: rgba(225, 29, 72, 0.15); border: 1px solid rgba(225, 29, 72, 0.3); color: #F43F5E; width: 30px; height: 30px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;" title="Remove Item">
+            <button onclick="removeFromQuote(${index})" class="drawer-item-remove" title="Remove Item">
               <i class="fas fa-trash-alt" style="font-size: 0.8rem;"></i>
             </button>
           </div>
@@ -446,7 +446,7 @@ function openQuoteDrawer() {
     body.innerHTML = `
       <div style="display:flex; flex-direction:column;">
         ${itemsHTML}
-        <div style="display:flex; justify-content:space-between; align-items:center; background: #050C1A; border: 1px solid #FF7A18; border-radius: 10px; padding: 1rem 1.2rem; margin-top: 0.5rem;">
+        <div class="drawer-basket-total-box">
           <span style="font-weight: 700; color: #CBD5E1; font-size: 0.9rem;">ESTIMATED BASKET TOTAL:</span>
           <span style="font-weight: 900; color: #FF7A18; font-size: 1.3rem; font-family: monospace;">$${subtotal.toFixed(2)} USD</span>
         </div>

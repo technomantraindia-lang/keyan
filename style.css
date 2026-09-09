@@ -1820,6 +1820,210 @@ a:hover {
   gap: 1rem;
 }
 
+/* Cart Drawer Item Responsive Cards */
+.drawer-cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #061325;
+  border: 1px solid #1E3A5F;
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.drawer-item-img {
+  width: 54px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #1E3A5F;
+  flex-shrink: 0;
+  background: #0A1628;
+}
+
+.drawer-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.drawer-item-sku {
+  font-size: 0.72rem;
+  color: #FF7A18;
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.drawer-item-title {
+  font-size: 0.92rem;
+  color: #FFFFFF;
+  font-weight: 700;
+  margin: 0.2rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.drawer-item-unit-price {
+  font-size: 0.8rem;
+  color: #94A3B8;
+}
+
+.drawer-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+.drawer-item-qty {
+  display: inline-flex;
+  align-items: center;
+  background: #0A1628;
+  border: 1px solid #1E3A5F;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.drawer-item-qty button {
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  width: 26px;
+  height: 26px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drawer-item-qty button:hover {
+  background: rgba(255, 122, 24, 0.2);
+  color: #FF7A18;
+}
+
+.drawer-item-qty span {
+  color: #FF7A18;
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 0 0.4rem;
+}
+
+.drawer-item-subtotal {
+  text-align: right;
+  min-width: 75px;
+}
+
+.drawer-item-subtotal .total-amount {
+  font-weight: 800;
+  color: #38BDF8;
+  font-size: 0.9rem;
+}
+
+.drawer-item-subtotal .total-curr {
+  font-size: 0.7rem;
+  color: #64748B;
+}
+
+.drawer-item-remove {
+  background: rgba(225, 29, 72, 0.15);
+  border: 1px solid rgba(225, 29, 72, 0.3);
+  color: #F43F5E;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.drawer-item-remove:hover {
+  background: rgba(225, 29, 72, 0.3);
+  color: #FFFFFF;
+}
+
+.drawer-basket-total-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #050C1A;
+  border: 1px solid #FF7A18;
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  margin-top: 0.5rem;
+}
+
+/* Mobile responsive drawer styles */
+@media (max-width: 600px) {
+  .modal-card {
+    width: 94% !important;
+    max-width: 94% !important;
+    margin: 0 auto;
+  }
+
+  .modal-header {
+    padding: 1rem 1.2rem !important;
+  }
+
+  .modal-header h4 {
+    font-size: 1rem !important;
+  }
+
+  .modal-body {
+    padding: 1rem !important;
+  }
+
+  .drawer-cart-item {
+    flex-wrap: wrap;
+    padding: 0.85rem;
+    gap: 0.75rem;
+  }
+
+  .drawer-item-info {
+    flex: 1 1 calc(100% - 68px);
+  }
+
+  .drawer-item-title {
+    white-space: normal !important;
+    font-size: 0.88rem !important;
+    line-height: 1.3;
+  }
+
+  .drawer-item-actions {
+    width: 100%;
+    justify-content: space-between;
+    padding-top: 0.6rem;
+    border-top: 1px solid rgba(30, 58, 95, 0.6);
+  }
+
+  .drawer-basket-total-box {
+    flex-direction: column;
+    gap: 0.4rem;
+    text-align: center;
+    padding: 0.9rem;
+  }
+
+  .modal-footer {
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+    padding: 1rem !important;
+  }
+
+  .modal-footer .btn,
+  .modal-footer a {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+    box-sizing: border-box;
+  }
+}
+
 /* Modal Form Controls */
 .modal-card form label,
 .modal-box form label {
