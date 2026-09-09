@@ -224,7 +224,6 @@ const CATALOG_ITEMS = [
 
 let quoteBasket = [];
 let cartBasket = JSON.parse(localStorage.getItem('keyan_cart') || '[]');
-let wishlist = new Set();
 
 function saveCartToStorage() {
   localStorage.setItem('keyan_cart', JSON.stringify(cartBasket));
@@ -299,10 +298,6 @@ function renderFeaturedProducts(categoryFilter = 'all') {
 
   container.innerHTML = filtered.map(p => `
     <div class="product-card-clean">
-      <button class="product-wishlist-toggle ${wishlist.has(p.id) ? 'active' : ''}" onclick="toggleWishlist('${p.id}')" title="Wishlist">
-        <i class="${wishlist.has(p.id) ? 'fas' : 'far'} fa-heart"></i>
-      </button>
-      
       <div class="product-img-stage">
         <img src="${p.img}" alt="${p.name}" class="product-photo" loading="lazy">
       </div>
@@ -347,19 +342,6 @@ function initTabs() {
       renderFeaturedProducts(cat);
     });
   });
-}
-
-function toggleWishlist(productId) {
-  if (wishlist.has(productId)) {
-    wishlist.delete(productId);
-    showToast('Item removed from Wishlist.');
-  } else {
-    wishlist.add(productId);
-    showToast('Item added to Wishlist.');
-  }
-  document.getElementById('wishlistCount').innerText = wishlist.size;
-  const activeTab = document.querySelector('.prod-tab-item.active')?.getAttribute('data-cat') || 'all';
-  renderFeaturedProducts(activeTab);
 }
 
 function addToQuote(productId) {
