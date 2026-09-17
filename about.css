@@ -1333,6 +1333,79 @@
   color: var(--orange-accent);
 }
 
+.about-chat-admin-section {
+  background: linear-gradient(145deg, #f8fbfe, #eef5f9);
+}
+
+.about-chat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.about-chat-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 310px;
+  padding: 1.6rem;
+  border: 1px solid rgba(6, 59, 92, 0.12);
+  border-radius: 12px;
+  background: #FFFFFF;
+  box-shadow: 0 16px 38px rgba(6, 59, 92, 0.08);
+}
+
+.about-chat-card.featured {
+  border-color: rgba(244, 123, 32, 0.45);
+  box-shadow: 0 20px 45px rgba(244, 123, 32, 0.14);
+}
+
+.about-chat-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1.2rem;
+  background: var(--navy-deep, #032034);
+  color: #FFFFFF;
+  font-size: 1.25rem;
+}
+
+.about-chat-card.featured .about-chat-icon {
+  background: var(--orange-accent, #f47b20);
+}
+
+.about-chat-card h3 {
+  margin: 0 0 0.7rem;
+  color: var(--navy-deep, #032034);
+  font-size: 1.25rem;
+}
+
+.about-chat-card p {
+  margin: 0 0 1.4rem;
+  color: var(--text-muted, #6f7f92);
+  line-height: 1.7;
+}
+
+.about-chat-btn {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 44px;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  background: var(--orange-accent, #f47b20);
+  color: #FFFFFF !important;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.about-chat-btn.secondary {
+  background: var(--navy-deep, #032034);
+}
+
 /* RESPONSIVE DESIGN ADJUSTMENTS */
 @media (max-width: 1024px) {
   .about-hero-grid,
@@ -1361,6 +1434,10 @@
 
   .brands-grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .about-chat-grid {
+    grid-template-columns: 1fr;
   }
 }
 

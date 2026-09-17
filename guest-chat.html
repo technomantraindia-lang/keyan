@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guest Chat | KEYAN CORPORATION</title>
+  <link rel="stylesheet" href="style.css?v=20260917-4">
+  <link rel="stylesheet" href="guest-chat.css?v=20260917-1">
+</head>
+<body class="guest-chat-body">
+  <main class="guest-chat-shell">
+    <header class="guest-chat-header">
+      <a href="index.html" class="portal-brand"><span class="portal-mark">K</span><span><strong>KEYAN</strong><small>Chat With Admin</small></span></a>
+      <a href="about.html" class="guest-outline-btn">Back to About</a>
+    </header>
+
+    <section class="guest-chat-grid">
+      <aside class="guest-chat-intro">
+        <p class="eyebrow">NO LOGIN REQUIRED</p>
+        <h1>Chat with Keyan admin for any product or quote detail.</h1>
+        <p>Enter your name, email, and phone once. We will create a secure chat thread for your enquiry and admin can reply from the admin panel.</p>
+        <div class="guest-chat-note">
+          <strong>Already have an account?</strong>
+          <a href="customer-portal.html">Open Customer Message Center</a>
+        </div>
+      </aside>
+
+      <section class="guest-chat-card">
+        <form id="guestStartForm" class="guest-start-form">
+          <div class="guest-form-row">
+            <label>Name *</label>
+            <input id="guestName" type="text" required maxlength="190" placeholder="Your full name">
+          </div>
+          <div class="guest-form-row">
+            <label>Email *</label>
+            <input id="guestEmail" type="email" required maxlength="190" placeholder="name@company.com">
+          </div>
+          <div class="guest-form-row">
+            <label>Phone *</label>
+            <input id="guestPhone" type="tel" required maxlength="40" placeholder="+91 XXXXX XXXXX">
+          </div>
+          <div class="guest-form-row">
+            <label>Message *</label>
+            <textarea id="guestInitialMessage" required maxlength="10000" placeholder="Tell us what product, quote, delivery, or technical detail you need..."></textarea>
+          </div>
+          <button class="guest-send-btn" type="submit">Start Chat</button>
+        </form>
+
+        <div id="guestThread" class="guest-thread" hidden>
+          <div class="guest-thread-head">
+            <div><span id="guestReference" class="eyebrow"></span><h2>Conversation with admin</h2></div>
+            <span id="guestStatus" class="guest-status">new</span>
+          </div>
+          <div id="guestMessages" class="guest-messages"></div>
+          <form id="guestMessageForm" class="guest-message-form">
+            <textarea id="guestMessageInput" required maxlength="10000" placeholder="Write a message to admin..."></textarea>
+            <div class="guest-form-footer"><span>Press Enter to send. Shift + Enter for new line.</span><button class="guest-send-btn" type="submit">Send</button></div>
+          </form>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="app.js?v=20260916-1"></script>
+  <script src="guest-chat.js?v=20260917-1"></script>
+</body>
+</html>

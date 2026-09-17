@@ -413,7 +413,73 @@ document.addEventListener('DOMContentLoaded', () => {
   initStickyNavScrollSpy();
   renderDiscoveryProducts(ALL_DISCOVERY_PRODUCTS);
   initDiscoveryFilters();
+  syncRemoteCategoryCatalog();
 });
+
+async function syncRemoteCategoryCatalog() {
+  if (typeof window.keyanApiRequest !== 'function') return;
+
+  try {
+    const [categoryPayload, productPayload] = await Promise.all([
+      window.keyanApiRequest('/categories'),
+      window.keyanApiRequest('/products?per_page=60')
+    ]);
+    const remoteCategories = Array.isArray(categoryPayload.data) ? categoryPayload.data : [];
+    const remoteProducts = Array.isArray(productPayload.data) ? productPayload.data : [];
+    if (!remoteCategories.length) return;
+
+    const existing = new Map(CATEGORIES_MASTER.map(category => [category.id, category]));
+    const mergedCategories = remoteCategories.map((category, index) => {
+      const original = existing.get(category.slug);
+      return original ? {
+        ...original,
+        name: category.name.toUpperCase(),
+        shortDesc: category.description || original.shortDesc,
+        supplyClass: category.supply_class || original.supplyClass,
+        application: category.application || original.application,
+        items: Array.isArray(category.items) && category.items.length ? category.items : original.items,
+        ctaText: category.cta_text || original.ctaText,
+        img: category.image_path || original.img,
+        productCount: `${category.product_count ?? 0} Products`
+      } : {
+        id: category.slug,
+        num: String(index + 1).padStart(2, '0'),
+        name: category.name.toUpperCase(),
+        shortDesc: category.description || 'Explore products and procurement solutions in this category.',
+        img: category.image_path || 'iamges/hero.jpg',
+        supplyClass: category.supply_class || 'INDUSTRIAL SUPPLY',
+        application: category.application || 'MARINE / INDUSTRIAL',
+        productCount: `${category.product_count ?? 0} Products`,
+        ctaText: `EXPLORE ${category.name.toUpperCase()} →`,
+        items: Array.isArray(category.items) ? category.items : [],
+        featuredProducts: []
+      };
+    });
+
+    CATEGORIES_MASTER.splice(0, CATEGORIES_MASTER.length, ...mergedCategories);
+    renderCategoryNavigation();
+    renderCategoryExperienceSections();
+    initStickyNavScrollSpy();
+
+    if (remoteProducts.length) {
+      ALL_DISCOVERY_PRODUCTS = remoteProducts.map(product => ({
+        ...product,
+        category: product.category_slug || product.category,
+        categoryName: product.categoryName || product.category_slug || product.category,
+        specs: product.specs || ''
+      }));
+      renderDiscoveryProducts(ALL_DISCOVERY_PRODUCTS);
+    }
+  } catch (error) {
+    console.info('Category API unavailable; using the local category catalogue.', error.message);
+  }
+}
+
+function renderCategoryNavigation() {
+  const nav = document.querySelector('.cat-sticky-nav-list');
+  if (!nav) return;
+  nav.innerHTML = CATEGORIES_MASTER.map(category => `<li class="cat-nav-item"><a href="#${category.id}" class="cat-nav-link"><span class="cat-num">${category.num}</span> ${category.name}</a></li>`).join('');
+}
 
 // Compile all products into single catalog array
 function buildFlatProductCatalog() {
@@ -473,7 +539,7 @@ function renderCategoryExperienceSections() {
               </div>
 
               <a href="products.html?category=${cat.id}" class="cat-explore-btn">
-                SEE ${cat.name} PRODUCTS <i class="fas fa-arrow-right"></i>
+                ${cat.ctaText || `SEE ${cat.name} PRODUCTS`} <i class="fas fa-arrow-right"></i>
               </a>
             </div>
 
@@ -487,10 +553,13 @@ function renderCategoryExperienceSections() {
 
 // 2. Sticky Category Navigation ScrollSpy
 function initStickyNavScrollSpy() {
+  if (window.__keyanCategoryScrollSpy) {
+    window.removeEventListener('scroll', window.__keyanCategoryScrollSpy);
+  }
   const links = document.querySelectorAll('.cat-nav-link');
   const sections = CATEGORIES_MASTER.map(c => document.getElementById(c.id)).filter(Boolean);
 
-  window.addEventListener('scroll', () => {
+  window.__keyanCategoryScrollSpy = () => {
     let current = '';
     const scrollPos = window.scrollY + 180;
 
@@ -508,7 +577,8 @@ function initStickyNavScrollSpy() {
         link.classList.add('active');
       }
     });
-  });
+  };
+  window.addEventListener('scroll', window.__keyanCategoryScrollSpy);
 }
 
 // 3. Product Discovery Area Controller
@@ -545,15 +615,12 @@ function renderDiscoveryProducts(items) {
       <div class="b2b-card-content">
         <span class="b2b-card-brand-tag"><i class="fas fa-tag"></i> ${p.brand}</span>
         <h4 class="b2b-card-title"><a href="product-detail.html?id=${p.id}" style="color:inherit; text-decoration:none;">${p.name}</a></h4>
-        <span class="b2b-card-status request-only"><i class="fas fa-info-circle"></i> ${p.availability}</span>
+        <span class="b2b-card-status ${isProductQuoteOnly(p) ? 'request-only' : ''}"><i class="fas fa-info-circle"></i> ${p.availability}</span>
         
         <div class="b2b-card-actions">
-          <button class="b2b-btn-quote" onclick="addToQuoteList('${p.id}')">
-            <i class="fas fa-file-signature"></i> Request Quote
-          </button>
-          <button class="b2b-btn-buy" onclick="handleDirectBuy('${p.id}')" title="Immediate Purchase">
-            <i class="fas fa-bolt"></i> Buy
-          </button>
+          ${isProductQuoteOnly(p)
+            ? `<button class="b2b-btn-quote" onclick="addToQuoteList('${p.id}')"><i class="fas fa-file-signature"></i> Request Quote</button>`
+            : `<button class="b2b-btn-buy" onclick="handleDirectBuy('${p.id}')" title="Immediate Purchase"><i class="fas fa-bolt"></i> Buy</button>`}
         </div>
       </div>
     </div>
@@ -572,9 +639,9 @@ function initDiscoveryFilters() {
     const brandVal = brandSelect ? brandSelect.value : 'all';
 
     const filtered = ALL_DISCOVERY_PRODUCTS.filter(p => {
-      const matchQ = !q || p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q) || p.specs.toLowerCase().includes(q);
+      const matchQ = !q || p.name.toLowerCase().includes(q) || (p.brand || '').toLowerCase().includes(q) || (p.specs || '').toLowerCase().includes(q);
       const matchCat = catVal === 'all' || p.category === catVal;
-      const matchBrand = brandVal === 'all' || p.brand.toLowerCase().includes(brandVal.toLowerCase());
+      const matchBrand = brandVal === 'all' || (p.brand || '').toLowerCase().includes(brandVal.toLowerCase());
       return matchQ && matchCat && matchBrand;
     });
 
@@ -711,7 +778,9 @@ function quickSearchTag(tagText) {
 
 // Integration with app.js quoteBasket
 function addToQuoteList(productId) {
-  if (typeof addToQuote === 'function') {
+  if (typeof requestProductQuote === 'function') {
+    requestProductQuote(productId);
+  } else if (typeof addToQuote === 'function') {
     addToQuote(productId);
   } else {
     alert('Product added to Quote List.');

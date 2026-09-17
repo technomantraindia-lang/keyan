@@ -13,11 +13,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
   <!-- Core Stylesheets -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260916-1">
   <link rel="stylesheet" href="categories.css">
   <link rel="stylesheet" href="product-detail.css">
 </head>
-<body class="pd-page-body">
+<body class="pd-page-body no-hover-page">
 
   <!-- UNIFIED MASTER HEADER CONTAINER -->
   <div id="header-container">
@@ -30,6 +30,7 @@
         </div>
         <div class="utility-right">
           <a href="tel:+919825207743"><i class="fas fa-phone-alt"></i> +91 9825207743</a>
+          <a href="tel:+919825206341"><i class="fas fa-phone-alt"></i> +91 9825206341</a>
           <a href="mailto:sales@keyancorporation.com"><i class="fas fa-envelope"></i> sales@keyancorporation.com</a>
           <span class="utility-gstin">| GSTIN: 24BWNPV1980J1ZV</span>
         </div>
@@ -62,10 +63,12 @@
         </ul>
         <div class="mobile-nav-actions">
           <a href="login.html" class="btn btn-navy btn-full"><i class="far fa-user"></i> Account Login</a>
-          <button class="btn btn-orange btn-full" onclick="closeMobileNav(); openModal('quoteModal');"><i class="fas fa-paper-plane"></i> Submit RFQ</button>
+          <a href="login.html?return=customer-portal.html" class="btn btn-navy btn-full customer-chat-nav"><i class="fas fa-comments"></i> Chat <span class="chat-new-label" data-chat-new-label hidden>New request</span><span class="chat-unread-badge" data-chat-unread-badge hidden>0</span></a>
+          <a href="login.html" class="btn btn-orange btn-full"><i class="fas fa-user-circle"></i> Customer Details</a>
         </div>
         <div class="mobile-nav-contact">
           <a href="tel:+919825207743"><i class="fas fa-phone-alt"></i> +91 9825207743</a>
+          <a href="tel:+919825206341"><i class="fas fa-phone-alt"></i> +91 9825206341</a>
           <a href="mailto:sales@keyancorporation.com"><i class="fas fa-envelope"></i> sales@keyancorporation.com</a>
         </div>
       </div>
@@ -101,6 +104,11 @@
               <i class="far fa-user"></i>
               <span>Account</span>
             </a>
+            <a href="login.html?return=customer-portal.html" class="tool-item customer-chat-nav" title="Open customer chat">
+              <i class="fas fa-comments"></i>
+              <span>Chat</span>
+              <span class="tool-badge chat-unread-badge" data-chat-unread-badge hidden>0</span>
+            </a>
             <a href="cart.html" class="tool-item" title="View Shopping Cart">
               <i class="fas fa-shopping-cart"></i>
               <span>Cart</span>
@@ -108,9 +116,9 @@
             </a>
           </div>
 
-          <button class="btn btn-orange header-rfq-btn" onclick="openModal('quoteModal')">
-            <i class="fas fa-paper-plane"></i> Request Quote
-          </button>
+          <a href="login.html" class="btn btn-orange header-rfq-btn">
+            <i class="fas fa-user-circle"></i> Customer Details
+          </a>
 
           <button class="mobile-hamburger" id="mobileNavBtn" onclick="toggleMobileNav()" aria-label="Toggle Navigation Menu">
             <i class="fas fa-bars"></i>
@@ -222,9 +230,6 @@
               <button class="pd-btn-buy-now" onclick="executeBuyNow()">
                 BUY NOW <i class="fas fa-bolt"></i>
               </button>
-              <button class="pd-btn-rfq" onclick="executeRequestQuote()">
-                REQUEST A QUOTE <i class="fas fa-file-signature"></i>
-              </button>
             </div>
           </div>
         </div>
@@ -242,25 +247,20 @@
   </section>
 
   <!-- ==================================================
-       3. TABBED PRODUCT SPECIFICATIONS SYSTEM
+       3. PRODUCT DETAILS & TECHNICAL SPECIFICATIONS
        ================================================== -->
   <section class="pd-tabs-section">
     <div class="container">
       
-      <div class="pd-tabs-nav">
-        <button class="pd-tab-btn active" data-tab="tab-specs">TECHNICAL SPECIFICATIONS</button>
-        <button class="pd-tab-btn" data-tab="tab-desc">FULL DESCRIPTION</button>
-        <button class="pd-tab-btn" data-tab="tab-app">APPLICATIONS</button>
-        <button class="pd-tab-btn" data-tab="tab-delivery">LOGISTICS & DELIVERY</button>
-        <button class="pd-tab-btn" data-tab="tab-rfq">REQUEST BULK RFQ</button>
-      </div>
-
-      <!-- Tab Panel 1: Specs -->
+      <!-- All product information is shown together; no tab menu is needed. -->
       <div id="tab-specs" class="pd-tab-content-panel active">
         <h3 style="font-family: var(--font-heading); color: var(--pd-navy-darkest); margin-bottom: 1.5rem; text-transform: uppercase;">
           ENGINEERING DATASHEET & SPECIFICATIONS
         </h3>
         <table class="pd-specs-table">
+          <thead>
+            <tr><th>SPECIFICATION</th><th>DETAIL</th></tr>
+          </thead>
           <tbody id="pdSpecsTable">
             <!-- Populated dynamically -->
           </tbody>
@@ -268,7 +268,7 @@
       </div>
 
       <!-- Tab Panel 2: Description -->
-      <div id="tab-desc" class="pd-tab-content-panel">
+      <div id="tab-desc" class="pd-tab-content-panel active">
         <h3 style="font-family: var(--font-heading); color: var(--pd-navy-darkest); margin-bottom: 1rem; text-transform: uppercase;">
           DETAILED OVERVIEW
         </h3>
@@ -278,7 +278,7 @@
       </div>
 
       <!-- Tab Panel 3: Applications -->
-      <div id="tab-app" class="pd-tab-content-panel">
+      <div id="tab-app" class="pd-tab-content-panel active">
         <h3 style="font-family: var(--font-heading); color: var(--pd-navy-darkest); margin-bottom: 1.5rem; text-transform: uppercase;">
           RECOMMENDED APPLICATION ENVIRONMENTS
         </h3>
@@ -288,7 +288,7 @@
       </div>
 
       <!-- Tab Panel 4: Logistics -->
-      <div id="tab-delivery" class="pd-tab-content-panel">
+      <div id="tab-delivery" class="pd-tab-content-panel active">
         <h3 style="font-family: var(--font-heading); color: var(--pd-navy-darkest); margin-bottom: 1rem; text-transform: uppercase;">
           PACKAGING, DISPATCH & PORT LOGISTICS
         </h3>
@@ -300,56 +300,6 @@
         </ul>
       </div>
 
-      <!-- Tab Panel 5: Bulk RFQ -->
-      <div id="tab-rfq" class="pd-tab-content-panel">
-        <h3 style="font-family: var(--font-heading); color: var(--pd-navy-darkest); margin-bottom: 1rem; text-transform: uppercase;">
-          CUSTOM VOLUME INQUIRY
-        </h3>
-        <p style="margin-bottom: 1.5rem; color: var(--pd-text-muted);">
-          Fill in your project quantity requirements below and our commercial technical sales team will revert with a formal quotation.
-        </p>
-        <button class="pd-btn-add-cart" style="width: auto;" onclick="openModal('quoteModal')">
-          OPEN RFQ FORM <i class="fas fa-paper-plane"></i>
-        </button>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ==================================================
-       4. IN-PAGE B2B RFQ SECTION ("NEED A LARGER QUANTITY?")
-       ================================================== -->
-  <section class="pd-rfq-section">
-    <div class="container">
-      <div class="pd-rfq-card">
-        <div>
-          <div class="cat-hud-badge" style="background: rgba(255,122,24,0.15); border-color: rgba(255,122,24,0.4);">
-            <span class="dot"></span> B2B BULK PROCUREMENT
-          </div>
-          <h2 class="pd-rfq-title text-white" style="color: #FFFFFF !important;">NEED A LARGER QUANTITY?</h2>
-          <p class="pd-rfq-desc">
-            Tell us your required quantity and target delivery timeline. Our technical sales team will assist with a tailored commercial quotation.
-          </p>
-        </div>
-
-        <form onsubmit="handleFormSubmit(event, 'Bulk Product Quote')">
-          <div class="pd-rfq-form-grid" style="margin-bottom: 1rem;">
-            <input type="text" id="rfqProductName" class="pd-input-dark" readonly value="Selected Product">
-            <input type="number" class="pd-input-dark" required placeholder="Required Quantity (Units)" min="1">
-          </div>
-          <div class="pd-rfq-form-grid" style="margin-bottom: 1rem;">
-            <input type="text" class="pd-input-dark" required placeholder="Company / Vessel Name">
-            <input type="email" class="pd-input-dark" required placeholder="Email Address">
-          </div>
-          <div class="pd-rfq-form-grid" style="margin-bottom: 1rem;">
-            <input type="tel" class="pd-input-dark" required placeholder="Phone / WhatsApp Number">
-            <input type="text" class="pd-input-dark" placeholder="Target Delivery Port">
-          </div>
-          <button type="submit" class="pd-btn-add-cart" style="width: 100%; justify-content: center;">
-            REQUEST FORMAL QUOTE <i class="fas fa-paper-plane"></i>
-          </button>
-        </form>
-      </div>
     </div>
   </section>
 
@@ -485,49 +435,9 @@
     </div>
   </div>
 
-  <!-- Master Request Quote Modal Form -->
-  <div id="quoteModal" class="modal-backdrop">
-    <div class="modal-card" style="max-width: 650px;">
-      <div class="modal-header">
-        <h4><i class="fas fa-paper-plane"></i> Submit Formal Request for Quote (RFQ)</h4>
-        <button class="modal-close" onclick="closeModal('quoteModal')" aria-label="Close Modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form onsubmit="handleFormSubmit(event, 'Request for Quote')">
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
-            <div>
-              <label>FULL NAME *</label>
-              <input type="text" required placeholder="Enter full name">
-            </div>
-            <div>
-              <label>COMPANY / VESSEL *</label>
-              <input type="text" required placeholder="Company or vessel name">
-            </div>
-          </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
-            <div>
-              <label>EMAIL ADDRESS *</label>
-              <input type="email" required placeholder="name@company.com">
-            </div>
-            <div>
-              <label>PHONE NUMBER *</label>
-              <input type="tel" required placeholder="+91 XXXXX XXXXX">
-            </div>
-          </div>
-          <div style="margin-bottom: 1.4rem;">
-            <label>SPECIFIC REQUIREMENTS / QUANTITY *</label>
-            <textarea rows="4" required placeholder="List products, model numbers, specifications or delivery port requirements..."></textarea>
-          </div>
-          <button type="submit" class="btn btn-orange" style="width: 100%; padding: 1rem; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.05em; justify-content: center; box-shadow: 0 8px 25px rgba(255, 122, 24, 0.4);">
-            SUBMIT RFQ ENQUIRY <i class="fas fa-paper-plane" style="margin-left: 0.4rem;"></i>
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-
   <!-- Scripts -->
-  <script src="app.js"></script>
-  <script src="product-detail.js"></script>
+  <script src="app.js?v=20260916-1"></script>
+  <script src="product-detail.js?v=20260916-1"></script>
+<a class="keyan-whatsapp-float" href="https://wa.me/919825206341?text=Hello%20Keyan%20Corporation%2C%20I%20need%20help%20with%20a%20product%20or%20quotation." target="_blank" rel="noopener noreferrer" aria-label="Chat with Keyan Corporation on WhatsApp"><i class="fab fa-whatsapp"></i><span>WhatsApp Us</span></a>
 </body>
 </html>

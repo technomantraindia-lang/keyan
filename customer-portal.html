@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Message Center | KEYAN CORPORATION</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="customer-portal.css?v=20260917-3">
+</head>
+<body class="customer-portal-body">
+  <div id="header-container"></div>
+  <main class="customer-portal-shell">
+    <header class="customer-portal-header"><a href="index.html" class="portal-brand"><span class="portal-mark">K</span><span><strong>KEYAN</strong><small>Customer Message Center</small></span></a><div class="portal-header-actions"><a href="index.html" class="portal-outline-btn">Back to catalogue</a></div></header>
+    <section class="portal-intro"><div><p class="eyebrow">CUSTOMER PORTAL</p><h1>Your requests, quotes & conversations</h1><p>Every quote and requested product stays in one secure conversation with the Keyan team.</p></div><div class="push-card" id="customerPushCard"><span id="customerPushStatus">Message alerts are off on this device</span><button id="enableCustomerPushButton" class="portal-outline-btn" type="button">Enable alerts</button></div></section>
+    <section class="message-center" aria-label="Customer conversations">
+      <aside class="conversation-list-panel"><div class="list-heading"><div><span class="eyebrow">INBOX</span><h2>Your requests</h2></div><span id="requestCount" class="count-pill">0</span></div><div id="conversationList" class="conversation-list"><div class="loading-state">Loading your requests…</div></div></aside>
+      <section class="conversation-panel"><div id="conversationEmpty" class="conversation-empty"><div class="empty-icon">↗</div><h2>Select a request</h2><p>Choose a quote or product request to view the conversation with Keyan Corporation.</p></div><div id="conversationView" class="conversation-view" hidden><div class="conversation-heading"><div><span id="threadReference" class="eyebrow"></span><h2 id="threadSubject"></h2><p id="threadProduct" class="muted"></p></div><span id="threadStatus" class="status-pill"></span></div><div id="threadMessages" class="thread-messages"></div><form id="messageForm" class="message-form"><textarea id="messageInput" maxlength="10000" required placeholder="Write a message to the Keyan team…"></textarea><div class="message-form-footer"><span>Messages are linked to this request.</span><button class="portal-send-btn" type="submit">Send message ↗</button></div></form></div></section>
+    </section>
+  </main>
+  <script src="app.js?v=20260916-1"></script><script src="customer-portal.js?v=20260917-3"></script>
+</body>
+</html>

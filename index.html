@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260917-4">
 </head>
 <body>
 
@@ -24,6 +24,7 @@
         </div>
         <div class="utility-right">
           <a href="tel:+919825207743"><i class="fas fa-phone-alt"></i> +91 9825207743</a>
+          <a href="tel:+919825206341"><i class="fas fa-phone-alt"></i> +91 9825206341</a>
           <a href="mailto:sales@keyancorporation.com"><i class="fas fa-envelope"></i> sales@keyancorporation.com</a>
           <span class="utility-gstin">| GSTIN: 24BWNPV1980J1ZV</span>
         </div>
@@ -56,10 +57,12 @@
         </ul>
         <div class="mobile-nav-actions">
           <a href="login.html" class="btn btn-navy btn-full"><i class="far fa-user"></i> Account Login</a>
-          <button class="btn btn-orange btn-full" onclick="closeMobileNav(); openModal('quoteModal');"><i class="fas fa-paper-plane"></i> Submit RFQ</button>
+          <a href="login.html?return=customer-portal.html" class="btn btn-navy btn-full customer-chat-nav"><i class="fas fa-comments"></i> Chat <span class="chat-new-label" data-chat-new-label hidden>New request</span><span class="chat-unread-badge" data-chat-unread-badge hidden>0</span></a>
+          <a href="login.html" class="btn btn-orange btn-full"><i class="fas fa-user-circle"></i> Customer Details</a>
         </div>
         <div class="mobile-nav-contact">
           <a href="tel:+919825207743"><i class="fas fa-phone-alt"></i> +91 9825207743</a>
+          <a href="tel:+919825206341"><i class="fas fa-phone-alt"></i> +91 9825206341</a>
           <a href="mailto:sales@keyancorporation.com"><i class="fas fa-envelope"></i> sales@keyancorporation.com</a>
         </div>
       </div>
@@ -95,6 +98,11 @@
               <i class="far fa-user"></i>
               <span>Account</span>
             </a>
+            <a href="login.html?return=customer-portal.html" class="tool-item customer-chat-nav" title="Open customer chat">
+              <i class="fas fa-comments"></i>
+              <span>Chat</span>
+              <span class="tool-badge chat-unread-badge" data-chat-unread-badge hidden>0</span>
+            </a>
             <a href="cart.html" class="tool-item" title="View Shopping Cart">
               <i class="fas fa-shopping-cart"></i>
               <span>Cart</span>
@@ -102,9 +110,9 @@
             </a>
           </div>
 
-          <button class="btn btn-orange header-rfq-btn" onclick="openModal('quoteModal')">
-            <i class="fas fa-paper-plane"></i> Request Quote
-          </button>
+          <a href="login.html" class="btn btn-orange header-rfq-btn">
+            <i class="fas fa-user-circle"></i> Customer Details
+          </a>
 
           <button class="mobile-hamburger" id="mobileNavBtn" onclick="toggleMobileNav()" aria-label="Toggle Navigation Menu">
             <i class="fas fa-bars"></i>
@@ -449,8 +457,57 @@
     </div>
   </section>
 
-  <!-- 9. DUAL TRAIN MARQUEE BRAND STRIP (DARK THEME) -->
-  <section id="brands" class="section-padding overflow-hidden bg-dark-brands reveal-from-bottom">
+  <!-- 9. CUSTOMER ADMIN CHAT SECTION -->
+  <section id="admin-chat" class="section-padding bg-dark-brands home-chat-section reveal-from-bottom">
+    <div class="container">
+      <div class="home-chat-grid">
+        <div class="home-chat-copy reveal-from-left">
+          <div class="explore-eyebrow">
+            <span class="orange-line"></span> CUSTOMER SUPPORT CHAT
+          </div>
+          <h2 class="explore-main-title">
+            Chat With <span class="text-marine-blue">Keyan Admin</span>
+          </h2>
+          <p class="explore-subtitle">Ask about quotation details, product availability, lead time, delivery, and requested products directly from your customer message center.</p>
+          <div class="home-chat-actions">
+            <a href="login.html?return=customer-portal.html" class="btn btn-orange customer-chat-nav">
+              <i class="fas fa-comments"></i> Open Customer Chat
+              <span class="chat-unread-badge" data-chat-unread-badge hidden>0</span>
+            </a>
+            <a href="contact.html#contactFormMain" class="btn btn-navy home-chat-secondary">
+              <i class="fas fa-file-signature"></i> Request Quote
+            </a>
+          </div>
+        </div>
+        <div class="home-chat-panel reveal-from-right">
+          <div class="home-chat-card">
+            <div class="home-chat-icon"><i class="fas fa-headset"></i></div>
+            <div>
+              <strong>Admin replies stay saved</strong>
+              <span>Every quote has its own secure conversation thread.</span>
+            </div>
+          </div>
+          <div class="home-chat-card">
+            <div class="home-chat-icon"><i class="fas fa-bell"></i></div>
+            <div>
+              <strong>New message alerts</strong>
+              <span>Customers and admin can enable device notifications.</span>
+            </div>
+          </div>
+          <div class="home-chat-card">
+            <div class="home-chat-icon"><i class="fas fa-clock"></i></div>
+            <div>
+              <strong>Quick quote follow-up</strong>
+              <span>Discuss price, documents, availability, and delivery in one place.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hidden legacy brand strip removed from the visible home page -->
+  <section id="brands" class="section-padding overflow-hidden bg-dark-brands reveal-from-bottom" hidden>
     <div class="container">
       
       <div class="section-header-editorial reveal-from-top" style="margin-bottom: 2.5rem;">
@@ -540,9 +597,9 @@
             <div class="trust-badge-pill"><i class="fas fa-globe"></i> Global Maritime Standards</div>
           </div>
 
-          <button onclick="openModal('quoteModal')" class="btn btn-orange why-trust-cta-btn">
-            <i class="fas fa-paper-plane"></i> Request Official Quotation
-          </button>
+          <a href="contact.html#inquiry" class="btn btn-orange why-trust-cta-btn" style="text-decoration:none;">
+            <i class="fas fa-paper-plane"></i> Send an Inquiry
+          </a>
         </div>
 
         <!-- Right Column: 4 Animated Benefit Cards -->
@@ -604,20 +661,12 @@
           <h2 class="rfq-left-title">Need a Specific Product?</h2>
           <p class="rfq-left-desc">Tell us what you need and our team will help you source the right solution.</p>
           <div class="rfq-phone-badge">
-            <i class="fas fa-phone-alt"></i> Direct Sales: +91 9825207743
+            <i class="fas fa-phone-alt"></i> Direct Sales: +91 9825207743 / +91 9825206341
           </div>
         </div>
 
         <div>
-          <form onsubmit="handleFormSubmit(event, 'RFQ Request')" class="rfq-form-compact">
-            <input type="text" class="rfq-input" placeholder="Product / Requirement *" required style="grid-column: span 2;">
-            <input type="text" class="rfq-input" placeholder="Quantity *" required>
-            <input type="text" class="rfq-input" placeholder="Company Name *" required>
-            <input type="text" class="rfq-input" placeholder="Email / Phone *" required style="grid-column: span 2;">
-            <button type="submit" class="btn btn-orange" style="grid-column: span 2; font-size: 1rem;">
-              Request a Quote →
-            </button>
-          </form>
+          <div class="rfq-form-compact"><a href="contact.html#inquiry" class="btn btn-orange" style="grid-column: span 2; font-size: 1rem; text-decoration: none; justify-content: center;">Send an Inquiry →</a></div>
         </div>
 
       </div>
@@ -709,63 +758,7 @@
     </footer>
   </div>
 
-  <!-- MODALS -->
-  <div id="quoteModal" class="modal-backdrop">
-    <div class="modal-card" style="max-width: 650px;">
-      <div class="modal-header">
-        <h4><i class="fas fa-paper-plane"></i> Submit Formal Request for Quote (RFQ)</h4>
-        <button class="modal-close" onclick="closeModal('quoteModal')" aria-label="Close Modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form onsubmit="handleFormSubmit(event, 'Request for Quote')">
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
-            <div>
-              <label>FULL NAME *</label>
-              <input type="text" required placeholder="Enter full name">
-            </div>
-            <div>
-              <label>COMPANY / VESSEL *</label>
-              <input type="text" required placeholder="Company or vessel name">
-            </div>
-          </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
-            <div>
-              <label>EMAIL ADDRESS *</label>
-              <input type="email" required placeholder="name@company.com">
-            </div>
-            <div>
-              <label>PHONE NUMBER *</label>
-              <input type="tel" required placeholder="+91 XXXXX XXXXX">
-            </div>
-          </div>
-          <div style="margin-bottom: 1.4rem;">
-            <label>SPECIFIC REQUIREMENTS / QUANTITY *</label>
-            <textarea rows="4" required placeholder="List products, model numbers, specifications or delivery port requirements..."></textarea>
-          </div>
-          <button type="submit" class="btn btn-orange" style="width: 100%; padding: 1rem; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.05em; justify-content: center; box-shadow: 0 8px 25px rgba(255, 122, 24, 0.4);">
-            SUBMIT RFQ ENQUIRY <i class="fas fa-paper-plane" style="margin-left: 0.4rem;"></i>
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div id="quoteDrawerModal" class="modal-backdrop">
-    <div class="modal-card" style="max-width: 650px;">
-      <div class="modal-header">
-        <h4><i class="fas fa-shopping-cart"></i> Your Cart & Quote Basket</h4>
-        <button class="modal-close" onclick="closeModal('quoteDrawerModal')" aria-label="Close Modal">&times;</button>
-      </div>
-      <div class="modal-body" id="quoteDrawerItems">
-        <!-- Cart items rendered dynamically -->
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-navy" onclick="closeModal('quoteDrawerModal')"><i class="fas fa-arrow-left"></i> Continue Browsing</button>
-        <a href="cart.html" class="btn btn-orange" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;"><i class="fas fa-shopping-cart"></i> View Full Cart & Checkout</a>
-      </div>
-    </div>
-  </div>
-
-  <script src="app.js"></script>
+  <script src="app.js?v=20260916-1"></script>
+<a class="keyan-whatsapp-float" href="https://wa.me/919825206341?text=Hello%20Keyan%20Corporation%2C%20I%20need%20help%20with%20a%20product%20or%20quotation." target="_blank" rel="noopener noreferrer" aria-label="Chat with Keyan Corporation on WhatsApp"><i class="fab fa-whatsapp"></i><span>WhatsApp Us</span></a>
 </body>
 </html>

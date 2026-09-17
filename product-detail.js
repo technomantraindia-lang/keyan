@@ -5,18 +5,98 @@
 
 let currentProduct = null;
 let currentQuantity = 1;
+const PRODUCT_CACHE_KEY = 'keyan_product_detail_';
 
 document.addEventListener('DOMContentLoaded', () => {
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get('id') || 'p1';
 
-  currentProduct = CATALOG_ITEMS.find(p => p.id === productId || p.sku === productId) || CATALOG_ITEMS[0];
+  currentProduct = normaliseProduct(CATALOG_ITEMS.find(p => p.id === productId || p.sku === productId) || CATALOG_ITEMS[0]);
 
   renderProductDetail(currentProduct);
   trackRecentlyViewed(currentProduct.id);
   renderRelatedProducts(currentProduct);
   renderRecentlyViewedProducts();
   initTabs();
+  loadBackendProduct(productId);
+});
+
+function normaliseProduct(product) {
+  if (!product) return null;
+
+  let specifications = product.specifications;
+  if (typeof specifications === 'string') {
+    try { specifications = JSON.parse(specifications); } catch (error) { specifications = {}; }
+  }
+
+  return {
+    ...product,
+    categoryName: product.categoryName || product.category_slug || product.category || 'Product Catalogue',
+    price_usd: Number(product.price_usd) || 0,
+    availability: product.availability || 'Available on Request',
+    specifications: specifications && typeof specifications === 'object' ? specifications : {},
+    applications: Array.isArray(product.applications) ? product.applications : [],
+    images: Array.isArray(product.images) ? product.images : []
+  };
+}
+
+async function loadBackendProduct(productId) {
+  const cacheKey = `${PRODUCT_CACHE_KEY}${productId}`;
+  const cachedProduct = readCachedProduct(cacheKey);
+
+  try {
+    const payload = await requestProductWithRetry(`/products/${encodeURIComponent(productId)}`);
+    const remoteProduct = normaliseProduct(payload.data || payload);
+    if (!remoteProduct || !remoteProduct.id) throw new Error('The product response was empty.');
+
+    localStorage.setItem(cacheKey, JSON.stringify(remoteProduct));
+    applyBackendProduct(remoteProduct);
+  } catch (error) {
+    if (cachedProduct) {
+      applyBackendProduct(cachedProduct);
+      return;
+    }
+    console.info('Product detail API unavailable; showing the local catalogue.', error.message);
+  }
+}
+
+async function requestProductWithRetry(path) {
+  if (typeof window.keyanApiRequest !== 'function') throw new Error('Catalogue API is not available.');
+
+  let lastError;
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    try {
+      return await window.keyanApiRequest(path);
+    } catch (error) {
+      lastError = error;
+      if (attempt < 2) await new Promise(resolve => setTimeout(resolve, 400 * (attempt + 1)));
+    }
+  }
+  throw lastError || new Error('The catalogue API is unavailable.');
+}
+
+function readCachedProduct(cacheKey) {
+  try {
+    const cached = JSON.parse(localStorage.getItem(cacheKey) || 'null');
+    return cached ? normaliseProduct(cached) : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+function applyBackendProduct(product) {
+  currentProduct = product;
+  renderProductDetail(currentProduct);
+  renderRelatedProducts(currentProduct);
+}
+
+// The API catalogue loads asynchronously after the local fallback catalogue.
+// Re-render once an admin-created product arrives from the backend.
+window.addEventListener('keyan:catalog-updated', () => {
+  const productId = new URLSearchParams(window.location.search).get('id') || 'p1';
+  const remoteProduct = CATALOG_ITEMS.find(p => p.id === productId || p.sku === productId);
+  if (! remoteProduct) return;
+  applyBackendProduct(normaliseProduct(remoteProduct));
 });
 
 // Render Main Product Detail Layout
@@ -32,11 +112,12 @@ function renderProductDetail(p) {
 
   // 2. Main Image & Gallery Thumbnails
   const mainImg = document.getElementById('pdMainImg');
-  if (mainImg) mainImg.src = p.img;
+  const primaryImage = p.img || 'iamges/hero.jpg';
+  if (mainImg) mainImg.src = primaryImage;
 
   const thumbsStrip = document.getElementById('pdThumbsStrip');
   if (thumbsStrip) {
-    const galleryImages = p.images && p.images.length > 0 ? p.images : [p.img];
+    const galleryImages = p.images && p.images.length > 0 ? p.images : [primaryImage];
     thumbsStrip.innerHTML = galleryImages.map((imgUrl, idx) => `
       <div class="pd-thumb-box ${idx === 0 ? 'active' : ''}" onclick="switchGalleryImg('${imgUrl}', this)">
         <img src="${imgUrl}" alt="${p.name} Thumbnail ${idx+1}">
@@ -53,10 +134,10 @@ function renderProductDetail(p) {
   const price = document.getElementById('pdPrice');
   const desc = document.getElementById('pdShortDesc');
 
-  if (catTag) catTag.innerText = p.categoryName.toUpperCase();
+  if (catTag) catTag.innerText = (p.categoryName || 'PRODUCT CATALOGUE').toUpperCase();
   if (skuTag) skuTag.innerText = `SKU: ${p.sku}`;
   if (title) title.innerText = p.name;
-  if (brand) brand.innerText = p.brand;
+  if (brand) brand.innerText = p.brand || 'Keyan Corporation';
   
   if (stock) {
     stock.innerText = p.availability;
@@ -65,6 +146,32 @@ function renderProductDetail(p) {
     } else {
       stock.classList.remove('request-only');
     }
+  }
+
+  // Recalculate this from the latest product returned by the backend. The
+  // detail page initially renders a local fallback and then re-renders API data.
+  const quoteOnly = productRequiresQuote(p);
+  const addCartButton = document.querySelector('.pd-btn-add-cart');
+  const buyNowButton = document.querySelector('.pd-btn-buy-now');
+  const mobileCartButton = document.querySelector('.pd-mob-bar-btn');
+  const quantityWrapper = document.querySelector('.pd-qty-wrapper');
+  document.body.classList.toggle('pd-request-only-mode', quoteOnly);
+  if (quoteOnly) {
+    if (addCartButton) {
+      addCartButton.innerHTML = 'REQUEST QUOTE <i class="fas fa-file-signature"></i>';
+      addCartButton.classList.add('pd-btn-quote-only');
+    }
+    if (buyNowButton) buyNowButton.style.display = 'none';
+    if (mobileCartButton) mobileCartButton.innerHTML = 'REQUEST QUOTE <i class="fas fa-file-signature"></i>';
+    if (quantityWrapper) quantityWrapper.style.display = 'none';
+  } else {
+    if (addCartButton) {
+      addCartButton.innerHTML = 'ADD TO CART <i class="fas fa-shopping-cart"></i>';
+      addCartButton.classList.remove('pd-btn-quote-only');
+    }
+    if (buyNowButton) buyNowButton.style.display = '';
+    if (mobileCartButton) mobileCartButton.innerHTML = 'ADD TO CART <i class="fas fa-shopping-cart"></i>';
+    if (quantityWrapper) quantityWrapper.style.display = '';
   }
 
   // Sample Editable USD Price Display
@@ -77,7 +184,9 @@ function renderProductDetail(p) {
     mobPrice.innerText = `$${p.price_usd.toFixed(2)} USD`;
   }
 
-  if (desc) desc.innerText = p.shortDesc;
+  if (desc) desc.innerText = p.shortDesc || '';
+  const fullDesc = document.getElementById('pdFullDesc');
+  if (fullDesc) fullDesc.innerText = p.fullDesc || p.shortDesc || '';
 
   // 4. Update Line Subtotal
   updateQuantitySubtotal();
@@ -167,36 +276,48 @@ function initTabs() {
 // Render Specs Table
 function renderSpecificationsTable(p) {
   const container = document.getElementById('pdSpecsTable');
-  if (!container || !p.specifications) return;
+  if (!container) return;
 
-  const entries = Object.entries(p.specifications);
+  const entries = Object.entries(p.specifications || {});
   container.innerHTML = entries.map(([key, val]) => `
     <tr>
-      <td class="pd-specs-key">${key}</td>
-      <td class="pd-specs-val">${val}</td>
+      <td class="pd-specs-key">${escapeProductHtml(key)}</td>
+      <td class="pd-specs-val">${escapeProductHtml(val)}</td>
     </tr>
-  `).join('');
+  `).join('') || (p.specs ? `<tr><td class="pd-specs-key">Specifications</td><td class="pd-specs-val">${escapeProductHtml(p.specs)}</td></tr>` : '<tr><td colspan="2" class="pd-specs-empty">No technical specifications available.</td></tr>');
+}
+
+function escapeProductHtml(value) {
+  return String(value ?? '').replace(/[&<>'"]/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#039;', '"': '&quot;' }[character]));
 }
 
 // Render Application Pills
 function renderApplicationPills(p) {
   const container = document.getElementById('pdAppPills');
-  if (!container || !p.applications) return;
+  if (!container) return;
 
-  container.innerHTML = p.applications.map(app => `
-    <span class="pd-app-pill"><i class="fas fa-check-circle"></i> ${app}</span>
+  container.innerHTML = (p.applications || []).map(app => `
+    <span class="pd-app-pill"><i class="fas fa-check-circle"></i> ${escapeProductHtml(app)}</span>
   `).join('');
 }
 
 // Cart Action Handlers
 function executeAddToCart() {
   if (!currentProduct) return;
+  if (productRequiresQuote(currentProduct)) {
+    requestProductQuote(currentProduct.id);
+    return;
+  }
 
   const cartItem = {
     id: currentProduct.id,
     sku: currentProduct.sku,
     name: currentProduct.name,
     brand: currentProduct.brand,
+    category: currentProduct.category,
+    categoryName: currentProduct.categoryName,
+    shortDesc: currentProduct.shortDesc,
+    availability: currentProduct.availability,
     price_usd: currentProduct.price_usd,
     img: currentProduct.img,
     qty: currentQuantity
@@ -211,16 +332,29 @@ function executeAddToCart() {
 
   saveCartToStorage();
   showToast(`Added ${currentQuantity} × "${currentProduct.name}" to Cart.`);
-  openQuoteDrawer();
+  // Cart actions stay on the product page; inquiries are submitted from Contact Us.
 }
 
 function executeBuyNow() {
+  if (currentProduct && productRequiresQuote(currentProduct)) {
+    requestProductQuote(currentProduct.id);
+    return;
+  }
   executeAddToCart();
+  if (!requireCustomerAuth('checkout.html')) return;
   window.location.href = 'checkout.html';
 }
 
 function executeRequestQuote() {
-  openModal('quoteModal');
+  if (currentProduct) requestProductQuote(currentProduct.id);
+}
+
+function productRequiresQuote(product) {
+  return Boolean(product && (
+    product.is_quote_only === true ||
+    String(product.is_quote_only || '').toLowerCase() === 'true' ||
+    String(product.availability || '').trim().toLowerCase() === 'available on request'
+  ));
 }
 
 // Related Products ("YOU MAY ALSO NEED")

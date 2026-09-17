@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>B2B CHECKOUT | KEYAN CORPORATION — Marine & Industrial Procurement</title>
+  <title>CHECKOUT | KEYAN CORPORATION — Marine & Industrial Procurement</title>
   <meta name="description" content="Complete your B2B industrial purchase or formal proforma invoice request with Keyan Corporation.">
   
   <!-- Modern Industrial & Monospace Typography System -->
@@ -13,11 +13,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
   <!-- Core Stylesheets -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260916-1">
   <link rel="stylesheet" href="categories.css">
   <link rel="stylesheet" href="checkout.css">
 </head>
-<body class="chk-page-body">
+<body class="chk-page-body no-hover-page">
 
   <!-- UNIFIED MASTER HEADER CONTAINER -->
   <div id="header-container">
@@ -30,6 +30,7 @@
         </div>
         <div class="utility-right">
           <a href="tel:+919825207743"><i class="fas fa-phone-alt"></i> +91 9825207743</a>
+          <a href="tel:+919825206341"><i class="fas fa-phone-alt"></i> +91 9825206341</a>
           <a href="mailto:sales@keyancorporation.com"><i class="fas fa-envelope"></i> sales@keyancorporation.com</a>
           <span class="utility-gstin">| GSTIN: 24BWNPV1980J1ZV</span>
         </div>
@@ -62,10 +63,12 @@
         </ul>
         <div class="mobile-nav-actions">
           <a href="login.html" class="btn btn-navy btn-full"><i class="far fa-user"></i> Account Login</a>
-          <button class="btn btn-orange btn-full" onclick="closeMobileNav(); openModal('quoteModal');"><i class="fas fa-paper-plane"></i> Submit RFQ</button>
+          <a href="login.html?return=customer-portal.html" class="btn btn-navy btn-full customer-chat-nav"><i class="fas fa-comments"></i> Chat <span class="chat-new-label" data-chat-new-label hidden>New request</span><span class="chat-unread-badge" data-chat-unread-badge hidden>0</span></a>
+          <a href="login.html" class="btn btn-orange btn-full"><i class="fas fa-user-circle"></i> Customer Details</a>
         </div>
         <div class="mobile-nav-contact">
           <a href="tel:+919825207743"><i class="fas fa-phone-alt"></i> +91 9825207743</a>
+          <a href="tel:+919825206341"><i class="fas fa-phone-alt"></i> +91 9825206341</a>
           <a href="mailto:sales@keyancorporation.com"><i class="fas fa-envelope"></i> sales@keyancorporation.com</a>
         </div>
       </div>
@@ -101,6 +104,11 @@
               <i class="far fa-user"></i>
               <span>Account</span>
             </a>
+            <a href="login.html?return=customer-portal.html" class="tool-item customer-chat-nav" title="Open customer chat">
+              <i class="fas fa-comments"></i>
+              <span>Chat</span>
+              <span class="tool-badge chat-unread-badge" data-chat-unread-badge hidden>0</span>
+            </a>
             <a href="cart.html" class="tool-item" title="View Shopping Cart">
               <i class="fas fa-shopping-cart"></i>
               <span>Cart</span>
@@ -108,9 +116,9 @@
             </a>
           </div>
 
-          <button class="btn btn-orange header-rfq-btn" onclick="openModal('quoteModal')">
-            <i class="fas fa-paper-plane"></i> Request Quote
-          </button>
+          <a href="login.html" class="btn btn-orange header-rfq-btn">
+            <i class="fas fa-user-circle"></i> Customer Details
+          </a>
 
           <button class="mobile-hamburger" id="mobileNavBtn" onclick="toggleMobileNav()" aria-label="Toggle Navigation Menu">
             <i class="fas fa-bars"></i>
@@ -143,8 +151,8 @@
       <div class="cat-hud-badge" style="background: rgba(255,122,24,0.15); border-color: rgba(255,122,24,0.4);">
         <span class="dot"></span> B2B INDUSTRIAL CHECKOUT
       </div>
-      <h1 class="chk-hero-title">CHECKOUT & ORDER CONFIRMATION</h1>
-      <p class="chk-hero-sub">Provide vessel delivery details and billing credentials to complete your commercial order.</p>
+      <h1 class="chk-hero-title">CHECKOUT &amp; ORDER CONFIRMATION</h1>
+      <p class="chk-hero-sub">Confirm your customer details, delivery address, and payment method.</p>
     </div>
   </section>
 
@@ -158,11 +166,11 @@
       <div class="chk-form-card">
         <form onsubmit="handleCheckoutSubmit(event)">
           
-          <!-- Step 1: Contact & Company -->
+          <!-- Step 1: Customer details -->
           <div class="chk-step-box">
             <div class="chk-step-header">
               <span class="chk-step-num">1</span>
-              <h3 class="chk-step-title">COMPANY & CONTACT CREDENTIALS</h3>
+              <h3 class="chk-step-title">CUSTOMER DETAILS</h3>
             </div>
 
             <div class="chk-form-row">
@@ -171,19 +179,8 @@
                 <input type="text" id="chkFullName" class="chk-input-control" required placeholder="John Doe">
               </div>
               <div class="chk-form-group">
-                <label class="chk-form-label" for="chkJobTitle">JOB TITLE / DESIGNATION</label>
-                <input type="text" id="chkJobTitle" class="chk-input-control" placeholder="Procurement Manager / Chief Engineer">
-              </div>
-            </div>
-
-            <div class="chk-form-row">
-              <div class="chk-form-group">
-                <label class="chk-form-label" for="chkCompanyName">COMPANY NAME *</label>
-                <input type="text" id="chkCompanyName" class="chk-input-control" required placeholder="Marine Maritime Ltd / Industrial Corp">
-              </div>
-              <div class="chk-form-group">
-                <label class="chk-form-label" for="chkGstin">GSTIN / TAX REGISTRATION NO.</label>
-                <input type="text" id="chkGstin" class="chk-input-control" placeholder="24BWNPV1980J1ZV">
+                <label class="chk-form-label" for="chkCompanyName">COMPANY NAME</label>
+                <input type="text" id="chkCompanyName" class="chk-input-control" placeholder="Company name">
               </div>
             </div>
 
@@ -197,48 +194,44 @@
                 <input type="tel" id="chkPhone" class="chk-input-control" required placeholder="+91 9825207743">
               </div>
             </div>
+            <p class="chk-account-note"><i class="fas fa-lock"></i> These details come from your customer account. You can update them from Account Details.</p>
           </div>
 
-          <!-- Step 2: Shipping & Vessel Delivery -->
+          <!-- Step 2: Saved or new delivery address -->
           <div class="chk-step-box">
             <div class="chk-step-header">
               <span class="chk-step-num">2</span>
-              <h3 class="chk-step-title">SHIPPING & VESSEL PORT OF CALL</h3>
+              <h3 class="chk-step-title">DELIVERY ADDRESS</h3>
             </div>
-
-            <div class="chk-form-row">
-              <div class="chk-form-group">
-                <label class="chk-form-label" for="chkVesselName">VESSEL / SHIP / PLANT NAME *</label>
-                <input type="text" id="chkVesselName" class="chk-input-control" required placeholder="M.V. Ocean Pioneer / Refinery Plant #2">
-              </div>
-              <div class="chk-form-group">
-                <label class="chk-form-label" for="chkImo">IMO NUMBER / CALL SIGN</label>
-                <input type="text" id="chkImo" class="chk-input-control" placeholder="IMO 9876543">
-              </div>
+            <div class="chk-form-group">
+              <label class="chk-form-label" for="chkSavedAddress">SAVED ADDRESSES</label>
+              <select id="chkSavedAddress" class="chk-input-control"><option value="">Add a new delivery address</option></select>
             </div>
-
-            <div class="chk-form-group" style="margin-bottom: 1.2rem;">
-              <label class="chk-form-label" for="chkDeliveryPort">DELIVERY PORT / SHIPYARD / PLANT ADDRESS *</label>
-              <input type="text" id="chkDeliveryPort" class="chk-input-control" required placeholder="Alang Shipbreaking Yard / Mundra Port Jetty #4 / VIP Park Bhavnagar">
-            </div>
-
-            <div class="chk-form-row">
-              <div class="chk-form-group">
-                <label class="chk-form-label" for="chkEta">TARGET DELIVERY DATE / ETA</label>
-                <input type="date" id="chkEta" class="chk-input-control">
+            <button type="button" id="chkNewAddressToggle" class="chk-address-toggle">+ Add new address</button>
+            <div id="chkNewAddressFields" class="chk-address-fields">
+              <div class="chk-form-row">
+                <div class="chk-form-group"><label class="chk-form-label" for="chkAddressLabel">ADDRESS NAME *</label><input type="text" id="chkAddressLabel" class="chk-input-control" placeholder="Office, Warehouse, Home"></div>
+                <div class="chk-form-group"><label class="chk-form-label" for="chkAddressRecipient">RECIPIENT NAME *</label><input type="text" id="chkAddressRecipient" class="chk-input-control" placeholder="John Doe"></div>
               </div>
-              <div class="chk-form-group">
-                <label class="chk-form-label" for="chkCountry">COUNTRY *</label>
-                <input type="text" id="chkCountry" class="chk-input-control" required value="India">
+              <div class="chk-form-group"><label class="chk-form-label" for="chkAddressLine1">ADDRESS LINE 1 *</label><input type="text" id="chkAddressLine1" class="chk-input-control" placeholder="Street, building, port or plant address"></div>
+              <div class="chk-form-group"><label class="chk-form-label" for="chkAddressLine2">ADDRESS LINE 2</label><input type="text" id="chkAddressLine2" class="chk-input-control" placeholder="Apartment, landmark, jetty, etc."></div>
+              <div class="chk-form-row">
+                <div class="chk-form-group"><label class="chk-form-label" for="chkAddressCity">CITY *</label><input type="text" id="chkAddressCity" class="chk-input-control" placeholder="Bhavnagar"></div>
+                <div class="chk-form-group"><label class="chk-form-label" for="chkAddressState">STATE</label><input type="text" id="chkAddressState" class="chk-input-control" placeholder="Gujarat"></div>
+              </div>
+              <div class="chk-form-row">
+                <div class="chk-form-group"><label class="chk-form-label" for="chkAddressPostal">POSTAL CODE</label><input type="text" id="chkAddressPostal" class="chk-input-control" placeholder="364001"></div>
+                <div class="chk-form-group"><label class="chk-form-label" for="chkAddressCountry">COUNTRY *</label><input type="text" id="chkAddressCountry" class="chk-input-control" value="India"></div>
               </div>
             </div>
+            <input type="hidden" id="chkDeliveryPort">
           </div>
 
-          <!-- Step 3: Payment & B2B Terms -->
+          <!-- Step 3: Payment -->
           <div class="chk-step-box">
             <div class="chk-step-header">
               <span class="chk-step-num">3</span>
-              <h3 class="chk-step-title">B2B PAYMENT & BILLING OPTIONS</h3>
+              <h3 class="chk-step-title">PAYMENT METHOD</h3>
             </div>
 
             <div class="chk-payment-options">
@@ -250,21 +243,6 @@
                 </div>
               </div>
 
-              <div class="chk-pay-option-card">
-                <input type="radio" id="payCreditCard" name="paymentMethod" value="Corporate Credit Card" class="chk-pay-radio">
-                <div class="chk-pay-info">
-                  <h5>Corporate Credit Card (Visa / MasterCard / AMEX)</h5>
-                  <p>Immediate payment via corporate credit card with Instant Receipt generation.</p>
-                </div>
-              </div>
-
-              <div class="chk-pay-option-card">
-                <input type="radio" id="payPo" name="paymentMethod" value="Formal Purchase Order (PO / Net Terms)" class="chk-pay-radio">
-                <div class="chk-pay-info">
-                  <h5>Formal Purchase Order (Net 30 Corporate Account)</h5>
-                  <p>For registered corporate account holders with approved credit facility.</p>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -331,8 +309,8 @@
           <strong id="confirmOrderRef" style="font-family:var(--font-mono); color:var(--chk-orange); font-size:1.05rem;">KEY-ORD-2026-8942</strong>
         </div>
         <div><strong>Company:</strong> <span id="confirmCompany">Marine Ltd</span></div>
-        <div><strong>Vessel / Plant:</strong> <span id="confirmVessel">M.V. Ocean Pioneer</span></div>
-        <div><strong>Delivery Port:</strong> <span id="confirmPort">Alang Shipbreaking Yard</span></div>
+        <div><strong>Delivery Address:</strong> <span id="confirmVessel">Add a delivery address</span></div>
+        <div><strong>Address Name:</strong> <span id="confirmPort">Primary address</span></div>
         <div><strong>Payment Method:</strong> <span id="confirmPaymentMethod">Proforma Invoice</span></div>
         <div style="display:flex; justify-content:space-between; border-top:1px solid var(--chk-border-light); padding-top:0.6rem; margin-top:0.6rem;">
           <strong>Total Amount Paid / Invoiced:</strong>
@@ -430,49 +408,9 @@
           </div>
         </div>
       </div>
-  <!-- Master Request Quote Modal Form -->
-  <div id="quoteModal" class="modal-backdrop">
-    <div class="modal-card" style="max-width: 650px;">
-      <div class="modal-header">
-        <h4><i class="fas fa-paper-plane"></i> Submit Formal Request for Quote (RFQ)</h4>
-        <button class="modal-close" onclick="closeModal('quoteModal')" aria-label="Close Modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form onsubmit="handleFormSubmit(event, 'Request for Quote')">
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
-            <div>
-              <label>FULL NAME *</label>
-              <input type="text" required placeholder="Enter full name">
-            </div>
-            <div>
-              <label>COMPANY / VESSEL *</label>
-              <input type="text" required placeholder="Company or vessel name">
-            </div>
-          </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
-            <div>
-              <label>EMAIL ADDRESS *</label>
-              <input type="email" required placeholder="name@company.com">
-            </div>
-            <div>
-              <label>PHONE NUMBER *</label>
-              <input type="tel" required placeholder="+91 XXXXX XXXXX">
-            </div>
-          </div>
-          <div style="margin-bottom: 1.4rem;">
-            <label>SPECIFIC REQUIREMENTS / QUANTITY *</label>
-            <textarea rows="4" required placeholder="List products, model numbers, specifications or delivery port requirements..."></textarea>
-          </div>
-          <button type="submit" class="btn btn-orange" style="width: 100%; padding: 1rem; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.05em; justify-content: center; box-shadow: 0 8px 25px rgba(255, 122, 24, 0.4);">
-            SUBMIT RFQ ENQUIRY <i class="fas fa-paper-plane" style="margin-left: 0.4rem;"></i>
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-
   <!-- Scripts -->
-  <script src="app.js"></script>
+  <script src="app.js?v=20260916-1"></script>
   <script src="checkout.js"></script>
+<a class="keyan-whatsapp-float" href="https://wa.me/919825206341?text=Hello%20Keyan%20Corporation%2C%20I%20need%20help%20with%20a%20product%20or%20quotation." target="_blank" rel="noopener noreferrer" aria-label="Chat with Keyan Corporation on WhatsApp"><i class="fab fa-whatsapp"></i><span>WhatsApp Us</span></a>
 </body>
 </html>

@@ -3,7 +3,34 @@
  */
 
 // B2B Catalogue Products with USD Pricing & Technical Specifications
-const CATALOG_ITEMS = [
+const defaultApiUrl = ['http:', 'https:'].includes(window.location.protocol)
+  ? `${window.location.origin}/api`
+  : 'http://127.0.0.1:8000/api';
+const KEYAN_API_URL = (window.KEYAN_API_URL || defaultApiUrl).replace(/\/$/, '');
+
+window.keyanApiRequest = async function (path, options = {}) {
+  const headers = {
+    Accept: 'application/json',
+    ...(options.body ? { 'Content-Type': 'application/json' } : {}),
+    ...(options.headers || {})
+  };
+  const token = localStorage.getItem('keyan_api_token');
+  if (token) headers.Authorization = `Bearer ${token}`;
+
+  const response = await fetch(`${KEYAN_API_URL}${path}`, { ...options, headers });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const validationMessage = payload.errors
+      ? Object.values(payload.errors).flat().join(' ')
+      : '';
+    const error = new Error(validationMessage || payload.message || 'The server could not complete this request.');
+    error.status = response.status;
+    throw error;
+  }
+  return payload;
+};
+
+let CATALOG_ITEMS = [
   {
     id: 'p1',
     sku: 'KEY-GD-2500',
@@ -225,6 +252,24 @@ const CATALOG_ITEMS = [
 let quoteBasket = [];
 let cartBasket = JSON.parse(localStorage.getItem('keyan_cart') || '[]');
 
+const KEYAN_WHATSAPP_NUMBER = '919825206341';
+
+function isCustomerAuthenticated() {
+  return Boolean(localStorage.getItem('keyan_api_token'));
+}
+
+function isProductQuoteOnly(product) {
+  return Boolean(product && (product.is_quote_only || String(product.availability || '').trim().toLowerCase() === 'available on request'));
+}
+
+function requireCustomerAuth(returnPath = 'checkout.html') {
+  if (isCustomerAuthenticated()) return true;
+
+  const safeReturnPath = String(returnPath || 'checkout.html').replace(/^\/+/, '');
+  window.location.href = `login.html?return=${encodeURIComponent(safeReturnPath)}`;
+  return false;
+}
+
 function saveCartToStorage() {
   localStorage.setItem('keyan_cart', JSON.stringify(cartBasket));
   updateCartBadgeCount();
@@ -243,12 +288,147 @@ document.addEventListener('DOMContentLoaded', () => {
   initTabs();
   initSearchAutocomplete();
   initScrollReveal();
+  initUniversalMotion();
+  syncCatalogFromBackend();
+  initBusinessContactActions();
 });
+
+async function syncCatalogFromBackend() {
+  try {
+    const payload = await window.keyanApiRequest('/products?per_page=60');
+    const remoteProducts = Array.isArray(payload.data) ? payload.data : [];
+    if (!remoteProducts.length) return;
+
+    CATALOG_ITEMS = remoteProducts;
+    const quoteOnlyIds = new Set(remoteProducts.filter(isProductQuoteOnly).map(product => product.id));
+    const filteredCart = cartBasket.filter(item => !quoteOnlyIds.has(item.id));
+    if (filteredCart.length !== cartBasket.length) {
+      cartBasket = filteredCart;
+      saveCartToStorage();
+    }
+    renderFeaturedProducts('all');
+    if (typeof window.applyCatalogueFilters === 'function') window.applyCatalogueFilters();
+    window.dispatchEvent(new CustomEvent('keyan:catalog-updated'));
+  } catch (error) {
+    // The existing in-page catalogue remains available when the API is offline.
+    console.info('Keyan API unavailable; using the local catalogue.', error.message);
+  }
+}
+
+/*
+ * Universal interaction layer.
+ * Page-specific files can keep their own visual language; this adds a shared
+ * depth response to every existing and dynamically-rendered surface.
+ */
+function initUniversalMotion() {
+  if (document.body.classList.contains('no-hover-page')) return;
+  const disableCardRotation = document.body.classList.contains('no-card-rotation');
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const sectionObserver = !reduceMotion && 'IntersectionObserver' in window
+    ? new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('motion-visible');
+          sectionObserver.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -70px 0px', threshold: 0.08 })
+    : null;
+  const surfaceSelector = [
+    '.explore-featured-hero', '.explore-split-card', '.explore-bottom-banner',
+    '.industry-card-premium', '.product-card-clean', '.benefit-card-animated',
+    '.rfq-conversion-banner', '.brand-strip-tile', '.brand-chip',
+    '.cat-image-panel-wrap', '.cat-info-panel-wrap', '.b2b-product-card',
+    '.cat-brand-pill', '.cat-finder-quick-btn', '.cat-preview-container',
+    '.cat-discovery-filter-card', '.cat-cta-contact-box', '.ind-stat-card',
+    '.ind-sector-card', '.ind-cap-card', '.ind-rfq-card', '.cnt-main-card',
+    '.cnt-info-card', '.cnt-dark-card', '.built-map-box', '.location-info-box',
+    '.location-map-wrapper', '.cta-box-wrapper', '.pd-gallery-container',
+    '.pd-info-container', '.pd-main-img-stage', '.pd-price-card',
+    '.pd-purchasing-box', '.pd-trust-strip', '.pd-trust-item',
+    '.pd-tab-content-panel', '.pd-rfq-card', '.prod-filter-card', '.prod-card',
+    '.chk-form-card', '.chk-review-card',
+    '.chk-pay-option-card', '.cart-items-card', '.cart-summary-card',
+    '.cart-item-row', '.portal-feature-item', '.portal-quote-card', '.sso-tile-btn',
+    '.form-container-wide', '.timeline-card', '.route-step', '.why-card', '.dna-panel',
+    '.ecosystem-detail-card', '.eco-nav-item', '.eco-chip', '.hud-vertical-item',
+    '.cat-tag-pill', '.cat-nav-item', '.pd-thumb-box', '.chk-step-box',
+    '.chk-form-group', '.cnt-input-group', '.qv-modal-card', '.prod-depth-card',
+    '.map-route-bar', '.location-detail-list', '.brand-marquee-row'
+  ].join(',');
+
+  const applyMotion = (root = document) => {
+    const find = selector => {
+      const elements = [];
+      if (root.nodeType === 1 && root.matches(selector)) elements.push(root);
+      elements.push(...root.querySelectorAll(selector));
+      return elements;
+    };
+
+    find('section:not(.reveal-on-scroll):not(.reveal-from-left):not(.reveal-from-right):not(.reveal-from-bottom):not(.reveal-from-top):not(.reveal-3d-pop)').forEach((section, index) => {
+      section.classList.add('motion-section');
+      section.style.setProperty('--motion-delay', `${Math.min(index * 70, 420)}ms`);
+      if (sectionObserver) sectionObserver.observe(section);
+      else section.classList.add('motion-visible');
+    });
+
+    find(surfaceSelector).forEach(surface => {
+      if (surface.dataset.motionReady === 'true') return;
+      surface.dataset.motionReady = 'true';
+      surface.classList.add('motion-surface');
+      if (disableCardRotation) surface.classList.add('no-card-rotation-surface');
+
+      if (reduceMotion) return;
+
+      surface.addEventListener('pointermove', event => {
+        if (event.pointerType && event.pointerType !== 'mouse') return;
+        const nearestSurface = event.target && event.target.closest
+          ? event.target.closest('.motion-surface')
+          : surface;
+        if (nearestSurface !== surface) {
+          surface.style.setProperty('--motion-rotate-y', '0deg');
+          surface.style.setProperty('--motion-rotate-x', '1.5deg');
+          return;
+        }
+        const bounds = surface.getBoundingClientRect();
+        const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+        const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+        surface.style.setProperty('--motion-rotate-y', `${(x * 5).toFixed(2)}deg`);
+        surface.style.setProperty('--motion-rotate-x', `${(-y * 5).toFixed(2)}deg`);
+      });
+
+      surface.addEventListener('pointerleave', () => {
+        surface.style.setProperty('--motion-rotate-y', '0deg');
+        surface.style.setProperty('--motion-rotate-x', '1.5deg');
+      });
+    });
+
+    find('button, a[href]').forEach(action => {
+      if (!action.dataset.motionAction && !action.closest('.motion-surface')) {
+        action.dataset.motionAction = 'true';
+        action.classList.add('motion-action');
+      }
+    });
+  };
+
+  applyMotion();
+
+  // Product cards and shared header/footer components can be inserted after
+  // the initial page load, so keep the same effects on new content.
+  if ('MutationObserver' in window) {
+    const motionObserver = new MutationObserver(records => {
+      records.forEach(record => record.addedNodes.forEach(node => {
+        if (node.nodeType === 1) applyMotion(node);
+      }));
+    });
+    motionObserver.observe(document.body, { childList: true, subtree: true });
+  }
+}
 
 // Scroll Reveal Intersection Observer
 function initScrollReveal() {
   const revealElements = document.querySelectorAll('.reveal-on-scroll, .reveal-from-left, .reveal-from-right, .reveal-from-bottom, .reveal-from-top, .reveal-3d-pop');
-  
+
   if (!('IntersectionObserver' in window)) {
     revealElements.forEach(el => el.classList.add('reveal-active'));
     return;
@@ -299,25 +479,22 @@ function renderFeaturedProducts(categoryFilter = 'all') {
   container.innerHTML = filtered.map(p => `
     <div class="product-card-clean">
       <div class="product-img-stage">
-        <img src="${p.img}" alt="${p.name}" class="product-photo" loading="lazy">
+        <img src="${p.img || 'iamges/hero.jpg'}" alt="${p.name}" class="product-photo" loading="lazy">
       </div>
 
       <div class="product-info-wrap">
         <span class="product-meta-cat">${p.categoryName}</span>
         <h4 class="product-name-title">${p.name}</h4>
-        <div class="product-brand-tag"><i class="fas fa-tag"></i> ${p.brand}</div>
+        <div class="product-brand-tag"><i class="fas fa-tag"></i> ${p.brand || 'Keyan Corporation'}</div>
         
         <div class="product-stock-status">
           <i class="fas fa-circle"></i> ${p.availability}
         </div>
 
         <div class="product-actions-group">
-          <button class="btn-card-buy" onclick="handleBuyNow('${p.id}')" title="Buy Now">
-            <i class="fas fa-bolt"></i> Buy Now
-          </button>
-          <button class="btn-card-quote" onclick="addToQuote('${p.id}')" title="Request Quote">
-            <i class="fas fa-file-signature"></i> Request Quote
-          </button>
+          ${isProductQuoteOnly(p)
+            ? `<button class="btn-card-quote btn-card-quote-only" onclick="requestProductQuote('${p.id}')" title="Request Quote"><i class="fas fa-file-signature"></i> Request Quote</button>`
+            : `<button class="btn-card-buy" onclick="handleBuyNow('${p.id}')" title="Buy Now"><i class="fas fa-bolt"></i> Buy Now</button>`}
         </div>
       </div>
     </div>
@@ -327,9 +504,31 @@ function renderFeaturedProducts(categoryFilter = 'all') {
 function handleBuyNow(productId) {
   const item = CATALOG_ITEMS.find(p => p.id === productId);
   if (!item) return;
-  addToQuote(productId);
-  showToast(`"${item.name}" added for Immediate Purchase.`);
-  openQuoteDrawer();
+  if (isProductQuoteOnly(item)) {
+    requestProductQuote(productId);
+    return;
+  }
+  const existing = cartBasket.find(cartItem => cartItem.id === productId);
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    cartBasket.push({
+      id: item.id,
+      sku: item.sku,
+      name: item.name,
+      brand: item.brand,
+      category: item.category,
+      categoryName: item.categoryName,
+      shortDesc: item.shortDesc,
+      availability: item.availability,
+      price_usd: item.price_usd,
+      img: item.img,
+      qty: 1
+    });
+  }
+  saveCartToStorage();
+  showToast(`"${item.name}" added to your cart.`);
+  window.location.href = 'cart.html';
 }
 
 function initTabs() {
@@ -359,11 +558,45 @@ function addToQuote(productId) {
   showToast(`"${item.name}" added to Quote List.`);
 }
 
+// Send a product-card quote request directly to the Contact Us form.
+function requestProductQuote(productId) {
+  let item = CATALOG_ITEMS.find(product => product.id === productId);
+
+  // Category-page products live in categories.js, so use that catalogue when
+  // the request originated from the category discovery cards.
+  if (!item && typeof ALL_DISCOVERY_PRODUCTS !== 'undefined') {
+    item = ALL_DISCOVERY_PRODUCTS.find(product => product.id === productId);
+  }
+
+  if (!item) {
+    window.location.href = 'contact.html?quote=1#contactFormMain';
+    return;
+  }
+
+  const quoteRequest = {
+    id: item.id,
+    name: item.name,
+    sku: item.sku || '',
+    brand: item.brand || '',
+    category: item.categoryName || item.category || '',
+    specs: item.specs || ''
+  };
+
+  sessionStorage.setItem('keyan_quote_request', JSON.stringify(quoteRequest));
+  const quotePath = `contact.html?quote=${encodeURIComponent(item.id)}#contactFormMain`;
+  if (!isCustomerAuthenticated()) {
+    window.location.href = `login.html?return=${encodeURIComponent(quotePath)}`;
+    return;
+  }
+
+  window.location.href = quotePath;
+}
+
 function updateQuoteBadge() {
   const stored = localStorage.getItem('keyan_cart');
   const cart = stored ? JSON.parse(stored) : quoteBasket;
   const count = cart.reduce((sum, i) => sum + (i.qty || 1), 0);
-  
+
   const badge = document.getElementById('quoteCartCount');
   if (badge) badge.innerText = count;
   const headerBadge = document.getElementById('cartHeaderBadge');
@@ -402,7 +635,7 @@ function openQuoteDrawer() {
           <img src="${imgSrc}" alt="${item.name}" class="drawer-item-img">
           
           <div class="drawer-item-info">
-            <div class="drawer-item-sku">SKU: ${item.sku || 'KEY-PROD-' + (index+1)}</div>
+            <div class="drawer-item-sku">SKU: ${item.sku || 'KEY-PROD-' + (index + 1)}</div>
             <h5 class="drawer-item-title">${item.name}</h5>
             <div class="drawer-item-unit-price">$${price.toFixed(2)} USD / Unit</div>
           </div>
@@ -471,9 +704,9 @@ function handleSearchSubmit(event) {
   if (event) event.preventDefault();
   let term = '';
   if (event && event.target) {
-    const input = event.target.querySelector('input[name="q"]') || 
-                  event.target.querySelector('input[type="text"]') || 
-                  document.getElementById('headerSearchInput');
+    const input = event.target.querySelector('input[name="q"]') ||
+      event.target.querySelector('input[type="text"]') ||
+      document.getElementById('headerSearchInput');
     if (input) term = input.value.trim();
   }
   if (!term) {
@@ -507,6 +740,10 @@ function quickSearchTag(tag) {
 }
 
 function openModal(id) {
+  if (id === 'quoteModal' && !document.body.classList.contains('cnt-page-body')) {
+    window.location.href = 'contact.html?inquiry=1#contactFormMain';
+    return;
+  }
   const modal = document.getElementById(id);
   if (modal) modal.classList.add('active');
 }
@@ -518,10 +755,43 @@ function closeModal(id) {
 
 function handleFormSubmit(event, title) {
   event.preventDefault();
-  showToast(`Thank you! Your ${title} has been submitted to Keyan Corporation sales team.`);
-  event.target.reset();
-  const activeModal = event.target.closest('.modal-backdrop');
-  if (activeModal) activeModal.classList.remove('active');
+  const form = event.target;
+  const inputs = [...form.querySelectorAll('input, textarea, select')].filter(field => field.value.trim());
+  const email = form.querySelector('input[type="email"]')?.value.trim() || '';
+  const phone = form.querySelector('input[type="tel"]')?.value.trim() || '';
+  const textInputs = [...form.querySelectorAll('input[type="text"]')].map(field => field.value.trim()).filter(Boolean);
+  const messageField = form.querySelector('textarea');
+  const details = inputs
+    .filter(field => field !== messageField && field.type !== 'email' && field.type !== 'tel')
+    .map(field => `${field.previousElementSibling?.innerText || field.placeholder || 'Requirement'}: ${field.value.trim()}`);
+
+  const submitButton = form.querySelector('button[type="submit"]');
+  if (submitButton) submitButton.disabled = true;
+
+  const request = {
+    first_name: textInputs[0] || '',
+    company_name: textInputs[1] || '',
+    email,
+    phone,
+    subject: title,
+    message: [details.join('\n'), messageField?.value.trim() || ''].filter(Boolean).join('\n\n') || title,
+    source: 'website-modal'
+  };
+
+  window.keyanApiRequest('/quote-requests', {
+    method: 'POST',
+    body: JSON.stringify(request)
+  }).then(payload => {
+    const reference = payload.data?.reference ? ` Reference: ${payload.data.reference}.` : '';
+    showToast(`Thank you! Your ${title} has been submitted.${reference}`);
+    form.reset();
+    const activeModal = form.closest('.modal-backdrop');
+    if (activeModal) activeModal.classList.remove('active');
+  }).catch(error => {
+    showToast(error.message || 'We could not submit your request. Please try again.');
+  }).finally(() => {
+    if (submitButton) submitButton.disabled = false;
+  });
 }
 
 function showToast(message) {
@@ -599,11 +869,15 @@ function loadExternalComponents() {
         headerContainer.innerHTML = data;
         highlightActiveNavLinks();
         updateCartBadgeCount();
+        updateCustomerHeader();
+        initBusinessContactActions();
       })
       .catch(err => console.log('Header load error:', err));
   } else {
     highlightActiveNavLinks();
     updateCartBadgeCount();
+    updateCustomerHeader();
+    initBusinessContactActions();
   }
 
   const footerContainer = document.getElementById('footer-container');
@@ -612,10 +886,84 @@ function loadExternalComponents() {
       .then(res => res.text())
       .then(data => {
         footerContainer.innerHTML = data;
+        initBusinessContactActions();
       })
       .catch(err => console.log('Footer load error:', err));
   }
 }
+
+function initBusinessContactActions() {
+  document.querySelectorAll('.utility-right, .mobile-nav-contact').forEach(container => {
+    if (container.querySelector('[data-keyan-secondary-phone], a[href="tel:+919825206341"]')) return;
+
+    const phoneLink = document.createElement('a');
+    phoneLink.href = 'tel:+919825206341';
+    phoneLink.dataset.keyanSecondaryPhone = 'true';
+    phoneLink.innerHTML = '<i class="fas fa-phone-alt"></i> +91 9825206341';
+    const gstin = container.querySelector('.utility-gstin');
+    if (gstin) gstin.before(phoneLink);
+    else container.appendChild(phoneLink);
+  });
+
+  if (document.querySelector('.keyan-whatsapp-float')) return;
+
+  const whatsappLink = document.createElement('a');
+  whatsappLink.className = 'keyan-whatsapp-float';
+  whatsappLink.href = `https://wa.me/${KEYAN_WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello Keyan Corporation, I need help with a product or quotation.')}`;
+  whatsappLink.target = '_blank';
+  whatsappLink.rel = 'noopener noreferrer';
+  whatsappLink.setAttribute('aria-label', 'Chat with Keyan Corporation on WhatsApp');
+  whatsappLink.innerHTML = '<i class="fab fa-whatsapp"></i><span>WhatsApp Us</span>';
+  document.body.appendChild(whatsappLink);
+}
+
+async function updateCustomerHeader() {
+  const accountLinks = document.querySelectorAll('.tool-item[href="login.html"], .mobile-nav-actions a[href="login.html"]');
+  const accountButtons = document.querySelectorAll('.header-rfq-btn, .mobile-nav-actions .btn-orange');
+  const customerChatLinks = document.querySelectorAll('.customer-chat-nav');
+  const token = localStorage.getItem('keyan_api_token');
+  let customer = null;
+  let unreadMessages = 0;
+
+  if (token && typeof window.keyanApiRequest === 'function') {
+    try {
+      const payload = await window.keyanApiRequest('/auth/me');
+      customer = payload.data || null;
+      const quotePayload = await window.keyanApiRequest('/quote-requests');
+      unreadMessages = (quotePayload.data || []).reduce((total, quote) => total + Number(quote.unread_messages_count || 0), 0);
+    } catch (error) {
+      localStorage.removeItem('keyan_api_token');
+    }
+  }
+
+  const label = customer ? (customer.name || 'Customer Details') : 'Login / Register';
+  accountLinks.forEach(link => {
+    link.title = customer ? 'View customer details' : 'Login or register';
+    const text = link.querySelector('span:not(.tool-badge)');
+    if (text) text.textContent = customer ? 'Account' : 'Account';
+  });
+  accountButtons.forEach(button => {
+    button.innerHTML = `<i class="fas fa-user-circle"></i> ${label}`;
+    button.onclick = () => {
+      if (typeof closeMobileNav === 'function') closeMobileNav();
+    window.location.href = customer ? 'customer-portal.html' : 'login.html';
+    };
+  });
+  customerChatLinks.forEach(link => {
+    link.href = customer ? 'customer-portal.html' : 'login.html?return=customer-portal.html';
+    link.classList.toggle('has-new-request', unreadMessages > 0);
+    link.querySelectorAll('[data-chat-unread-badge]').forEach(badge => {
+      badge.textContent = unreadMessages;
+      badge.hidden = unreadMessages === 0;
+    });
+    link.querySelectorAll('[data-chat-new-label]').forEach(label => { label.hidden = unreadMessages === 0; });
+  });
+}
+
+// Keep the red unread indicator current while the customer browses the catalogue.
+setInterval(() => {
+  if (document.querySelector('.customer-chat-nav')) updateCustomerHeader();
+}, 30000);
 
 function updateCartBadgeCount() {
   const stored = localStorage.getItem('keyan_cart');
@@ -678,5 +1026,3 @@ function highlightActiveNavLinks() {
     if (mobHomeLink) mobHomeLink.classList.add('active');
   }
 }
-
-

@@ -39,6 +39,13 @@ function renderCartPage() {
     summaryContainer.style.pointerEvents = 'auto';
   }
 
+  const checkoutButton = document.getElementById('cartCheckoutButton');
+  if (checkoutButton) {
+    checkoutButton.innerHTML = isCustomerAuthenticated()
+      ? 'PROCEED TO CHECKOUT <i class="fas fa-arrow-right"></i>'
+      : 'LOGIN / REGISTER TO CHECKOUT <i class="fas fa-user-lock"></i>';
+  }
+
   // Render Line Item Rows
   container.innerHTML = cartBasket.map((item, index) => {
     const unitPrice = item.price_usd || 125.00;
@@ -54,6 +61,7 @@ function renderCartPage() {
             <span>SKU: ${item.sku || 'KEY-PROD-001'}</span>
           </div>
           <h4><a href="product-detail.html?id=${item.id}">${item.name}</a></h4>
+          <div class="cart-item-meta">${item.categoryName || item.category || ''}${item.availability ? ` · ${item.availability}` : ''}</div>
           <div class="cart-item-price-unit">$${unitPrice.toFixed(2)} USD / Unit</div>
         </div>
 
@@ -147,5 +155,6 @@ function proceedToCheckout() {
     showToast('Your cart is empty. Add products to proceed.');
     return;
   }
+  if (!requireCustomerAuth('checkout.html')) return;
   window.location.href = 'checkout.html';
 }

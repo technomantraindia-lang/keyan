@@ -13,10 +13,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
   <!-- CSS Stylesheets -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260916-1">
   <link rel="stylesheet" href="contact.css">
 </head>
-<body class="cnt-page-body">
+<body class="cnt-page-body no-card-rotation">
 
   <!-- UNIFIED MASTER HEADER CONTAINER -->
   <div id="header-container">
@@ -29,6 +29,7 @@
         </div>
         <div class="utility-right">
           <a href="tel:+919825207743"><i class="fas fa-phone-alt"></i> +91 9825207743</a>
+          <a href="tel:+919825206341"><i class="fas fa-phone-alt"></i> +91 9825206341</a>
           <a href="mailto:sales@keyancorporation.com"><i class="fas fa-envelope"></i> sales@keyancorporation.com</a>
           <span class="utility-gstin">| GSTIN: 24BWNPV1980J1ZV</span>
         </div>
@@ -61,10 +62,12 @@
         </ul>
         <div class="mobile-nav-actions">
           <a href="login.html" class="btn btn-navy btn-full"><i class="far fa-user"></i> Account Login</a>
+          <a href="login.html?return=customer-portal.html" class="btn btn-navy btn-full customer-chat-nav"><i class="fas fa-comments"></i> Chat <span class="chat-new-label" data-chat-new-label hidden>New request</span><span class="chat-unread-badge" data-chat-unread-badge hidden>0</span></a>
           <button class="btn btn-orange btn-full" onclick="closeMobileNav(); openModal('quoteModal');"><i class="fas fa-paper-plane"></i> Submit RFQ</button>
         </div>
         <div class="mobile-nav-contact">
           <a href="tel:+919825207743"><i class="fas fa-phone-alt"></i> +91 9825207743</a>
+          <a href="tel:+919825206341"><i class="fas fa-phone-alt"></i> +91 9825206341</a>
           <a href="mailto:sales@keyancorporation.com"><i class="fas fa-envelope"></i> sales@keyancorporation.com</a>
         </div>
       </div>
@@ -100,6 +103,11 @@
               <i class="far fa-user"></i>
               <span>Account</span>
             </a>
+            <a href="login.html?return=customer-portal.html" class="tool-item customer-chat-nav" title="Open customer chat">
+              <i class="fas fa-comments"></i>
+              <span>Chat</span>
+              <span class="tool-badge chat-unread-badge" data-chat-unread-badge hidden>0</span>
+            </a>
             <a href="cart.html" class="tool-item" title="View Shopping Cart">
               <i class="fas fa-shopping-cart"></i>
               <span>Cart</span>
@@ -107,9 +115,9 @@
             </a>
           </div>
 
-          <button class="btn btn-orange header-rfq-btn" onclick="if(typeof openModal === 'function') openModal('quoteModal')">
-            <i class="fas fa-paper-plane"></i> Request Quote
-          </button>
+          <a href="login.html" class="btn btn-orange header-rfq-btn">
+            <i class="fas fa-user-circle"></i> Customer Details
+          </a>
 
           <button class="mobile-hamburger" id="mobileNavBtn" onclick="toggleMobileNav()" aria-label="Toggle Navigation Menu">
             <i class="fas fa-bars"></i>
@@ -170,7 +178,8 @@
                 <div>
                   <div class="cnt-info-label">Phone</div>
                   <div class="cnt-info-value">
-                    <a href="tel:+919825207743">+91 9825207743</a>
+                    <a href="tel:+919825207743">+91 9825207743</a><br>
+                    <a href="tel:+919825206341">+91 9825206341</a>
                   </div>
                 </div>
               </div>
@@ -220,7 +229,7 @@
           </div>
 
           <!-- RIGHT COLUMN: FLOATING DARK NAVY FORM CARD -->
-          <div class="cnt-right-col">
+          <div id="inquiry" class="cnt-right-col">
             <div class="cnt-dark-card">
               
               <!-- Corner Ribbon Badge -->
@@ -263,6 +272,11 @@
                     <label for="cntPhone">Phone Number *</label>
                     <input type="tel" id="cntPhone" required placeholder="+91 98765 43210">
                   </div>
+                </div>
+
+                <div class="cnt-input-group" style="margin-bottom: 1.2rem;">
+                  <label for="cntCompany">Company / Organisation</label>
+                  <input type="text" id="cntCompany" placeholder="Your company name">
                 </div>
 
                 <div class="cnt-input-group" style="margin-bottom: 1.2rem;">
@@ -469,7 +483,8 @@
   </div>
 
   <!-- JavaScript Scripts -->
-  <script src="app.js"></script>
+  <script src="app.js?v=20260916-1"></script>
   <script src="contact.js"></script>
+<a class="keyan-whatsapp-float" href="https://wa.me/919825206341?text=Hello%20Keyan%20Corporation%2C%20I%20need%20help%20with%20a%20product%20or%20quotation." target="_blank" rel="noopener noreferrer" aria-label="Chat with Keyan Corporation on WhatsApp"><i class="fab fa-whatsapp"></i><span>WhatsApp Us</span></a>
 </body>
 </html>

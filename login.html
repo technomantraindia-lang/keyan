@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260916-1">
   <style>
     /* B2B SPLIT SCREEN PREMIUM LOGIN & REGISTER PORTAL */
     * {
@@ -428,6 +428,28 @@
       display: block;
     }
 
+    .account-details-panel {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 1.4rem;
+    }
+
+    .account-details-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.3rem;
+    }
+
+    .account-details-heading > i { color: var(--orange-accent); font-size: 1.8rem; }
+    .account-details-heading h3 { color: var(--navy-deep); font-size: 1rem; margin-bottom: 0.2rem; }
+    .account-details-heading p { color: var(--text-muted); font-size: 0.78rem; }
+    .account-plain-input { padding-left: 1rem; background: #FFFFFF; }
+    .account-logout-btn { width: 100%; margin-top: 1rem; padding: 0.75rem; border: 1px solid #CBD5E1; border-radius: 9px; background: #FFFFFF; color: var(--navy-deep); font-weight: 700; cursor: pointer; }
+    .auth-cancel-btn { width: 100%; margin-top: 0.75rem; padding: 0.8rem; border: 1px solid #CBD5E1; border-radius: 9px; background: #FFFFFF; color: var(--navy-deep); font-weight: 700; cursor: pointer; transition: background-color 0.2s ease, border-color 0.2s ease; }
+    .auth-cancel-btn:hover { background: #F1F5F9; border-color: var(--marine-blue); }
+
     /* Detailed Multi-Device Responsive Rules */
     @media (max-width: 992px) {
       .split-portal-container {
@@ -489,7 +511,7 @@
     }
   </style>
 </head>
-<body class="split-login-body">
+<body class="split-login-body no-card-rotation">
 
   <div class="split-portal-container">
     
@@ -560,6 +582,20 @@
           </button>
         </div>
 
+        <section id="accountPanel" class="form-panel account-details-panel">
+          <div class="account-details-heading"><i class="fas fa-user-circle"></i><div><h3>Customer account details</h3><p>Review or update the details used for your orders.</p></div></div>
+          <form onsubmit="saveAccountDetails(event)">
+            <div class="b2b-form-group"><label class="b2b-label" for="accountName">FULL NAME *</label><input id="accountName" class="b2b-input-field account-plain-input" required></div>
+            <div class="b2b-form-group"><label class="b2b-label" for="accountEmail">EMAIL *</label><input id="accountEmail" type="email" class="b2b-input-field account-plain-input" required></div>
+            <div class="b2b-form-group"><label class="b2b-label" for="accountCompany">COMPANY</label><input id="accountCompany" class="b2b-input-field account-plain-input"></div>
+            <div class="b2b-form-group"><label class="b2b-label" for="accountPhone">PHONE</label><input id="accountPhone" type="tel" class="b2b-input-field account-plain-input"></div>
+            <div class="b2b-form-group"><label class="b2b-label" for="accountGstin">GSTIN / TAX ID</label><input id="accountGstin" class="b2b-input-field account-plain-input"></div>
+            <button type="submit" class="btn-b2b-submit"><i class="fas fa-save"></i> SAVE CUSTOMER DETAILS</button>
+          </form>
+          <a href="customer-portal.html" class="account-logout-btn" style="display:block;text-align:center;text-decoration:none;background:#063B5C;color:#fff;border-color:#063B5C;"><i class="fas fa-comments"></i> Open Message Center</a>
+          <button type="button" class="account-logout-btn" onclick="logoutCustomer()"><i class="fas fa-sign-out-alt"></i> Log out</button>
+        </section>
+
         <!-- PANEL 1: CUSTOMER LOGIN -->
         <div id="panelLogin" class="form-panel active">
           <form onsubmit="handlePortalAuth(event, 'Customer Portal Login')">
@@ -591,18 +627,8 @@
             <button type="submit" class="btn-b2b-submit">
               <i class="fas fa-sign-in-alt"></i> Access B2B Portal
             </button>
+            <button type="button" class="auth-cancel-btn" onclick="window.location.href='index.html'">Cancel</button>
           </form>
-
-          <div class="b2b-or-divider"><span>OR LOG IN WITH ENTERPRISE SSO</span></div>
-
-          <div class="b2b-sso-grid">
-            <button class="sso-tile-btn" onclick="alert('Microsoft Azure B2B Single Sign-On Activated')">
-              <i class="fab fa-microsoft" style="color:#00A4EF;"></i> Microsoft B2B
-            </button>
-            <button class="sso-tile-btn" onclick="alert('Google Workspace Enterprise SSO Activated')">
-              <i class="fab fa-google" style="color:#EA4335;"></i> Google Workspace
-            </button>
-          </div>
 
           <div class="b2b-form-footer">
             Need a B2B Procurement Account? <a href="#" onclick="showPanel('register')">Register Company</a>
@@ -622,18 +648,11 @@
             </div>
 
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
-              <div class="b2b-form-group">
+              <div class="b2b-form-group" style="grid-column: 1 / -1;">
                 <label class="b2b-label">Corporate Email *</label>
                 <div class="b2b-input-box">
                   <i class="fas fa-envelope b2b-input-icon"></i>
                   <input type="email" class="b2b-input-field" placeholder="procurement@company.com" required>
-                </div>
-              </div>
-              <div class="b2b-form-group">
-                <label class="b2b-label">GSTIN / Tax ID *</label>
-                <div class="b2b-input-box">
-                  <i class="fas fa-id-card b2b-input-icon"></i>
-                  <input type="text" class="b2b-input-field" placeholder="24BWNPV1980J1ZV" required>
                 </div>
               </div>
             </div>
@@ -658,6 +677,7 @@
             <button type="submit" class="btn-b2b-submit">
               <i class="fas fa-user-check"></i> Register B2B Enterprise Account
             </button>
+            <button type="button" class="auth-cancel-btn" onclick="showPanel('login')">Cancel</button>
           </form>
 
           <div class="b2b-form-footer" style="margin-top: 1.5rem;">
@@ -701,6 +721,71 @@
   </div>
 
   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (localStorage.getItem('keyan_api_token')) loadAccountDetails();
+    });
+
+    function getSafeReturnPath(defaultPath = 'index.html') {
+      const returnPath = new URLSearchParams(window.location.search).get('return');
+      return returnPath && !returnPath.includes('://') && !returnPath.startsWith('//')
+        ? returnPath
+        : defaultPath;
+    }
+
+    async function loadAccountDetails() {
+      try {
+        const payload = await window.keyanApiRequest('/auth/me');
+        const customer = payload.data || {};
+        const returnPath = getSafeReturnPath('');
+        if (returnPath) {
+          window.location.href = returnPath;
+          return;
+        }
+
+        document.getElementById('accountName').value = customer.name || '';
+        document.getElementById('accountEmail').value = customer.email || '';
+        document.getElementById('accountCompany').value = customer.company_name || '';
+        document.getElementById('accountPhone').value = customer.phone || '';
+        document.getElementById('accountGstin').value = customer.gstin || '';
+        document.querySelector('.b2b-tab-row').style.display = 'none';
+        document.querySelectorAll('#panelLogin, #panelRegister').forEach(panel => panel.classList.remove('active'));
+        document.getElementById('accountPanel').classList.add('active');
+        document.getElementById('panelTitle').innerText = 'Customer Details';
+        document.getElementById('panelSub').innerText = 'Your account is signed in. Update your details or continue shopping.';
+      } catch (error) {
+        localStorage.removeItem('keyan_api_token');
+      }
+    }
+
+    async function saveAccountDetails(event) {
+      event.preventDefault();
+      const button = event.target.querySelector('button[type="submit"]');
+      if (button) button.disabled = true;
+      try {
+        await window.keyanApiRequest('/auth/me', {
+          method: 'PUT',
+          body: JSON.stringify({
+            name: document.getElementById('accountName').value.trim(),
+            email: document.getElementById('accountEmail').value.trim(),
+            company_name: document.getElementById('accountCompany').value.trim(),
+            phone: document.getElementById('accountPhone').value.trim(),
+            gstin: document.getElementById('accountGstin').value.trim()
+          })
+        });
+        alert('Customer details updated successfully.');
+      } catch (error) {
+        alert(error.message || 'Unable to update customer details.');
+      } finally {
+        if (button) button.disabled = false;
+      }
+    }
+
+    async function logoutCustomer() {
+      try { await window.keyanApiRequest('/auth/logout', { method: 'POST' }); } catch (error) {}
+      localStorage.removeItem('keyan_api_token');
+      window.location.href = 'login.html';
+    }
+
     function showPanel(panelName) {
       document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.b2b-tab-btn').forEach(b => b.classList.remove('active'));
@@ -732,11 +817,53 @@
       }
     }
 
-    function handlePortalAuth(event, portalTitle) {
+    async function handlePortalAuth(event, portalTitle) {
       event.preventDefault();
-      alert(`Success! ${portalTitle} authenticated successfully.\nRedirecting to Keyan B2B Dashboard...`);
-      window.location.href = 'index.html';
+      const form = event.target;
+      const fields = [...form.querySelectorAll('input')];
+      const password = form.querySelector('input[type="password"]')?.value || '';
+      const email = form.querySelector('input[type="email"]')?.value || fields.find(field => field.type === 'text')?.value || '';
+      const isRegister = form.closest('#panelRegister');
+
+      if (typeof window.keyanApiRequest !== 'function') {
+        alert('The backend is not running. Start Laravel with: php artisan serve');
+        return;
+      }
+
+      const submitButton = form.querySelector('button[type="submit"]');
+      if (submitButton) submitButton.disabled = true;
+
+      try {
+        const payload = isRegister
+          ? await window.keyanApiRequest('/auth/register', {
+              method: 'POST',
+              body: JSON.stringify({
+                name: fields[0]?.value || '',
+                email,
+                password,
+                password_confirmation: password,
+                company_name: fields[0]?.value || '',
+                phone: fields.find(field => field.type === 'tel')?.value || ''
+              })
+            })
+          : await window.keyanApiRequest('/auth/login', {
+              method: 'POST',
+              body: JSON.stringify({ email, password })
+            });
+
+        const token = payload.data?.token;
+        if (token) localStorage.setItem('keyan_api_token', token);
+        const safeReturnPath = getSafeReturnPath('index.html');
+        alert(`Success! ${portalTitle} completed successfully.\nContinuing to your purchase...`);
+        window.location.href = safeReturnPath;
+      } catch (error) {
+        alert(error.message || 'Unable to complete authentication.');
+      } finally {
+        if (submitButton) submitButton.disabled = false;
+      }
     }
   </script>
+  <script src="app.js?v=20260916-1"></script>
+<a class="keyan-whatsapp-float" href="https://wa.me/919825206341?text=Hello%20Keyan%20Corporation%2C%20I%20need%20help%20with%20a%20product%20or%20quotation." target="_blank" rel="noopener noreferrer" aria-label="Chat with Keyan Corporation on WhatsApp"><i class="fab fa-whatsapp"></i><span>WhatsApp Us</span></a>
 </body>
 </html>

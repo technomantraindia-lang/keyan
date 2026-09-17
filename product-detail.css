@@ -121,18 +121,13 @@
   justify-content: center;
   padding: 2rem;
   box-shadow: var(--shadow-subtle);
-  cursor: zoom-in;
+  cursor: default;
 }
 
 .pd-main-img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  transition: transform 0.4s ease;
-}
-
-.pd-main-img-stage:hover .pd-main-img {
-  transform: scale(1.1);
 }
 
 /* Fullscreen Trigger Badge */
@@ -191,11 +186,9 @@
   object-fit: contain;
 }
 
-.pd-thumb-box:hover,
 .pd-thumb-box.active {
   border-color: var(--pd-orange);
   box-shadow: 0 0 0 3px var(--pd-orange-glow);
-  transform: translateY(-2px);
 }
 
 /* RIGHT COLUMN: PRODUCT INFO PANEL */
@@ -566,10 +559,44 @@
   display: block;
 }
 
+/* Give the combined detail sections distinct, coordinated surfaces. */
+#tab-specs { background: #ffffff; border-top: 4px solid var(--pd-orange); }
+#tab-desc { background: #fff8ef; border-color: #f3d7b7; }
+#tab-app { background: #f0f8f7; border-color: #cbe6df; }
+#tab-delivery { background: #f1f6fb; border-color: #cfdeed; }
+#tab-rfq { background: #fff3e7; border-color: #ffd3aa; }
+
+/* Product details are displayed as a continuous, readable stack instead of tabs. */
+.pd-tab-content-panel.active + .pd-tab-content-panel.active {
+  margin-top: 1.25rem;
+}
+
 /* Specifications Table */
 .pd-specs-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
+  overflow: hidden;
+  border: 1px solid var(--pd-border-light);
+  border-radius: 8px;
+}
+
+.pd-specs-table thead {
+  background: var(--pd-navy-darkest);
+  color: #FFFFFF;
+}
+
+.pd-specs-table th {
+  padding: 0.85rem 1.2rem;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+.pd-specs-table th:first-child,
+.pd-specs-table td:first-child {
+  width: 34%;
 }
 
 .pd-specs-table tr {
@@ -597,6 +624,13 @@
 .pd-specs-val {
   color: var(--pd-text-dark);
   font-weight: 500;
+}
+
+.pd-specs-empty {
+  padding: 1.25rem !important;
+  text-align: center;
+  color: var(--pd-text-muted);
+  font-style: italic;
 }
 
 /* Applications Pill Tags */

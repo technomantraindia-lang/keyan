@@ -43,12 +43,18 @@
   font-weight: 800;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
+  color: #FFFFFF !important;
 }
 
 .chk-hero-sub {
   font-size: 1.05rem;
   color: #94A3B8;
 }
+
+.chk-account-note { margin-top: -0.5rem; color: var(--chk-text-muted); font-size: 0.78rem; }
+.chk-account-note i { color: var(--chk-orange); margin-right: 0.35rem; }
+.chk-address-toggle { border: 0; background: transparent; color: var(--chk-navy-deep); font-weight: 800; padding: 0; margin: 0 0 1.1rem; cursor: pointer; }
+.chk-address-fields[hidden] { display: none; }
 
 /* 2-Column Stage */
 .chk-main-section {
@@ -260,8 +266,33 @@
 }
 
 .chk-btn-place-order:hover {
-  background: linear-gradient(135deg, #FF8C33 0%, var(--chk-orange) 100%);
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, var(--chk-orange) 0%, #D8630B 100%);
+  color: #FFFFFF;
+  transform: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  box-shadow: 0 8px 20px var(--chk-orange-glow) !important;
+}
+
+/* Keep both checkout actions visible and stable while the pointer is over them. */
+.chk-btn-place-order,
+.chk-btn-place-order:hover,
+.chk-btn-place-order:focus,
+.chk-btn-place-order:active {
+  transition: none !important;
+}
+
+body.no-hover-page .chk-btn-place-order:hover,
+body.no-hover-page .chk-btn-place-order:focus,
+body.no-hover-page .chk-btn-place-order:active {
+  background: linear-gradient(135deg, var(--chk-orange) 0%, #D8630B 100%) !important;
+  color: #FFFFFF !important;
+  transform: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  box-shadow: 0 8px 20px var(--chk-orange-glow) !important;
 }
 
 /* Order Confirmation Modal */

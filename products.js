@@ -24,8 +24,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initCategoryPillsNav();
   initProductFilters();
+  syncCategoryFilterOptions();
   applyCatalogueFilters();
 });
+
+async function syncCategoryFilterOptions() {
+  const select = document.getElementById('filterCatSelect');
+  if (!select || typeof window.keyanApiRequest !== 'function') return;
+
+  try {
+    const payload = await window.keyanApiRequest('/categories');
+    const categories = Array.isArray(payload.data) ? payload.data : [];
+    if (!categories.length) return;
+
+    const currentValue = select.value || activeCategoryFilter || 'all';
+    select.innerHTML = '<option value="all">All Categories</option>' + categories.map(category =>
+      `<option value="${escapeHtml(category.slug)}">${escapeHtml(category.name)}</option>`
+    ).join('');
+    select.value = categories.some(category => category.slug === currentValue) ? currentValue : 'all';
+    activeCategoryFilter = select.value;
+    applyCatalogueFilters();
+  } catch (error) {
+    console.info('Category filter API unavailable; using the local filter options.', error.message);
+  }
+}
+
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>'"]/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[character]));
+}
 
 // Category Navigation Pill Tabs
 function initCategoryPillsNav() {
@@ -72,9 +98,10 @@ function applyCatalogueFilters() {
 
   let filtered = CATALOG_ITEMS.filter(p => {
     const qLower = q.toLowerCase();
+    const brand = p.brand || '';
     const matchQ = !q || 
       (p.name && p.name.toLowerCase().includes(qLower)) || 
-      (p.brand && p.brand.toLowerCase().includes(qLower)) || 
+      brand.toLowerCase().includes(qLower) || 
       (p.sku && p.sku.toLowerCase().includes(qLower)) || 
       (p.categoryName && p.categoryName.toLowerCase().includes(qLower)) ||
       (p.category && p.category.toLowerCase().includes(qLower)) ||
@@ -82,7 +109,7 @@ function applyCatalogueFilters() {
       (p.specs && p.specs.toLowerCase().includes(qLower));
 
     const matchCat = catVal === 'all' || p.category === catVal || getCategorySlug(p.categoryName) === catVal;
-    const matchBrand = brandVal === 'all' || p.brand.toLowerCase().includes(brandVal.toLowerCase());
+    const matchBrand = brandVal === 'all' || brand.toLowerCase().includes(brandVal.toLowerCase());
     return matchQ && matchCat && matchBrand;
   });
 
@@ -116,12 +143,12 @@ function applyCatalogueFilters() {
     <div class="prod-card">
       <div class="prod-card-img-stage">
         <a href="product-detail.html?id=${p.id}" style="display:contents;">
-          <img src="${p.img}" alt="${p.name}" class="prod-card-img" loading="lazy">
+          <img src="${p.img || 'iamges/hero.jpg'}" alt="${p.name}" class="prod-card-img" loading="lazy">
         </a>
       </div>
       
       <div class="prod-card-body">
-        <span class="prod-card-brand"><i class="fas fa-tag"></i> ${p.brand}</span>
+        <span class="prod-card-brand"><i class="fas fa-tag"></i> ${p.brand || 'Keyan Corporation'}</span>
         <h4 class="prod-card-title">
           <a href="product-detail.html?id=${p.id}">${p.name}</a>
         </h4>
@@ -136,12 +163,9 @@ function applyCatalogueFilters() {
         </span>
 
         <div class="prod-card-actions">
-          <a href="product-detail.html?id=${p.id}" class="prod-btn-buy">
-            BUY NOW <i class="fas fa-bolt"></i>
-          </a>
-          <button class="prod-btn-rfq" onclick="addToQuote('${p.id}')" title="Request Quote">
-            <i class="fas fa-file-signature"></i> Quote
-          </button>
+          ${isProductQuoteOnly(p)
+            ? `<button class="prod-btn-rfq prod-btn-rfq-only" onclick="requestProductQuote('${p.id}')" title="Request Quote"><i class="fas fa-file-signature"></i> Request Quote</button>`
+            : `<a href="product-detail.html?id=${p.id}" class="prod-btn-buy">BUY NOW <i class="fas fa-bolt"></i></a>`}
         </div>
       </div>
     </div>
