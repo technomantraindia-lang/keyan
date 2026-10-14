@@ -178,7 +178,7 @@ async function handleCheckoutSubmit(event) {
 
   const fullName = document.getElementById('chkFullName')?.value || 'Customer';
   const companyName = document.getElementById('chkCompanyName')?.value || 'Corporate Partner';
-  const email = document.getElementById('chkEmail')?.value || 'sales@keyancorporation.com';
+  const email = document.getElementById('chkEmail')?.value || 'Info@keyancorporation.com';
   const phone = document.getElementById('chkPhone')?.value || '';
   const address = getCheckoutAddress();
   if (!address) return;
