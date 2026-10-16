@@ -28,6 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
   applyCatalogueFilters();
 });
 
+window.applyCatalogueFilters = applyCatalogueFilters;
+window.addEventListener('keyan:catalog-updated', () => {
+  applyCatalogueFilters();
+});
+
 async function syncCategoryFilterOptions() {
   const select = document.getElementById('filterCatSelect');
   if (!select || typeof window.keyanApiRequest !== 'function') return;

@@ -52,11 +52,48 @@ async function loadBackendProduct(productId) {
     localStorage.setItem(cacheKey, JSON.stringify(remoteProduct));
     applyBackendProduct(remoteProduct);
   } catch (error) {
+    if (error && (error.status === 404 || error.message?.includes('not found') || error.message?.includes('No query results'))) {
+      localStorage.removeItem(cacheKey);
+      renderDraftOrUnavailableProduct();
+      return;
+    }
     if (cachedProduct) {
       applyBackendProduct(cachedProduct);
       return;
     }
     console.info('Product detail API unavailable; showing the local catalogue.', error.message);
+  }
+}
+
+function renderDraftOrUnavailableProduct() {
+  const stageSection = document.querySelector('.pd-stage-section');
+  const tabsSection = document.querySelector('.pd-tabs-section');
+  const relatedSection = document.querySelector('.pd-related-section');
+  if (tabsSection) tabsSection.style.display = 'none';
+  if (relatedSection) relatedSection.style.display = 'none';
+  if (stageSection) {
+    stageSection.innerHTML = `
+      <div class="container" style="padding: 5rem 1rem; text-align: center; max-width: 680px; margin: 0 auto;">
+        <div style="width: 76px; height: 76px; border-radius: 50%; background: #fff0df; color: #ff7a18; display: grid; place-items: center; margin: 0 auto 1.5rem; font-size: 2.2rem; box-shadow: 0 10px 25px rgba(255,122,24,0.18);">
+          <i class="fas fa-file-alt"></i>
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <span class="badge orange" style="font-size: 0.85rem; padding: 5px 14px; font-weight: 700; border-radius: 99px; background: #fff0df; color: #b65708;">● Draft / Unpublished</span>
+        </div>
+        <h2 style="font-family: var(--font-heading, inherit); font-size: 2.1rem; color: #071525; margin-bottom: 0.85rem; font-weight: 800;">This product is in Draft</h2>
+        <p style="color: #64748b; font-size: 1.05rem; line-height: 1.65; margin-bottom: 2.2rem;">
+          The administrator has not published this product live on the storefront yet. It is currently saved as a draft.
+        </p>
+        <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+          <a href="products.html" class="btn btn-navy" style="display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border-radius: 8px; background: #071525; color: #fff; text-decoration: none; font-weight: 700;">
+            <i class="fas fa-boxes"></i> Explore Live Products
+          </a>
+          <a href="contact.html" class="btn btn-orange" style="display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border-radius: 8px; background: #ff7a18; color: #fff; text-decoration: none; font-weight: 700;">
+            <i class="fas fa-envelope"></i> Request Custom Quote
+          </a>
+        </div>
+      </div>
+    `;
   }
 }
 

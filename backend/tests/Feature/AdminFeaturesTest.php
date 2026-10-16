@@ -135,4 +135,69 @@ class AdminFeaturesTest extends TestCase
         $this->assertDatabaseHas('quote_messages', ['quote_request_id' => $quote->id, 'sender_role' => 'admin', 'body' => 'Our team will send pricing shortly.']);
         $this->assertSame('quoted', $quote->fresh()->status);
     }
+
+    public function test_admin_can_save_product_as_draft_and_toggle_live_status(): void
+    {
+        $admin = $this->createAdminUser();
+
+        $category = \App\Models\Category::create([
+            'slug' => 'draft-cat',
+            'name' => 'Draft Category',
+            'is_active' => true,
+        ]);
+
+        // 1. Admin creates product in Draft mode (is_active = 0)
+        $storeResponse = $this->actingAs($admin)->post(route('admin.products.store'), [
+            'category_id' => $category->id,
+            'sku' => 'SKU-DRAFT-1',
+            'name' => 'Draft Industrial Pump',
+            'brand' => 'Keyan Brand',
+            'price_usd' => '120.00',
+            'availability' => 'In Stock',
+            'is_active' => '0',
+        ]);
+
+        $storeResponse->assertRedirect(route('admin.products'));
+        $storeResponse->assertSessionHas('success');
+
+        $product = \App\Models\Product::where('sku', 'SKU-DRAFT-1')->firstOrFail();
+        $this->assertFalse($product->is_active);
+
+        // 2. Public API does NOT show this draft product
+        $this->getJson('/api/products')
+            ->assertOk()
+            ->assertJsonMissing(['sku' => 'SKU-DRAFT-1']);
+
+        $this->getJson('/api/products/'.$product->catalog_id)
+            ->assertNotFound();
+
+        // 3. Admin product list shows product with Draft badge and filters work
+        $this->actingAs($admin)->get(route('admin.products', ['status' => 'draft']))
+            ->assertOk()
+            ->assertSee('Draft Industrial Pump')
+            ->assertSee('Draft Only (Hidden)');
+
+        $this->actingAs($admin)->get(route('admin.products', ['status' => 'live']))
+            ->assertOk()
+            ->assertDontSee('Draft Industrial Pump');
+
+        // 4. Admin toggles product to Live with 1-click
+        $toggleResponse = $this->actingAs($admin)
+            ->post(route('admin.products.toggle-status', $product));
+
+        $toggleResponse->assertRedirect();
+        $this->assertTrue($product->fresh()->is_active);
+
+        // 5. Public API now shows this product
+        $this->getJson('/api/products')
+            ->assertOk()
+            ->assertJsonFragment(['sku' => 'SKU-DRAFT-1']);
+
+        // 6. Admin toggles product back to Draft
+        $this->actingAs($admin)
+            ->post(route('admin.products.toggle-status', $product))
+            ->assertRedirect();
+
+        $this->assertFalse($product->fresh()->is_active);
+    }
 }

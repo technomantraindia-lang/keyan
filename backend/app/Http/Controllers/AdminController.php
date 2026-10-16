@@ -54,6 +54,8 @@ class AdminController extends Controller
         return view('admin.dashboard', [
             'stats' => [
                 'products' => Product::count(),
+                'products_live' => Product::where('is_active', true)->count(),
+                'products_draft' => Product::where('is_active', false)->count(),
                 'categories' => Category::count(),
                 'orders' => Order::count(),
                 'quotes' => QuoteRequest::where('status', 'new')->count(),
@@ -74,9 +76,10 @@ class AdminController extends Controller
         }
 
         if ($request->filled('status')) {
-            if ($request->input('status') === 'active') {
+            $status = strtolower((string) $request->input('status'));
+            if ($status === 'live' || $status === 'active') {
                 $query->where('is_active', true);
-            } elseif ($request->input('status') === 'archived') {
+            } elseif ($status === 'draft' || $status === 'archived') {
                 $query->where('is_active', false);
             }
         }
@@ -94,6 +97,9 @@ class AdminController extends Controller
         return view('admin.products.index', [
             'products' => $query->paginate(12)->withQueryString(),
             'categories' => Category::orderBy('name')->get(),
+            'totalCount' => Product::count(),
+            'liveCount' => Product::where('is_active', true)->count(),
+            'draftCount' => Product::where('is_active', false)->count(),
             'filters' => $request->only(['category_id', 'status', 'search']),
         ]);
     }
@@ -105,9 +111,10 @@ class AdminController extends Controller
 
     public function productStore(Request $request): RedirectResponse
     {
-        Product::create($this->productData($request));
+        $product = Product::create($this->productData($request));
+        $statusLabel = $product->is_active ? 'published live on storefront' : 'saved as draft (hidden from storefront)';
 
-        return redirect()->route('admin.products')->with('success', 'Product created successfully.');
+        return redirect()->route('admin.products')->with('success', "Product '{$product->name}' created and {$statusLabel}.");
     }
 
     public function productEdit(Product $product): View
@@ -118,8 +125,9 @@ class AdminController extends Controller
     public function productUpdate(Request $request, Product $product): RedirectResponse
     {
         $product->update($this->productData($request, $product));
+        $statusLabel = $product->is_active ? 'published live on storefront' : 'saved as draft (hidden from storefront)';
 
-        return redirect()->route('admin.products')->with('success', 'Product updated successfully.');
+        return redirect()->route('admin.products')->with('success', "Product '{$product->name}' updated and {$statusLabel}.");
     }
 
     public function productToggleStatus(Product $product): RedirectResponse
@@ -127,9 +135,9 @@ class AdminController extends Controller
         $newStatus = ! $product->is_active;
         $product->update(['is_active' => $newStatus]);
 
-        $label = $newStatus ? 'restored to active' : 'archived';
+        $label = $newStatus ? 'published LIVE on storefront' : 'moved to DRAFT (hidden from storefront)';
 
-        return back()->with('success', "Product '{$product->name}' {$label}.");
+        return back()->with('success', "Product '{$product->name}' is now {$label}.");
     }
 
     public function productDestroy(Product $product): RedirectResponse

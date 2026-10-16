@@ -10,7 +10,45 @@
 <div class="field"><label>AVAILABILITY *</label><select name="availability" required><option value="In Stock" @selected(old('availability', $product->availability ?: 'Available on Request') === 'In Stock')>In Stock</option><option value="Available on Request" @selected(old('availability', $product->availability ?: 'Available on Request') === 'Available on Request')>Available on Request</option><option value="Out of Stock" @selected(old('availability', $product->availability ?: 'Available on Request') === 'Out of Stock')>Out of Stock</option><option value="Pre-Order" @selected(old('availability', $product->availability ?: 'Available on Request') === 'Pre-Order')>Pre-Order</option><option value="Discontinued" @selected(old('availability', $product->availability ?: 'Available on Request') === 'Discontinued')>Discontinued</option></select></div>
 <div class="field full"><label>PRODUCT IMAGE</label><div class="image-input-row"><div class="image-preview" id="imagePreview"><div class="image-placeholder"><strong>IMAGE</strong>No image preview</div><img id="productImagePreview" alt="Product image preview"></div><div class="field"><label class="upload-control" for="imageFile"><span class="upload-icon">+</span><span><strong>Choose image from files</strong><small>JPG, PNG, WEBP or GIF up to 5 MB</small></span></label><input class="file-input" id="imageFile" name="image_file" type="file" accept="image/jpeg,image/png,image/webp,image/gif"><div class="or-divider"><span>or use an existing path</span></div><input id="imagePath" name="image_path" value="{{ old('image_path', $product->image_path) }}" placeholder="iamges/product.jpg"><span class="image-help">Uploaded files are stored securely in the backend and used by the storefront automatically.</span></div></div></div>
 <div class="field full"><label>SHORT DESCRIPTION</label><textarea name="short_description">{{ old('short_description', $product->short_description) }}</textarea></div><div class="field full"><label>FULL DESCRIPTION</label><textarea name="full_description">{{ old('full_description', $product->full_description) }}</textarea></div><div class="field full"><label>SPECIFICATIONS</label><textarea name="specs" placeholder="Material: Stainless steel&#10;Certification: ATEX">{{ old('specs', $product->specs) }}</textarea></div>
-</div><div class="field full"><label>TECHNICAL SPECIFICATIONS</label><div class="admin-spec-editor"><table class="admin-spec-table"><thead><tr><th>SPECIFICATION</th><th>DETAIL</th><th></th></tr></thead><tbody id="adminSpecificationRows"></tbody></table><button type="button" class="btn small secondary" id="addSpecificationRow">+ Add specification</button><input type="hidden" id="specificationsJson" name="specifications" value="{{ old('specifications', $product->specifications ? json_encode($product->specifications) : '{}') }}"></div><span class="image-help">Add one specification per row. These rows appear in the public engineering datasheet.</span></div><div class="field"><label>APPLICATIONS</label><textarea name="applications" rows="6" placeholder="One application per line.">{{ old('applications', $product->applications ? implode("\n", $product->applications) : '') }}</textarea></div><label class="check" id="quoteOnlyOption"><input type="hidden" name="is_quote_only" value="0"><input type="checkbox" id="isQuoteOnly" name="is_quote_only" value="1" @checked(old('is_quote_only', $product->exists ? $product->is_quote_only : false))> Quote only</label><span class="image-help" id="availabilityHelp">Products marked “Available on Request” automatically use Request Quote instead of Buy or Add to Cart.</span><label class="check"><input type="hidden" name="is_active" value="0"><input type="checkbox" name="is_active" value="1" @checked(old('is_active', $product->exists ? $product->is_active : true))> Active on storefront</label>
+</div><div class="field full"><label>TECHNICAL SPECIFICATIONS</label><div class="admin-spec-editor"><table class="admin-spec-table"><thead><tr><th>SPECIFICATION</th><th>DETAIL</th><th></th></tr></thead><tbody id="adminSpecificationRows"></tbody></table><button type="button" class="btn small secondary" id="addSpecificationRow">+ Add specification</button><input type="hidden" id="specificationsJson" name="specifications" value="{{ old('specifications', $product->specifications ? json_encode($product->specifications) : '{}') }}"></div><span class="image-help">Add one specification per row. These rows appear in the public engineering datasheet.</span></div><div class="field"><label>APPLICATIONS</label><textarea name="applications" rows="6" placeholder="One application per line.">{{ old('applications', $product->applications ? implode("\n", $product->applications) : '') }}</textarea></div><label class="check" id="quoteOnlyOption"><input type="hidden" name="is_quote_only" value="0"><input type="checkbox" id="isQuoteOnly" name="is_quote_only" value="1" @checked(old('is_quote_only', $product->exists ? $product->is_quote_only : false))> Quote only</label><span class="image-help" id="availabilityHelp">Products marked “Available on Request” automatically use Request Quote instead of Buy or Add to Cart.</span>
+
+<div class="field full" style="margin-top: 20px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 10px; background: #fbfcfe;">
+    <label style="font-size: 13px; font-weight: 800; color: #1e293b; display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+        <span>STOREFRONT PUBLISHING STATUS *</span>
+        <span class="muted" style="font-weight: 500; font-size: 11px;">Select Draft if you don't want this product live on the frontend yet</span>
+    </label>
+    @php($selectedStatus = (string) old('is_active', $product->exists ? ($product->is_active ? '1' : '0') : '1'))
+    <div class="status-radio-group" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
+        <!-- Option 1: Live -->
+        <label id="statusOptionLive" class="status-option-card" style="display:flex;gap:12px;align-items:flex-start;padding:16px;border:2px solid {{ $selectedStatus === '1' ? '#16845b' : '#d5dde7' }};border-radius:9px;background:{{ $selectedStatus === '1' ? '#f0fdf4' : '#fff' }};cursor:pointer;transition:all .18s ease;">
+            <input type="radio" name="is_active" value="1" @checked($selectedStatus === '1') style="margin-top:3px;accent-color:#16845b;width:18px;height:18px;" onchange="updateStatusCardStyles()">
+            <div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <strong style="color:#0f172a;font-size:14px;">Live on Storefront</strong>
+                    <span class="badge green" style="font-size:10px;padding:2px 7px;">● Live</span>
+                </div>
+                <div class="muted" style="font-size:12px;margin-top:5px;line-height:1.45;">
+                    Product is active and published live on the customer storefront. Customers can browse, search, purchase, or request quotes.
+                </div>
+            </div>
+        </label>
+
+        <!-- Option 2: Draft -->
+        <label id="statusOptionDraft" class="status-option-card" style="display:flex;gap:12px;align-items:flex-start;padding:16px;border:2px solid {{ $selectedStatus === '0' ? '#e06d10' : '#d5dde7' }};border-radius:9px;background:{{ $selectedStatus === '0' ? '#fff7ed' : '#fff' }};cursor:pointer;transition:all .18s ease;">
+            <input type="radio" name="is_active" value="0" @checked($selectedStatus === '0') style="margin-top:3px;accent-color:#e06d10;width:18px;height:18px;" onchange="updateStatusCardStyles()">
+            <div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <strong style="color:#0f172a;font-size:14px;">Save as Draft (Hidden)</strong>
+                    <span class="badge orange" style="font-size:10px;padding:2px 7px;">● Draft</span>
+                </div>
+                <div class="muted" style="font-size:12px;margin-top:5px;line-height:1.45;">
+                    Product is saved in Draft mode. It will <strong>NOT</strong> appear on the public storefront, search results, or categories.
+                </div>
+            </div>
+        </label>
+    </div>
+</div>
+
 </div><div class="form-actions"><button class="btn" type="submit">{{ $product->exists ? 'Save changes' : 'Create product' }}</button><a class="btn secondary" href="{{ route('admin.products') }}">Cancel</a></div></div></div></form>
 @endsection
 @push('scripts')
@@ -87,5 +125,25 @@ function syncQuoteOnlyAvailability() {
 
 availabilitySelect?.addEventListener('change', syncQuoteOnlyAvailability);
 syncQuoteOnlyAvailability();
+
+function updateStatusCardStyles() {
+    const liveRadio = document.querySelector('input[name="is_active"][value="1"]');
+    const cardLive = document.getElementById('statusOptionLive');
+    const cardDraft = document.getElementById('statusOptionDraft');
+    if (!cardLive || !cardDraft || !liveRadio) return;
+    
+    if (liveRadio.checked) {
+        cardLive.style.borderColor = '#16845b';
+        cardLive.style.background = '#f0fdf4';
+        cardDraft.style.borderColor = '#d5dde7';
+        cardDraft.style.background = '#ffffff';
+    } else {
+        cardLive.style.borderColor = '#d5dde7';
+        cardLive.style.background = '#ffffff';
+        cardDraft.style.borderColor = '#e06d10';
+        cardDraft.style.background = '#fff7ed';
+    }
+}
+updateStatusCardStyles();
 </script>
 @endpush
