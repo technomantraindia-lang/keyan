@@ -2,7 +2,7 @@
 @section('title', 'Products')
 @section('heading', 'Products')
 @section('content')
-@php($backendUrl = rtrim(env('APP_URL', 'http://127.0.0.1:8000'), '/'))
+@php($backendUrl = rtrim(request()->getSchemeAndHttpHost(), '/'))
 <div class="page-actions">
     <div>
         <h2>Product catalogue</h2>

@@ -2,7 +2,7 @@
 @section('title', 'Categories')
 @section('heading', 'Categories')
 @section('content')
-@php($backendUrl = rtrim(env('APP_URL', 'http://127.0.0.1:8000'), '/'))
+@php($backendUrl = rtrim(request()->getSchemeAndHttpHost(), '/'))
 <div class="page-actions"><div><h2>Product categories</h2><div class="muted">Organise the catalogue and control category visibility.</div></div><a class="btn" href="{{ route('admin.categories.create') }}">+ Add category</a></div>
 <div class="panel"><div class="panel-head"><h3>Existing categories</h3></div><div class="table-wrap"><table><thead><tr><th>Category</th><th>Products</th><th>Actions</th></tr></thead><tbody>
 @forelse($categories as $category)

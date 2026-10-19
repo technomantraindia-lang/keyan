@@ -5,7 +5,7 @@
 - Indexed source files: 121
 - Structural edges: 72
 - Matched end-to-end flows: 0
-- Updated: 2026-09-21T03:36:27.825Z
+- Updated: 2026-10-19T10:12:20.670Z
 
 ## Routes
 - ROUTE GET /api/categories -> CategoryController@index @ backend/routes/api.php
@@ -66,6 +66,7 @@
 - IMPORT products.html -> style.css, categories.css, products.css, app.js, products.js
 - LARAVEL backend/app/Services/QuoteChatCleanupService.php -> app/Models/QuoteRequest.php
 - LARAVEL backend/app/Services/PushNotificationService.php -> app/Models/PushSubscription.php, app/Models/User.php
+- LARAVEL backend/app/Http/Controllers/AdminController.php -> app/Models/Category.php, app/Models/Order.php, app/Models/Product.php, app/Models/QuoteRequest.php, app/Models/PushSubscription.php, app/Models/QuoteMessage.php, app/Models/User.php, app/Services/QuoteChatCleanupService.php, FormRequest QuoteRequest
 - LARAVEL backend/app/Http/Controllers/Api/QuoteRequestController.php -> app/Http/Resources/QuoteRequestResource.php, app/Models/Product.php, app/Models/QuoteRequest.php, app/Models/User.php, app/Services/PushNotificationService.php
 - LARAVEL backend/app/Http/Controllers/Api/ProductController.php -> app/Http/Resources/ProductResource.php, app/Models/Product.php
 - LARAVEL backend/app/Http/Controllers/Api/OrderController.php -> app/Models/Address.php, app/Models/Order.php, app/Models/Product.php
@@ -74,7 +75,6 @@
 - LARAVEL backend/app/Http/Controllers/Api/CartController.php -> app/Http/Resources/ProductResource.php, app/Models/Cart.php, app/Models/Product.php
 - LARAVEL backend/app/Http/Controllers/Api/AuthController.php -> app/Models/User.php
 - LARAVEL backend/app/Http/Controllers/Api/AddressController.php -> app/Models/Address.php
-- LARAVEL backend/app/Http/Controllers/AdminController.php -> app/Models/Category.php, app/Models/Order.php, app/Models/Product.php, app/Models/QuoteRequest.php, app/Models/PushSubscription.php, app/Models/QuoteMessage.php, app/Models/User.php, app/Services/QuoteChatCleanupService.php, FormRequest QuoteRequest
 
 ## Database references
 - DB backend/vite.config.js -> vite, laravel
@@ -101,7 +101,7 @@
 
 ## Symbols
 - SYMBOL backend/resources/views/admin/categories/form.blade.php: categoryImageUrl, refreshCategoryPreview
-- SYMBOL backend/resources/views/admin/products/form.blade.php: refreshImagePreview, addSpecificationRow, escapeSpecificationValue, syncSpecifications, syncQuoteOnlyAvailability
+- SYMBOL backend/resources/views/admin/products/form.blade.php: refreshImagePreview, addSpecificationRow, escapeSpecificationValue, syncSpecifications, syncQuoteOnlyAvailability, updateStatusCardStyles
 - SYMBOL about.js: initEcosystemTabs, initDnaPanels, initTimelineScroll, initSmoothScroll
 - SYMBOL app.js: isCustomerAuthenticated, isProductQuoteOnly, requireCustomerAuth, saveCartToStorage, updateCartBadgeCount, syncCatalogFromBackend, initUniversalMotion, initScrollReveal, renderFeaturedProducts, handleBuyNow
 - SYMBOL backend/app/Http/Controllers/AdminController.php: AdminController, loginForm, login, logout, dashboard, products, productCreate, productStore, productEdit, productUpdate

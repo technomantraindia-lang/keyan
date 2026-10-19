@@ -6,7 +6,7 @@
 - Technology: Vite, Tailwind CSS, Node.js/npm, Laravel/PHP
 - Active file at refresh: None
 - Local code graph: 121 files · 72 edges · 0 matched flows
-- Refreshed: 2026-09-21T03:36:27.836Z
+- Refreshed: 2026-10-19T10:12:20.680Z
 
 ## Framework Intelligence (V4.7.8)
 - Profiles: laravel
@@ -36,8 +36,8 @@
 - backend/resources/views/admin/layout.blade.php
 - backend/resources/views/admin/dashboard.blade.php
 - backend/resources/views/admin/customers/index.blade.php
-- backend/resources/views/admin/categories/form.blade.php
 - backend/resources/views/admin/categories/index.blade.php
+- backend/resources/views/admin/categories/form.blade.php
 
 ### Backend API contracts
 - backend/routes/api.php: GET /api/categories -> CategoryController@index
@@ -96,6 +96,8 @@
 - backend/database/migrations/0001_01_01_000000_create_users_table.php: table sessions (id, user_id, ip_address, user_agent, last_activity)
 
 ### Laravel route / class / method symbols
+- backend/routes/web.php: GET /, GET /product-assets/{path}, GET /login, POST /login, POST /logout, GET /products, GET /products/create, POST /products
+- backend/routes/api.php: GET /health, GET /categories, GET /products, GET /products/{product}, POST /quote-requests, GET /push-public-key, POST /guest-chat/start, GET /guest-chat/{quote}/messages
 - backend/app/Services/QuoteChatCleanupService.php: class QuoteChatCleanupService, purgeInactive()
 - backend/app/Services/PushNotificationService.php: class PushNotificationService, sendToUser()
 - backend/app/Models/User.php: class User, casts(), quoteRequests(), carts(), orders(), addresses(), quoteMessages(), pushSubscriptions()
@@ -110,6 +112,7 @@
 - backend/app/Models/Cart.php: class Cart, user(), items()
 - backend/app/Models/Address.php: class Address, casts(), user()
 - backend/app/Http/Controllers/Controller.php: class Controller
+- backend/app/Http/Controllers/AdminController.php: class AdminController, loginForm(), login(), logout(), dashboard(), products(), productCreate(), productStore(), productEdit(), productUpdate()
 - backend/app/Http/Controllers/Api/QuoteRequestController.php: class QuoteRequestController, store()
 - backend/app/Http/Controllers/Api/ProductController.php: class ProductController, index(), show()
 - backend/app/Http/Controllers/Api/OrderController.php: class OrderController, store()
@@ -118,9 +121,6 @@
 - backend/app/Http/Controllers/Api/CartController.php: class CartController, show(), add(), update(), remove()
 - backend/app/Http/Controllers/Api/AuthController.php: class AuthController, register(), login(), me(), update(), logout()
 - backend/app/Http/Controllers/Api/AddressController.php: class AddressController, index(), store(), update(), destroy()
-- backend/app/Http/Controllers/AdminController.php: class AdminController, loginForm(), login(), logout(), dashboard(), products(), productCreate(), productStore(), productEdit(), productUpdate()
-- backend/routes/web.php: GET /, GET /product-assets/{path}, GET /login, POST /login, POST /logout, GET /products, GET /products/create, POST /products
-- backend/routes/api.php: GET /health, GET /categories, GET /products, GET /products/{product}, POST /quote-requests, GET /push-public-key, POST /guest-chat/start, GET /guest-chat/{quote}/messages
 
 ### Laravel route -> controller graph
 - backend/routes/web.php: GET /login -> AdminController@loginForm, POST /login -> AdminController@login, GET / -> AdminController@dashboard, POST /logout -> AdminController@logout, GET /products -> AdminController@products, GET /products/create -> AdminController@productCreate, POST /products -> AdminController@productStore, GET /products/{product}/edit -> AdminController@productEdit, PUT /products/{product} -> AdminController@productUpdate, POST /products/{product}/toggle-status -> AdminController@productToggleStatus, DELETE /products/{product} -> AdminController@productDestroy, GET /categories -> AdminController@categories, GET /categories/create -> AdminController@categoryCreate, GET /categories/{category}/edit -> AdminController@categoryEdit, POST /categories -> AdminController@categoryStore, PUT /categories/{category} -> AdminController@categoryUpdate, POST /categories/{category}/toggle-status -> AdminController@categoryToggleStatus, DELETE /categories/{category} -> AdminController@categoryDestroy, GET /orders -> AdminController@orders, GET /orders/{order} -> AdminController@orderShow
@@ -129,6 +129,7 @@
 ### Laravel controller/service/model chains
 - backend/app/Services/QuoteChatCleanupService.php -> app/Models/QuoteRequest.php
 - backend/app/Services/PushNotificationService.php -> app/Models/PushSubscription.php, app/Models/User.php
+- backend/app/Http/Controllers/AdminController.php -> app/Models/Category.php, app/Models/Order.php, app/Models/Product.php, app/Models/QuoteRequest.php, app/Models/PushSubscription.php, app/Models/QuoteMessage.php, app/Models/User.php, app/Services/QuoteChatCleanupService.php, FormRequest QuoteRequest
 - backend/app/Http/Controllers/Api/QuoteRequestController.php -> app/Http/Resources/QuoteRequestResource.php, app/Models/Product.php, app/Models/QuoteRequest.php, app/Models/User.php, app/Services/PushNotificationService.php
 - backend/app/Http/Controllers/Api/ProductController.php -> app/Http/Resources/ProductResource.php, app/Models/Product.php
 - backend/app/Http/Controllers/Api/OrderController.php -> app/Models/Address.php, app/Models/Order.php, app/Models/Product.php
@@ -137,7 +138,6 @@
 - backend/app/Http/Controllers/Api/CartController.php -> app/Http/Resources/ProductResource.php, app/Models/Cart.php, app/Models/Product.php
 - backend/app/Http/Controllers/Api/AuthController.php -> app/Models/User.php
 - backend/app/Http/Controllers/Api/AddressController.php -> app/Models/Address.php
-- backend/app/Http/Controllers/AdminController.php -> app/Models/Category.php, app/Models/Order.php, app/Models/Product.php, app/Models/QuoteRequest.php, app/Models/PushSubscription.php, app/Models/QuoteMessage.php, app/Models/User.php, app/Services/QuoteChatCleanupService.php, FormRequest QuoteRequest
 
 ### Frontend routes
 - backend/routes/api.php
@@ -163,6 +163,7 @@
 
 ### Controllers
 - backend/app/Http/Controllers/Controller.php
+- backend/app/Http/Controllers/AdminController.php
 - backend/app/Http/Controllers/Api/QuoteRequestController.php
 - backend/app/Http/Controllers/Api/ProductController.php
 - backend/app/Http/Controllers/Api/OrderController.php
@@ -171,7 +172,6 @@
 - backend/app/Http/Controllers/Api/CartController.php
 - backend/app/Http/Controllers/Api/AuthController.php
 - backend/app/Http/Controllers/Api/AddressController.php
-- backend/app/Http/Controllers/AdminController.php
 
 ### Services / actions
 - backend/app/Services/QuoteChatCleanupService.php
@@ -277,6 +277,7 @@
 - backend/storage/framework/views/7d9856071126b398ac24b7528d507c51.php
 - backend/storage/framework/views/8c1103870c0d187c3f275bbdc415735a.php
 - backend/storage/framework/views/b1b4f7e95d78d1a5208f94318669acb1.php
+- backend/storage/framework/views/b57b6eabddc1c387b7ec53f9558d966a.php
 - backend/storage/framework/views/c01e953cb3b5636a72636f79091b5cb6.php
 - backend/storage/framework/views/c03496948391050cb2d81bf9cbd22374.php
 - backend/storage/framework/views/c5963de98a15a2a0ed519b8398dc50ea.php
@@ -285,6 +286,7 @@
 - style.css
 - .clinerules/05-technomantra-execution-mode.md
 - .clinerules/06-technomantra-developer-mode.md
+- .clinerules/07-technomantra-eco-execution.md
 - .clinerules/08-technomantra-task-watchdog.md
 - .clinerules/09-technomantra-multitask-isolation.md
 - .clinerules/10-technomantra-project-memory.md
@@ -311,10 +313,10 @@
 - backend/app/Http/Resources/CategoryResource.php
 - backend/app/Http/Resources/ProductResource.php
 - backend/app/Http/Resources/QuoteRequestResource.php
-- backend/app/Models/Address.php
-- backend/app/Models/Cart.php
 
 ## Additional indexed files
+- backend/app/Models/Address.php
+- backend/app/Models/Cart.php
 - backend/app/Models/CartItem.php
 - backend/app/Models/Category.php
 - backend/app/Models/Order.php
@@ -338,6 +340,4 @@
 - backend/database/migrations/2026_09_10_000002_create_products_table.php
 - backend/database/migrations/2026_09_10_000003_create_quote_requests_table.php
 - backend/database/migrations/2026_09_10_000004_create_carts_table.php
-- backend/database/migrations/2026_09_10_000005_create_orders_table.php
-- backend/database/migrations/2026_09_10_000006_extend_categories_for_storefront.php
-- backend/databas
+- backend/database/migrations/2026_09_10_000005_create_o

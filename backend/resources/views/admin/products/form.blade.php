@@ -56,7 +56,7 @@
 .admin-spec-editor{border:1px solid #dce5ee;border-radius:10px;overflow:hidden;background:#fff}.admin-spec-table{width:100%;border-collapse:collapse}.admin-spec-table th{padding:10px 12px;background:#f3f6f9;color:#53657a;font-size:11px;text-align:left;letter-spacing:.06em}.admin-spec-table td{padding:7px;border-top:1px solid #e8edf2}.admin-spec-table input{width:100%;border:1px solid #d5dfe9;border-radius:6px;padding:9px 10px;font:inherit;color:#152a40}.admin-spec-remove{border:0;background:transparent;color:#b33b4b;cursor:pointer;font-size:18px;padding:6px 10px}.admin-spec-editor>.btn{margin:12px}
 </style>
 <script>
-const backendUrl = @json(rtrim(env('APP_URL', 'http://127.0.0.1:8000'), '/'));
+const backendUrl = @json(rtrim(request()->getSchemeAndHttpHost(), '/'));
 const imagePath = document.getElementById('imagePath');
 const imageFile = document.getElementById('imageFile');
 const imagePreview = document.getElementById('imagePreview');

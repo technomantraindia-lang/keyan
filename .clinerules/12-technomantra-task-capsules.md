@@ -20,7 +20,7 @@ The extension refreshes this file automatically. Prefer its concise state over o
 - Project: keyan
 - Framework: 
 - Developer mode: smart
-- Model mode: paid/manual
+- Model mode: eco
 - Active file: index.html
 - Objective: Current developer prompt in this workspace/window only.
 - Blocker: none

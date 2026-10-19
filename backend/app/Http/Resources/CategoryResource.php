@@ -11,7 +11,7 @@ class CategoryResource extends JsonResource
     public function toArray(Request $request): array
     {
         $path = $this->image_path;
-        $backendUrl = rtrim((string) env('APP_URL', $request->getSchemeAndHttpHost()), '/');
+        $backendUrl = rtrim($request->getSchemeAndHttpHost(), '/');
         $imageUrl = null;
 
         if ($path) {

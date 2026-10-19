@@ -20,7 +20,7 @@ class ProductResource extends JsonResource
             default => $category,
         };
         $image = $this->image_path;
-        $backendUrl = rtrim((string) env('APP_URL', $request->getSchemeAndHttpHost()), '/');
+        $backendUrl = rtrim($request->getSchemeAndHttpHost(), '/');
         $imageUrl = $this->imageUrl($image, $backendUrl);
         $quoteOnly = $this->is_quote_only || strcasecmp(trim((string) $this->availability), 'Available on Request') === 0;
         $specifications = is_array($this->specifications) ? $this->specifications : [];
