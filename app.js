@@ -477,14 +477,16 @@ function renderFeaturedProducts(categoryFilter = 'all') {
     : CATALOG_ITEMS.filter(p => p.category === categoryFilter);
 
   container.innerHTML = filtered.map(p => `
-    <div class="product-card-clean">
+    <div class="product-card-clean" onclick="if (!event.target.closest('button, a')) window.location.href = 'product-detail.html?id=${p.id}'" style="cursor: pointer;">
       <div class="product-img-stage">
-        <img src="${p.img || 'iamges/hero.jpg'}" alt="${p.name}" class="product-photo" loading="lazy">
+        <a href="product-detail.html?id=${p.id}" class="product-img-link" style="display:flex; width:100%; height:100%; align-items:center; justify-content:center; text-decoration:none;">
+          <img src="${p.img || 'iamges/hero.jpg'}" alt="${p.name}" class="product-photo" loading="lazy">
+        </a>
       </div>
 
       <div class="product-info-wrap">
         <span class="product-meta-cat">${p.categoryName}</span>
-        <h4 class="product-name-title">${p.name}</h4>
+        <h4 class="product-name-title"><a href="product-detail.html?id=${p.id}" style="color:inherit; text-decoration:none;">${p.name}</a></h4>
         <div class="product-brand-tag"><i class="fas fa-tag"></i> ${p.brand || 'Keyan Corporation'}</div>
         
         <div class="product-stock-status">
@@ -493,8 +495,8 @@ function renderFeaturedProducts(categoryFilter = 'all') {
 
         <div class="product-actions-group">
           ${isProductQuoteOnly(p)
-            ? `<button class="btn-card-quote btn-card-quote-only" onclick="requestProductQuote('${p.id}')" title="Request Quote"><i class="fas fa-file-signature"></i> Request Quote</button>`
-            : `<button class="btn-card-buy" onclick="handleBuyNow('${p.id}')" title="Buy Now"><i class="fas fa-bolt"></i> Buy Now</button>`}
+            ? `<button class="btn-card-quote btn-card-quote-only" onclick="event.stopPropagation(); requestProductQuote('${p.id}')" title="Request Quote"><i class="fas fa-file-signature"></i> Request Quote</button>`
+            : `<button class="btn-card-buy" onclick="event.stopPropagation(); handleBuyNow('${p.id}')" title="Buy Now"><i class="fas fa-bolt"></i> Buy Now</button>`}
         </div>
       </div>
     </div>

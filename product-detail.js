@@ -53,8 +53,16 @@ async function loadBackendProduct(productId) {
     applyBackendProduct(remoteProduct);
   } catch (error) {
     if (error && (error.status === 404 || error.message?.includes('not found') || error.message?.includes('No query results'))) {
-      localStorage.removeItem(cacheKey);
-      renderDraftOrUnavailableProduct();
+      const localProduct = typeof CATALOG_ITEMS !== 'undefined'
+        ? CATALOG_ITEMS.find(p => p.id === productId || p.sku === productId)
+        : null;
+
+      if (!localProduct) {
+        localStorage.removeItem(cacheKey);
+        renderDraftOrUnavailableProduct();
+        return;
+      }
+      console.info('Product detail API 404; displaying local catalogue item.', error.message);
       return;
     }
     if (cachedProduct) {
@@ -402,17 +410,19 @@ function renderRelatedProducts(p) {
   const related = CATALOG_ITEMS.filter(item => item.id !== p.id && (item.category === p.category || item.brand === p.brand)).slice(0, 4);
 
   container.innerHTML = related.map(rel => `
-    <div class="b2b-product-card">
+    <div class="b2b-product-card" onclick="if (!event.target.closest('button, a')) window.location.href = 'product-detail.html?id=${rel.id}'" style="cursor: pointer;">
       <div class="b2b-card-img-stage">
-        <img src="${rel.img}" alt="${rel.name}" class="b2b-card-img" loading="lazy">
+        <a href="product-detail.html?id=${rel.id}" style="display:flex; width:100%; height:100%; align-items:center; justify-content:center; text-decoration:none;">
+          <img src="${rel.img}" alt="${rel.name}" class="b2b-card-img" loading="lazy">
+        </a>
       </div>
       <div class="b2b-card-content">
         <span class="b2b-card-brand-tag"><i class="fas fa-tag"></i> ${rel.brand}</span>
-        <h4 class="b2b-card-title">${rel.name}</h4>
+        <h4 class="b2b-card-title"><a href="product-detail.html?id=${rel.id}" style="color:inherit; text-decoration:none;">${rel.name}</a></h4>
         <span class="b2b-card-status request-only">$${rel.price_usd.toFixed(2)} USD</span>
         
         <div class="b2b-card-actions">
-          <a href="product-detail.html?id=${rel.id}" class="b2b-btn-quote" style="text-decoration:none; text-align:center;">
+          <a href="product-detail.html?id=${rel.id}" class="b2b-btn-quote" onclick="event.stopPropagation();" style="text-decoration:none; text-align:center;">
             <i class="fas fa-eye"></i> View Detail
           </a>
         </div>
@@ -444,17 +454,19 @@ function renderRecentlyViewedProducts() {
 
   section.style.display = 'block';
   container.innerHTML = items.map(rv => `
-    <div class="b2b-product-card">
+    <div class="b2b-product-card" onclick="if (!event.target.closest('button, a')) window.location.href = 'product-detail.html?id=${rv.id}'" style="cursor: pointer;">
       <div class="b2b-card-img-stage">
-        <img src="${rv.img}" alt="${rv.name}" class="b2b-card-img" loading="lazy">
+        <a href="product-detail.html?id=${rv.id}" style="display:flex; width:100%; height:100%; align-items:center; justify-content:center; text-decoration:none;">
+          <img src="${rv.img}" alt="${rv.name}" class="b2b-card-img" loading="lazy">
+        </a>
       </div>
       <div class="b2b-card-content">
         <span class="b2b-card-brand-tag"><i class="fas fa-tag"></i> ${rv.brand}</span>
-        <h4 class="b2b-card-title">${rv.name}</h4>
+        <h4 class="b2b-card-title"><a href="product-detail.html?id=${rv.id}" style="color:inherit; text-decoration:none;">${rv.name}</a></h4>
         <span class="b2b-card-status request-only">$${rv.price_usd.toFixed(2)} USD</span>
         
         <div class="b2b-card-actions">
-          <a href="product-detail.html?id=${rv.id}" class="b2b-btn-quote" style="text-decoration:none; text-align:center;">
+          <a href="product-detail.html?id=${rv.id}" class="b2b-btn-quote" onclick="event.stopPropagation();" style="text-decoration:none; text-align:center;">
             <i class="fas fa-eye"></i> View Item
           </a>
         </div>

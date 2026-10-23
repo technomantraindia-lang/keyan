@@ -726,11 +726,13 @@
   align-items: center;
   justify-content: center;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.3s ease;
 }
 
 .b2b-product-card:hover .b2b-quick-view-trigger {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .b2b-qv-btn {

@@ -603,11 +603,13 @@ function renderDiscoveryProducts(items) {
   }
 
   container.innerHTML = items.map(p => `
-    <div class="b2b-product-card">
+    <div class="b2b-product-card" onclick="if (!event.target.closest('button, a')) window.location.href = 'product-detail.html?id=${p.id}'" style="cursor: pointer;">
       <div class="b2b-card-img-stage">
-        <img src="${p.img}" alt="${p.name}" class="b2b-card-img" loading="lazy">
+        <a href="product-detail.html?id=${p.id}" class="b2b-card-img-link" style="display:flex; width:100%; height:100%; align-items:center; justify-content:center; text-decoration:none;">
+          <img src="${p.img}" alt="${p.name}" class="b2b-card-img" loading="lazy">
+        </a>
         <div class="b2b-quick-view-trigger">
-          <button class="b2b-qv-btn" onclick="openQuickView('${p.id}')">
+          <button class="b2b-qv-btn" onclick="event.stopPropagation(); openQuickView('${p.id}')">
             <i class="fas fa-eye"></i> Quick View
           </button>
         </div>
@@ -619,8 +621,8 @@ function renderDiscoveryProducts(items) {
         
         <div class="b2b-card-actions">
           ${isProductQuoteOnly(p)
-            ? `<button class="b2b-btn-quote" onclick="addToQuoteList('${p.id}')"><i class="fas fa-file-signature"></i> Request Quote</button>`
-            : `<button class="b2b-btn-buy" onclick="handleDirectBuy('${p.id}')" title="Immediate Purchase"><i class="fas fa-bolt"></i> Buy</button>`}
+            ? `<button class="b2b-btn-quote" onclick="event.stopPropagation(); addToQuoteList('${p.id}')"><i class="fas fa-file-signature"></i> Request Quote</button>`
+            : `<button class="b2b-btn-buy" onclick="event.stopPropagation(); handleDirectBuy('${p.id}')" title="Immediate Purchase"><i class="fas fa-bolt"></i> Buy</button>`}
         </div>
       </div>
     </div>

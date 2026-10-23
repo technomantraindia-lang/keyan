@@ -145,9 +145,9 @@ function applyCatalogueFilters() {
   }
 
   grid.innerHTML = filtered.map(p => `
-    <div class="prod-card">
+    <div class="prod-card" onclick="if (!event.target.closest('button, a')) window.location.href = 'product-detail.html?id=${p.id}'" style="cursor: pointer;">
       <div class="prod-card-img-stage">
-        <a href="product-detail.html?id=${p.id}" style="display:contents;">
+        <a href="product-detail.html?id=${p.id}" class="prod-card-img-link" style="display:flex; width:100%; height:100%; align-items:center; justify-content:center; text-decoration:none;">
           <img src="${p.img || 'iamges/hero.jpg'}" alt="${p.name}" class="prod-card-img" loading="lazy">
         </a>
       </div>
@@ -169,8 +169,8 @@ function applyCatalogueFilters() {
 
         <div class="prod-card-actions">
           ${isProductQuoteOnly(p)
-            ? `<button class="prod-btn-rfq prod-btn-rfq-only" onclick="requestProductQuote('${p.id}')" title="Request Quote"><i class="fas fa-file-signature"></i> Request Quote</button>`
-            : `<a href="product-detail.html?id=${p.id}" class="prod-btn-buy">BUY NOW <i class="fas fa-bolt"></i></a>`}
+            ? `<button class="prod-btn-rfq prod-btn-rfq-only" onclick="event.stopPropagation(); requestProductQuote('${p.id}')" title="Request Quote"><i class="fas fa-file-signature"></i> Request Quote</button>`
+            : `<a href="product-detail.html?id=${p.id}" class="prod-btn-buy" onclick="event.stopPropagation();">BUY NOW <i class="fas fa-bolt"></i></a>`}
         </div>
       </div>
     </div>
