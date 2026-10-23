@@ -3,16 +3,30 @@
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
-$frontendRoot = dirname(base_path());
+$frontendRoot = (is_dir(public_path('iamges')) || is_file(public_path('about.html')) || is_file(public_path('index.frontend.html')))
+    ? public_path()
+    : dirname(base_path());
 
-// The Keyan storefront lives beside the Laravel backend. Serving it here keeps
-// the storefront and API on the same local URL during development.
-$serveFrontendFile = static function (string $path = 'index.html') use ($frontendRoot) {
+$defaultHomepage = is_file($frontendRoot.DIRECTORY_SEPARATOR.'index.html')
+    ? 'index.html'
+    : (is_file($frontendRoot.DIRECTORY_SEPARATOR.'index.frontend.html') ? 'index.frontend.html' : 'index.html');
+
+// The Keyan storefront lives inside public on production or beside backend locally.
+$serveFrontendFile = static function (?string $path = null) use ($frontendRoot, $defaultHomepage) {
+    if (!$path || $path === 'index.html' || $path === 'index.frontend.html') {
+        $path = $defaultHomepage;
+    }
     $relativePath = ltrim(str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path), DIRECTORY_SEPARATOR);
     $frontendRootReal = realpath($frontendRoot);
     $frontendFile = $frontendRootReal
         ? realpath($frontendRootReal.DIRECTORY_SEPARATOR.$relativePath)
         : false;
+
+    // If the specific file is index.html or index.frontend.html and not found, try the alternate
+    if ((!$frontendFile || !is_file($frontendFile)) && ($path === 'index.html' || $path === 'index.frontend.html')) {
+        $altName = $path === 'index.html' ? 'index.frontend.html' : 'index.html';
+        $frontendFile = $frontendRootReal ? realpath($frontendRootReal.DIRECTORY_SEPARATOR.$altName) : false;
+    }
 
     abort_unless(
         $frontendRootReal &&
@@ -48,7 +62,7 @@ $serveFrontendFile = static function (string $path = 'index.html') use ($fronten
     ]));
 };
 
-Route::get('/', $serveFrontendFile);
+Route::get('/', fn () => $serveFrontendFile());
 
 // Serve the catalogue images that live beside the Laravel backend during local development.
 Route::get('/product-assets/{path}', function (string $path) {

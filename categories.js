@@ -22,7 +22,7 @@ const CATEGORIES_MASTER = [
     ],
     featuredProducts: [
       {
-        id: 'cat-m1',
+        id: 'p4',
         name: 'Marine Bronze Flanged Globe Valve DN100',
         brand: 'Sikla / SOLAS',
         category: 'marine-ship-supply',
@@ -32,7 +32,7 @@ const CATEGORIES_MASTER = [
         specs: 'Class Approved | RG5 Bronze Marine Standard'
       },
       {
-        id: 'cat-m2',
+        id: 'p6',
         name: 'SOLAS Approved Inflatable Life Jacket (275N)',
         brand: 'Unitor / SOLAS',
         category: 'marine-ship-supply',
@@ -80,7 +80,7 @@ const CATEGORIES_MASTER = [
     ],
     featuredProducts: [
       {
-        id: 'cat-f1',
+        id: 'p7',
         name: 'Heavy Duty Fire Hose & Couplings (2.5")',
         brand: 'Scott / Fire Guard',
         category: 'fire-safety',
@@ -90,24 +90,24 @@ const CATEGORIES_MASTER = [
         specs: 'Synthetic Rubber Lined | High Burst Pressure'
       },
       {
-        id: 'cat-f2',
-        name: 'Nomex Pro Heavy Duty Firefighting Suit',
-        brand: 'Tyco Safety',
-        category: 'fire-safety',
-        categoryName: 'Fire & Safety Equipment',
-        img: 'iamges/fire_safety.jpg',
-        availability: 'Available on Request',
-        specs: 'EN469 Certified | Thermal Barrier Protective Wear'
-      },
-      {
-        id: 'cat-f3',
-        name: 'Rechargeable Explosive-Proof Safety Hand Lamp',
-        brand: 'Apollo',
+        id: 'p2',
+        name: 'SCBA Air Breathing Apparatus System',
+        brand: 'MSA Safety',
         category: 'fire-safety',
         categoryName: 'Fire & Safety Equipment',
         img: 'iamges/prod_scba.jpg',
         availability: 'Available on Request',
-        specs: 'ATEX Zone 1 Certified | High Power LED'
+        specs: '300 Bar Carbon Composite Cylinder | Ergonomic Harness'
+      },
+      {
+        id: 'p9',
+        name: 'MSA AIRGO SCBA SET',
+        brand: 'MSA',
+        category: 'fire-safety',
+        categoryName: 'Fire & Safety Equipment',
+        img: 'iamges/prod_scba.jpg',
+        availability: 'Available on Request',
+        specs: 'High-Pressure 200-300 Bar | Backplate & Full Face Mask Included'
       }
     ]
   },
@@ -130,7 +130,7 @@ const CATEGORIES_MASTER = [
     ],
     featuredProducts: [
       {
-        id: 'cat-b1',
+        id: 'p2',
         name: 'SCBA Air Breathing Apparatus System',
         brand: 'MSA Safety',
         category: 'breathing-air',
@@ -138,6 +138,16 @@ const CATEGORIES_MASTER = [
         img: 'iamges/prod_scba.jpg',
         availability: 'Available on Request',
         specs: '300 Bar Carbon Composite Cylinder | Ergonomic Harness'
+      },
+      {
+        id: 'p9',
+        name: 'MSA AIRGO SCBA SET',
+        brand: 'MSA',
+        category: 'breathing-air',
+        categoryName: 'Breathing Air & Respiratory',
+        img: 'iamges/prod_scba.jpg',
+        availability: 'Available on Request',
+        specs: '6-9 Litres Cylinder | 200-300 Bar Complete Set'
       },
       {
         id: 'cat-b2',
@@ -148,16 +158,6 @@ const CATEGORIES_MASTER = [
         img: 'iamges/prod_scba.jpg',
         availability: 'Available on Request',
         specs: 'SOLAS Approved | Positive Pressure Hood System'
-      },
-      {
-        id: 'cat-b3',
-        name: 'Chemical Protective Suit & Immersion Kit',
-        brand: '3M / Solas',
-        category: 'breathing-air',
-        categoryName: 'Breathing Air & Respiratory',
-        img: 'iamges/fire_safety.jpg',
-        availability: 'Available on Request',
-        specs: 'Gas-Tight Protective Suit | EN943 Type 1a'
       }
     ]
   },
@@ -179,7 +179,7 @@ const CATEGORIES_MASTER = [
     ],
     featuredProducts: [
       {
-        id: 'cat-g1',
+        id: 'p1',
         name: 'Portable Multi Gas Detector X-am 2500',
         brand: 'Dräger',
         category: 'gas-detection',
@@ -228,7 +228,7 @@ const CATEGORIES_MASTER = [
     ],
     featuredProducts: [
       {
-        id: 'cat-im1',
+        id: 'p3',
         name: 'Air-Operated Double Diaphragm Pump (AODD)',
         brand: 'Wilden',
         category: 'industrial-machinery',
@@ -323,14 +323,14 @@ const CATEGORIES_MASTER = [
     ],
     featuredProducts: [
       {
-        id: 'cat-r1',
-        name: 'SOLAS Approved Inflatable Throwover Liferaft',
+        id: 'p6',
+        name: 'SOLAS Approved Inflatable Life Jacket (275N)',
         brand: 'SOLAS / Unitor',
         category: 'marine-rescue',
         categoryName: 'Marine Rescue',
-        img: 'iamges/offshore and rig.png',
+        img: 'iamges/prod_lifejacket.jpg',
         availability: 'Available on Request',
-        specs: '25-Person Emergency Capacity | Insulated Canopy'
+        specs: '275N Buoyancy | MED Certified Dual Chamber Auto-Inflate'
       },
       {
         id: 'cat-r2',
@@ -343,14 +343,14 @@ const CATEGORIES_MASTER = [
         specs: '4.3kg Polyethylene Ring | Floating Lanyard Included'
       },
       {
-        id: 'cat-r3',
-        name: 'Fast Rescue Boat & Davit Launching System',
-        brand: 'Unitor',
+        id: 'cat-r1',
+        name: 'SOLAS Approved Inflatable Throwover Liferaft',
+        brand: 'SOLAS / Unitor',
         category: 'marine-rescue',
         categoryName: 'Marine Rescue',
-        img: 'iamges/ship_supplier.jpg',
+        img: 'iamges/offshore and rig.png',
         availability: 'Available on Request',
-        specs: 'Diesel Outboard Powered | SOLAS Approved Hull'
+        specs: '25-Person Emergency Capacity | Insulated Canopy'
       }
     ]
   },
@@ -371,7 +371,7 @@ const CATEGORIES_MASTER = [
     ],
     featuredProducts: [
       {
-        id: 'cat-i1',
+        id: 'p5',
         name: 'Digital Marine Pressure Transmitter Gauge',
         brand: 'Consilium',
         category: 'marine-instruments',
@@ -381,7 +381,7 @@ const CATEGORIES_MASTER = [
         specs: 'ATEX Certified | 4-20mA Signal Output'
       },
       {
-        id: 'cat-i2',
+        id: 'p8',
         name: 'Offshore Rig Monitoring Control Telemetry Unit',
         brand: 'Apollo',
         category: 'marine-instruments',

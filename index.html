@@ -53,12 +53,12 @@
       </div>
       <div class="mobile-nav-body">
         <ul class="mobile-nav-menu">
-          <li><a href="index.html" class="mobile-nav-link active" id="nav-mob-home" onclick="closeMobileNav()"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="about.html" class="mobile-nav-link" id="nav-mob-about" onclick="closeMobileNav()"><i class="fas fa-building"></i> About Us</a></li>
-          <li><a href="categories.html" class="mobile-nav-link" id="nav-mob-categories" onclick="closeMobileNav()"><i class="fas fa-th-large"></i> Categories</a></li>
-          <li><a href="products.html" class="mobile-nav-link" id="nav-mob-products" onclick="closeMobileNav()"><i class="fas fa-boxes"></i> Featured Products</a></li>
-          <li><a href="industries.html" class="mobile-nav-link" id="nav-mob-industries" onclick="closeMobileNav()"><i class="fas fa-industry"></i> Industry Sectors</a></li>
-          <li><a href="contact.html" class="mobile-nav-link" id="nav-mob-contact" onclick="closeMobileNav()"><i class="fas fa-envelope"></i> Contact Us</a></li>
+          <li><a href="index.html" class="mobile-nav-link active" id="nav-mob-home"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="about.html" class="mobile-nav-link" id="nav-mob-about"><i class="fas fa-building"></i> About Us</a></li>
+          <li><a href="categories.html" class="mobile-nav-link" id="nav-mob-categories"><i class="fas fa-th-large"></i> Categories</a></li>
+          <li><a href="products.html" class="mobile-nav-link" id="nav-mob-products"><i class="fas fa-boxes"></i> Featured Products</a></li>
+          <li><a href="industries.html" class="mobile-nav-link" id="nav-mob-industries"><i class="fas fa-industry"></i> Industry Sectors</a></li>
+          <li><a href="contact.html" class="mobile-nav-link" id="nav-mob-contact"><i class="fas fa-envelope"></i> Contact Us</a></li>
         </ul>
         <div class="mobile-nav-actions">
           <a href="login.html" class="btn btn-navy btn-full"><i class="far fa-user"></i> Account Login</a>
@@ -211,7 +211,7 @@
       <div class="explore-main-grid">
         
         <!-- LEFT: Large Featured Hero Card (Marine & Ship Supply) -->
-        <a href="#featured" onclick="renderFeaturedProducts('marine')" class="explore-featured-hero reveal-from-left">
+        <a href="#featured" onclick="openCategoryFeatured('marine', event)" class="explore-featured-hero reveal-from-left">
           <div class="explore-hero-bg" style="background-image: url('iamges/marine and shipping.png');"></div>
           <div class="explore-hero-overlay"></div>
           
@@ -242,7 +242,7 @@
         <div class="explore-right-grid">
           
           <!-- Card 1: Fire & Safety -->
-          <a href="#featured" onclick="renderFeaturedProducts('safety')" class="explore-split-card reveal-from-right delay-100">
+          <a href="#featured" onclick="openCategoryFeatured('safety', event)" class="explore-split-card reveal-from-right delay-100">
             <div class="split-card-img-wrap">
               <img src="iamges/fire.png" alt="Fire & Safety" class="split-card-img">
             </div>
@@ -260,7 +260,7 @@
           </a>
 
           <!-- Card 2: Industrial Machinery -->
-          <a href="#featured" onclick="renderFeaturedProducts('machinery')" class="explore-split-card reveal-from-right delay-200">
+          <a href="#featured" onclick="openCategoryFeatured('machinery', event)" class="explore-split-card reveal-from-right delay-200">
             <div class="split-card-img-wrap">
               <img src="iamges/INDUSTRIAL & MFG].png" alt="Industrial Machinery" class="split-card-img">
             </div>
@@ -278,7 +278,7 @@
           </a>
 
           <!-- Card 3: Rig & Marine Instruments -->
-          <a href="#featured" onclick="renderFeaturedProducts('instruments')" class="explore-split-card reveal-from-right delay-300">
+          <a href="#featured" onclick="openCategoryFeatured('instruments', event)" class="explore-split-card reveal-from-right delay-300">
             <div class="split-card-img-wrap">
               <img src="iamges/Offshore Rig Monitoring Control Telemetry.png" alt="Rig & Marine Instruments" class="split-card-img">
             </div>
@@ -296,7 +296,7 @@
           </a>
 
           <!-- Card 4: Breathing Air & Gas Detection -->
-          <a href="#featured" onclick="renderFeaturedProducts('gas')" class="explore-split-card reveal-from-right delay-400">
+          <a href="#featured" onclick="openCategoryFeatured('gas', event)" class="explore-split-card reveal-from-right delay-400">
             <div class="split-card-img-wrap">
               <img src="iamges/prod_scba.jpg" alt="Breathing Air & Gas Detection" class="split-card-img">
             </div>
@@ -318,7 +318,7 @@
       </div>
 
       <!-- BOTTOM FULL-WIDTH BANNER: Industrial Consumables -->
-      <a href="#featured" onclick="renderFeaturedProducts('machinery')" class="explore-bottom-banner reveal-from-bottom">
+      <a href="#featured" onclick="openCategoryFeatured('machinery', event)" class="explore-bottom-banner reveal-from-bottom">
         <div class="banner-img-side">
           <img src="iamges/consumables.jpg" alt="Industrial Consumables" class="banner-img">
         </div>
@@ -361,6 +361,7 @@
         <button class="prod-tab-item" data-cat="safety">Fire & Safety</button>
         <button class="prod-tab-item" data-cat="machinery">Industrial</button>
         <button class="prod-tab-item" data-cat="instruments">Instrumentation</button>
+        <button class="prod-tab-item" data-cat="gas">Gas Detection</button>
       </div>
 
       <!-- Product Grid (4 Per Row) -->

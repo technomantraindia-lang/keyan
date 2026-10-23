@@ -7,17 +7,56 @@ let currentProduct = null;
 let currentQuantity = 1;
 const PRODUCT_CACHE_KEY = 'keyan_product_detail_';
 
+function findProductEverywhere(productId) {
+  if (!productId) return null;
+  const targetId = String(productId).trim().toLowerCase();
+
+  // 1. Search CATALOG_ITEMS
+  if (typeof CATALOG_ITEMS !== 'undefined' && Array.isArray(CATALOG_ITEMS)) {
+    const item = CATALOG_ITEMS.find(p =>
+      String(p.id).toLowerCase() === targetId ||
+      String(p.sku || '').toLowerCase() === targetId
+    );
+    if (item) return item;
+  }
+
+  // 2. Search CATEGORIES_MASTER featured products
+  if (typeof CATEGORIES_MASTER !== 'undefined' && Array.isArray(CATEGORIES_MASTER)) {
+    for (const cat of CATEGORIES_MASTER) {
+      if (Array.isArray(cat.featuredProducts)) {
+        const item = cat.featuredProducts.find(p =>
+          String(p.id).toLowerCase() === targetId ||
+          String(p.sku || '').toLowerCase() === targetId
+        );
+        if (item) return item;
+      }
+    }
+  }
+
+  // 3. Search ALL_DISCOVERY_PRODUCTS
+  if (typeof ALL_DISCOVERY_PRODUCTS !== 'undefined' && Array.isArray(ALL_DISCOVERY_PRODUCTS)) {
+    const item = ALL_DISCOVERY_PRODUCTS.find(p =>
+      String(p.id).toLowerCase() === targetId ||
+      String(p.sku || '').toLowerCase() === targetId
+    );
+    if (item) return item;
+  }
+
+  return null;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get('id') || 'p1';
 
-  currentProduct = normaliseProduct(CATALOG_ITEMS.find(p => p.id === productId || p.sku === productId) || CATALOG_ITEMS[0]);
+  const productMatch = findProductEverywhere(productId) || (typeof CATALOG_ITEMS !== 'undefined' ? CATALOG_ITEMS[0] : null);
+  currentProduct = normaliseProduct(productMatch);
 
   renderProductDetail(currentProduct);
   trackRecentlyViewed(currentProduct.id);
   renderRelatedProducts(currentProduct);
   renderRecentlyViewedProducts();
-  initTabs();
+  if (typeof initTabs === 'function') initTabs();
   loadBackendProduct(productId);
 });
 
@@ -29,14 +68,29 @@ function normaliseProduct(product) {
     try { specifications = JSON.parse(specifications); } catch (error) { specifications = {}; }
   }
 
+  const specsObj = specifications && typeof specifications === 'object' && Object.keys(specifications).length > 0
+    ? specifications
+    : (product.specs ? { 'Key Specifications': product.specs, 'Product Class': product.categoryName || 'Standard' } : {});
+
   return {
     ...product,
+    id: product.id || 'p1',
+    sku: product.sku || `KEY-${(product.id || 'GEN').toUpperCase()}`,
+    name: product.name || 'Industrial Product',
+    brand: product.brand || 'Keyan Corporation',
+    category: product.category || product.category_slug || 'marine',
     categoryName: product.categoryName || product.category_slug || product.category || 'Product Catalogue',
     price_usd: Number(product.price_usd) || 0,
     availability: product.availability || 'Available on Request',
-    specifications: specifications && typeof specifications === 'object' ? specifications : {},
-    applications: Array.isArray(product.applications) ? product.applications : [],
-    images: Array.isArray(product.images) ? product.images : []
+    shortDesc: product.shortDesc || product.fullDesc || (product.specs ? `${product.name} — ${product.specs}` : 'Class-approved industrial and marine grade equipment from Keyan Corporation.'),
+    fullDesc: product.fullDesc || product.shortDesc || 'Manufactured and certified to international marine and industrial quality standards. Suitable for vessel, rig, terminal, and plant applications.',
+    specifications: specsObj,
+    applications: Array.isArray(product.applications) && product.applications.length > 0
+      ? product.applications
+      : ['Marine & Vessel Operations', 'Industrial Plant Maintenance', 'Offshore Supply', 'Port Logistics'],
+    images: Array.isArray(product.images) && product.images.length > 0
+      ? product.images
+      : [product.img || 'iamges/hero.jpg']
   };
 }
 
@@ -53,15 +107,16 @@ async function loadBackendProduct(productId) {
     applyBackendProduct(remoteProduct);
   } catch (error) {
     if (error && (error.status === 404 || error.message?.includes('not found') || error.message?.includes('No query results'))) {
-      const localProduct = typeof CATALOG_ITEMS !== 'undefined'
-        ? CATALOG_ITEMS.find(p => p.id === productId || p.sku === productId)
-        : null;
+      const localProduct = findProductEverywhere(productId);
 
       if (!localProduct) {
         localStorage.removeItem(cacheKey);
         renderDraftOrUnavailableProduct();
         return;
       }
+      currentProduct = normaliseProduct(localProduct);
+      renderProductDetail(currentProduct);
+      renderRelatedProducts(currentProduct);
       console.info('Product detail API 404; displaying local catalogue item.', error.message);
       return;
     }

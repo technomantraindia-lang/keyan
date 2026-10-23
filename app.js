@@ -246,6 +246,36 @@ let CATALOG_ITEMS = [
     },
     applications: ['Offshore Drilling Rigs', 'Jack-Up Platforms', 'FPSO Vessels', 'Subsea Telemetry'],
     is_quote_only: true
+  },
+  {
+    id: 'p9',
+    sku: 'KC-ITEM-001',
+    name: 'MSA AIRGO SCBA SET',
+    brand: 'MSA',
+    category: 'safety',
+    category_slug: 'fire-safety',
+    categoryName: 'Fire & Safety Equipment',
+    img: 'iamges/prod_scba.jpg',
+    images: ['iamges/prod_scba.jpg', 'iamges/fire_safety.jpg'],
+    price_usd: 350.00,
+    availability: 'Available on Request',
+    shortDesc: 'MSA AIRGO SCBA (SELF CONTAINED BREATHING APPARATUS) COMPLETE SET',
+    fullDesc: 'MSA AIRGO SCBA SET complete with mild steel cylinder (6-9L, 200-300 bar), backplate, harness, full face mask, demand valve, and pressure gauge.',
+    specs: 'High-Pressure Air Cylinder | 200-300 Bar | Backplate & Harness Included',
+    specifications: {
+      'Brand': 'MSA',
+      'Product Type': 'Self-Contained Breathing Apparatus (SCBA)',
+      'Cylinder Capacity': '6-9 Litres',
+      'Cylinder Material': 'Mild Steel',
+      'Working Pressure': '200-300 Bar',
+      'Duration': 'Approx. 45 Minutes',
+      'Backplate & Harness': 'Included',
+      'Full Face Mask': 'Included',
+      'Demand Valve': 'Included',
+      'Pressure Gauge': 'Included'
+    },
+    applications: ['Firefighting', 'Emergency Evacuation', 'Confined Space Entry', 'Industrial Plant Safety'],
+    is_quote_only: true
   }
 ];
 
@@ -468,35 +498,93 @@ window.addEventListener('keydown', (e) => {
 });
 
 
+function openCategoryFeatured(categoryFilter = 'all', event) {
+  if (event) {
+    try { event.preventDefault(); } catch (e) {}
+  }
+  renderFeaturedProducts(categoryFilter);
+
+  const target = document.getElementById('featured') || document.getElementById('featuredProductsGrid');
+  if (target) {
+    const headerOffset = 90;
+    const elementPosition = target.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    window.scrollTo({
+      top: Math.max(0, offsetPosition),
+      behavior: 'smooth'
+    });
+  }
+}
+
+function handleProductCardClick(event, productId) {
+  if (event && event.target && event.target.closest('button')) {
+    return;
+  }
+  if (!productId) return;
+  window.location.href = `product-detail.html?id=${encodeURIComponent(productId)}`;
+}
+
 function renderFeaturedProducts(categoryFilter = 'all') {
   const container = document.getElementById('featuredProductsGrid');
   if (!container) return;
 
-  const filtered = categoryFilter === 'all'
+  const tabs = document.querySelectorAll('.prod-tab-item');
+  tabs.forEach(tab => {
+    const tabCat = tab.getAttribute('data-cat');
+    if (tabCat === categoryFilter) {
+      tab.classList.add('active');
+    } else {
+      tab.classList.remove('active');
+    }
+  });
+
+  const filterLower = (categoryFilter || 'all').toLowerCase();
+  const filtered = filterLower === 'all'
     ? CATALOG_ITEMS
-    : CATALOG_ITEMS.filter(p => p.category === categoryFilter);
+    : CATALOG_ITEMS.filter(p => {
+        const cat = (p.category || '').toLowerCase();
+        const slug = (p.category_slug || '').toLowerCase();
+        if (cat === filterLower || slug === filterLower) return true;
+        if (filterLower === 'safety' && (cat.includes('safety') || slug.includes('safety') || cat.includes('fire'))) return true;
+        if (filterLower === 'marine' && (cat.includes('marine') || slug.includes('marine') || cat.includes('ship'))) return true;
+        if (filterLower === 'machinery' && (cat.includes('machinery') || slug.includes('machinery') || cat.includes('industrial') || cat.includes('tool'))) return true;
+        if (filterLower === 'instruments' && (cat.includes('instrument') || slug.includes('instrument') || cat.includes('rig') || cat.includes('telemetry'))) return true;
+        if (filterLower === 'gas' && (cat.includes('gas') || slug.includes('gas') || cat.includes('detector'))) return true;
+        return false;
+      });
+
+  if (!filtered.length) {
+    container.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: #64748b;">
+        <i class="fas fa-boxes" style="font-size: 2rem; color: #ff7a18; margin-bottom: 0.8rem; display: block;"></i>
+        <p style="font-weight: 600;">No featured products found for this category.</p>
+        <button type="button" class="btn btn-navy" onclick="renderFeaturedProducts('all')" style="margin-top: 1rem; padding: 8px 18px; border-radius: 6px;">View All Products</button>
+      </div>
+    `;
+    return;
+  }
 
   container.innerHTML = filtered.map(p => `
-    <div class="product-card-clean" onclick="if (!event.target.closest('button, a')) window.location.href = 'product-detail.html?id=${p.id}'" style="cursor: pointer;">
+    <div class="product-card-clean" onclick="handleProductCardClick(event, '${p.id}')" style="cursor: pointer;">
       <div class="product-img-stage">
-        <a href="product-detail.html?id=${p.id}" class="product-img-link" style="display:flex; width:100%; height:100%; align-items:center; justify-content:center; text-decoration:none;">
+        <a href="product-detail.html?id=${encodeURIComponent(p.id)}" class="product-img-link" style="display:flex; width:100%; height:100%; align-items:center; justify-content:center; text-decoration:none;">
           <img src="${p.img || 'iamges/hero.jpg'}" alt="${p.name}" class="product-photo" loading="lazy">
         </a>
       </div>
 
       <div class="product-info-wrap">
-        <span class="product-meta-cat">${p.categoryName}</span>
-        <h4 class="product-name-title"><a href="product-detail.html?id=${p.id}" style="color:inherit; text-decoration:none;">${p.name}</a></h4>
+        <span class="product-meta-cat">${p.categoryName || p.category || 'Product'}</span>
+        <h4 class="product-name-title"><a href="product-detail.html?id=${encodeURIComponent(p.id)}" style="color:inherit; text-decoration:none;">${p.name}</a></h4>
         <div class="product-brand-tag"><i class="fas fa-tag"></i> ${p.brand || 'Keyan Corporation'}</div>
         
         <div class="product-stock-status">
-          <i class="fas fa-circle"></i> ${p.availability}
+          <i class="fas fa-circle"></i> ${p.availability || 'Available on Request'}
         </div>
 
         <div class="product-actions-group">
           ${isProductQuoteOnly(p)
-            ? `<button class="btn-card-quote btn-card-quote-only" onclick="event.stopPropagation(); requestProductQuote('${p.id}')" title="Request Quote"><i class="fas fa-file-signature"></i> Request Quote</button>`
-            : `<button class="btn-card-buy" onclick="event.stopPropagation(); handleBuyNow('${p.id}')" title="Buy Now"><i class="fas fa-bolt"></i> Buy Now</button>`}
+            ? `<button type="button" class="btn-card-quote btn-card-quote-only" onclick="event.stopPropagation(); requestProductQuote('${p.id}')" title="Request Quote"><i class="fas fa-file-signature"></i> Request Quote</button>`
+            : `<button type="button" class="btn-card-buy" onclick="event.stopPropagation(); handleBuyNow('${p.id}')" title="Buy Now"><i class="fas fa-bolt"></i> Buy Now</button>`}
         </div>
       </div>
     </div>
@@ -840,6 +928,48 @@ function closeMobileNav() {
   }
 }
 
+function initMobileNavListeners() {
+  const btn = document.getElementById('mobileNavBtn');
+  const drawer = document.getElementById('mobileNavDrawer');
+  const backdrop = document.getElementById('mobileNavBackdrop');
+  const closeBtn = drawer ? drawer.querySelector('.mobile-nav-close') : null;
+
+  if (btn) {
+    btn.onclick = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMobileNav();
+    };
+  }
+
+  if (closeBtn) {
+    closeBtn.onclick = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeMobileNav();
+    };
+  }
+
+  if (backdrop) {
+    backdrop.onclick = (e) => {
+      e.preventDefault();
+      closeMobileNav();
+    };
+  }
+
+  // Only close drawer for in-page anchors
+  if (drawer) {
+    drawer.querySelectorAll('a').forEach(link => {
+      const href = link.getAttribute('href') || '';
+      if (href.startsWith('#')) {
+        link.addEventListener('click', () => {
+          closeMobileNav();
+        });
+      }
+    });
+  }
+}
+
 // Global Event Listeners for Mobile Navigation & Modals
 window.addEventListener('resize', () => {
   if (window.innerWidth > 992) {
@@ -858,6 +988,7 @@ window.addEventListener('keydown', (e) => {
 
 // Component Loader for Header & Footer
 document.addEventListener('DOMContentLoaded', () => {
+  initMobileNavListeners();
   highlightActiveNavLinks();
   loadExternalComponents();
 });
@@ -869,6 +1000,7 @@ function loadExternalComponents() {
       .then(res => res.text())
       .then(data => {
         headerContainer.innerHTML = data;
+        initMobileNavListeners();
         highlightActiveNavLinks();
         updateCartBadgeCount();
         updateCustomerHeader();
@@ -876,6 +1008,7 @@ function loadExternalComponents() {
       })
       .catch(err => console.log('Header load error:', err));
   } else {
+    initMobileNavListeners();
     highlightActiveNavLinks();
     updateCartBadgeCount();
     updateCustomerHeader();
